@@ -20,13 +20,9 @@ typedef struct s_data {
 
 /**
  * data->addr is the start of the image memory buffer (byte pointer).
-
 y * data->line_len:
-
 Moves the pointer to row y (each row is line_len bytes).
-
 x * (bpp / 8):
-
 Moves the pointer x pixels into the row, based on how many bytes per pixel (bpp / 8).
 if bpp = 32 → 4 bytes per pixel.
 So:
@@ -64,14 +60,26 @@ int	handle_key(int key, t_data *data)
 {
 	if (key == 65307) // ESC
 		exit(0);
-	else if (key == 65361) // left
-		data->x -= 10;
-	else if (key == 65363) // right
-		data->x += 10;
+	else if (key == 65361)
+    {
+        if (data->x - 20 >= 0)
+            data->x -= 20;
+    } // left
+	else if (key == 65363)
+    {
+        if (data->x + 20 + SQUARE_SIZE <= WIDTH)
+            data->x += 20;
+    } // right
 	else if (key == 65362) // up
-		data->y -= 10;
+    {
+        if (data->y - 20 >= 0)
+            data->y -= 20;
+    }
 	else if (key == 65364) // down
-		data->y += 10;
+    {
+        if (data->y + 20 + SQUARE_SIZE <= HEIGHT)
+            data->y += 20;
+    }
 	return (0);
 }
 /**
