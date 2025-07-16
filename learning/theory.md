@@ -42,3 +42,36 @@ localhost:10.0 → remote graphical session (like SSH with X11 forwarding)
 
 If $DISPLAY is empty or wrong, then programs like mlx_init() can’t create a window → crash.
 ============================
+.xpm files:
+
+A .xpm image is a text file like this:
+
+xpm
+Copy code
+/* XPM */
+static char *example[] = {
+"4 4 2 1",         // width, height, number of colors, chars per pixel
+"0 c #FFFFFF",     // color definitions
+"1 c #000000",
+"0110",            // each line = row of pixels
+"1001",
+"1001",
+"0110"
+};
+Explained:
+"4 4 2 1" → 4×4 image, 2 colors, each pixel = 1 character
+
+"0 c #FFFFFF" → 0 means white
+
+"1 c #000000" → 1 means black
+
+Image = cross symbol
+
+Feature	XPM	JPG/PNG
+Format	Text file	Binary format
+Editable	Yes (in any text editor)	No
+Compression	None	Yes
+Transparency	Yes (basic)	PNG only
+Use in MLX	✅ Easy and required	❌ Not supported
+==========================
+
