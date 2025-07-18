@@ -22,3 +22,5 @@ int	init_data(t_data *d)
 	d->map = maze_map;
 	return (0);
 }
+
+
