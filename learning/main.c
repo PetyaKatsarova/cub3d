@@ -92,7 +92,7 @@ Image buffer → fast: write in memory, then draw all at once
  */
 
  // export DISPLAY=:0
-//  gcc main.c -I ../lib/minilibx_linux -L ../lib/minilibx_linux -lmlx -lX11 -lXext -lm -o my_prog && ./my_prog
+//  gcc main.c -I ../lib/minilibx_linux -L ../lib/minilibx_linux -lmlx -lX11 -lXext -lm && ./a.out
         
 int	main(void)
 {

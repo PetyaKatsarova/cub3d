@@ -46,7 +46,7 @@ It’s a plain text image format used in old X11 systems (like in Linux GUI)
 mlx_xpm_file_to_image(...)
 → This MiniLibX function:
 
-Reads an .xpm image file (wall.xpm / floor.xpm)
+Reads an .xpm image file (wall.xpm / dungeonFloor.xpm)
 
 Converts it to an internal image object usable in MLX
 
@@ -63,23 +63,23 @@ command: realpath wall.xpm
  *  */ 
 void load_textures(t_data *data)
 {
-    FILE *f = fopen("wall.xpm", "r");
+    FILE *f = fopen("brickWall.xpm", "r");
     if (!f) {
-        perror("wall.xpm fopen");
+        perror("brickWall.xpm fopen");
         exit(1);
     }
     fclose(f);
 
     int width, height;
-    data->img_wall = mlx_xpm_file_to_image(data->mlx, "wall.xpm", &width, &height);
+    data->img_wall = mlx_xpm_file_to_image(data->mlx, "brickWall.xpm", &width, &height);
     if (!data->img_wall) {
-        fprintf(stderr, "Failed to load wall.xpm\n");
+        fprintf(stderr, "Failed to load brickWall.xpm\n");
         exit(1);
     }
 
-    data->img_floor = mlx_xpm_file_to_image(data->mlx, "floor.xpm", &width, &height);
+    data->img_floor = mlx_xpm_file_to_image(data->mlx, "dungeonFloor.xpm", &width, &height);
     if (!data->img_floor) {
-        fprintf(stderr, "Failed to load floor.xpm\n");
+        fprintf(stderr, "Failed to load dungeonFloor.xpm\n");
         exit(1);
     }
 }
