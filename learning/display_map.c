@@ -1,4 +1,4 @@
-#include "../lib/minilibx_linux/mlx.h"
+#include "../cub3/lib/minilibx_linux/mlx.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -96,7 +96,30 @@ void draw_map(t_data *data, char **map)
     }
 }
 
-//  gcc display_map.c -I ../lib/minilibx_linux -L ../lib/minilibx_linux -lmlx -lX11 -lXext -lm && ./a.out
+void handle_keys(int keycode, void *param)
+{
+    t_data *data = (t_data *)param;
+
+    if (keycode == 65307) // ESC
+    {
+        mlx_destroy_image(data->mlx, data->img_wall);
+        mlx_destroy_image(data->mlx, data->img_floor);
+        mlx_destroy_window(data->mlx, data->win);
+        exit(0);
+    }
+}
+
+int handle_exit(t_data *data)
+{
+	mlx_destroy_image(data->mlx, data->img_wall);
+	mlx_destroy_image(data->mlx, data->img_floor);
+	mlx_destroy_window(data->mlx, data->win);
+	exit(0);
+	return (0);
+}
+
+
+//  gcc display_map.c -I ../cub3/lib/minilibx_linux -L ../cub3/lib/minilibx_linux -lmlx -lX11 -lXext -lm && ./a.out
 
 int main() {
     t_data data;
@@ -109,6 +132,8 @@ int main() {
 
     load_textures(&data);
     draw_map(&data, map);
+	mlx_key_hook(data.win, handle_keys, &data);
+	mlx_hook(data.win, 17, 0, (void *)handle_exit, &data);
     mlx_loop(data.mlx);
     // do we need to destroy sth here for mem protect?
 

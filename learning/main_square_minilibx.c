@@ -1,4 +1,4 @@
-#include "../lib/minilibx_linux/mlx.h"
+#include "../cub3/lib/minilibx_linux/mlx.h"
 #include <stdlib.h>
 
 #define WIDTH 800
@@ -92,7 +92,7 @@ Image buffer → fast: write in memory, then draw all at once
  */
 
  // export DISPLAY=:0
-//  gcc main.c -I ../lib/minilibx_linux -L ../lib/minilibx_linux -lmlx -lX11 -lXext -lm && ./a.out
+//  gcc main_square_minilibx.c -I ../cub3/lib/minilibx_linux -L ../cub3/lib/minilibx_linux -lmlx -lX11 -lXext -lm && ./a.out
         
 int	main(void)
 {

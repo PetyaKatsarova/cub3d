@@ -2,19 +2,16 @@ NAME     := cub3d
 CC       := cc
 CFLAGS   := -Wall -Wextra -Werror -g
 
-LIBMLX   := lib/minilibx_linux
-HEADERS  := -I./include -I$(LIBMLX)
+LIBMLX   := lib/MLX42
+HEADERS  := -I./include -I$(LIBMLX)/include
 
-LIBS     := -L$(LIBMLX) -lmlx -lXext -lX11 -lm -ldl -lpthread
+LIBS     := $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
 
 SRC      := src/main.c
 OBJDIR   := obj
 OBJ      := $(SRC:src/%.c=$(OBJDIR)/%.o)
 
-all: libmlx $(NAME)
-
-libmlx:
-	@make -C $(LIBMLX)
+all: $(NAME)
 
 $(OBJDIR)/%.o: src/%.c | $(OBJDIR)
 	@$(CC) $(CFLAGS) -c $< -o $@ $(HEADERS)
@@ -23,8 +20,8 @@ $(OBJDIR)/%.o: src/%.c | $(OBJDIR)
 $(OBJDIR):
 	@mkdir -p $(OBJDIR)
 
-$(NAME): $(OBJ) Makefile
-	@$(CC) $(CFLAGS) $(OBJ) $(LIBS) $(HEADERS) -o $(NAME)
+$(NAME): $(OBJ)
+	@$(CC) $(CFLAGS) $(OBJ) $(LIBS) -o $(NAME)
 	@echo "Build successful!"
 
 clean:
@@ -32,8 +29,7 @@ clean:
 
 fclean: clean
 	@rm -f $(NAME)
-	@cd $(LIBMLX) && ./configure clean
 
 re: fclean all
 
-.PHONY: all clean fclean re libmlx
+.PHONY: all clean fclean re

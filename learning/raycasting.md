@@ -1,5 +1,9 @@
 https://lodev.org/cgtutor/raycasting.html
 
+https://github.com/codam-coding-college/MLX42/wiki
+
+https://harm-smits.github.io/42docs/libs/minilibx/introduction.html
+
 Raycasting is not the same as raytracing! Raycasting is a fast semi-3D technique that works in realtime even on 4MHz graphical calculators, while raytracing is a realistic rendering technique that supports reflections and shadows in true 3D scenes, and only recently computers became fast enough to do it in realtime for reasonably high resolutions and complex scenes.
 
 The basic idea of raycasting is as follows: the map is a 2D square grid, and each square can either be 0 (= no wall), or a positive value (= a wall with a certain color or texture).
