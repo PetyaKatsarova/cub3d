@@ -4,8 +4,8 @@
 #include <string.h>
 
 #define TILE_SIZE 64
-#define MAP_WIDTH 6
-#define MAP_HEIGHT 5
+#define MAP_WIDTH 6 // tiles wide
+#define MAP_HEIGHT 5 // tiles high
 #define WIDTH (MAP_WIDTH * TILE_SIZE)
 #define HEIGHT (MAP_HEIGHT * TILE_SIZE)
 
@@ -99,8 +99,10 @@ void draw_map(t_data *d)
 }
 
 /**
- * cc -Wall -Wextra -Werror -g \
-  display_map.c ../../cub3/lib/MLX42/build/libmlx42.a \
+ 
+  cc -Wall -Wextra -Werror -g \
+   display_map.c \
+  ../../cub3/lib/MLX42/build/libmlx42.a \
   -I../../cub3/lib/MLX42/include \
   -ldl -lglfw -lm -pthread \
   -o play && ./play

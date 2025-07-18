@@ -7,7 +7,10 @@ HEADERS  := -I./include -I$(LIBMLX)/include
 
 LIBS     := $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
 
-SRC      := src/main.c
+SRC      := src/main.c \
+		   src/init_data.c \
+		   src/draw_maze.c \
+
 OBJDIR   := obj
 OBJ      := $(SRC:src/%.c=$(OBJDIR)/%.o)
 
