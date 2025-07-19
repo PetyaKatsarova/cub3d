@@ -128,7 +128,7 @@ int main() {
         return (1);
 
     data.mlx = mlx_init();
-    data.win = data.win = mlx_new_window(data.mlx, 6 * TILE_SIZE, 5 * TILE_SIZE, "2dPlay");
+    data.win = mlx_new_window(data.mlx, 6 * TILE_SIZE, 5 * TILE_SIZE, "2dPlay");
 
     load_textures(&data);
     draw_map(&data, map);

@@ -67,5 +67,6 @@
 	"span": "c",
 	"unordered_map": "c",
 	"cub3d.h": "c"
-}
+},
+"cmake.sourceDirectory": "/home/pekatsar/sgoinfre/cub3d/cub3/lib/MLX42"
 }

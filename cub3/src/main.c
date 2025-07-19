@@ -11,6 +11,6 @@ int	main(void)
 		return (1);
 	draw_maze(&data);
 	mlx_loop(data.mlx);
-	mlx_terminate(data.mlx);
+	mlx_terminate(data.mlx); // todo: clean more
 	return (0);
 }

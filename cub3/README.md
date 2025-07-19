@@ -17,7 +17,9 @@ https://github.com/codam-coding-college/MLX42/wiki
 Program name cub3D
 Turn in files All your files
 Makefile all, clean, fclean, re, bonus
+===================================================
 Arguments a map in format *.cub
+===================================================
 External functs.
 • open, close, read, write,
 printf, malloc, free, perror,
@@ -27,6 +29,7 @@ library (-lm man man 3 math).
 • All functions of the MinilibX
 library.
 Libft authorized Yes
+====================================================
 Description You must create a “realistic” 3D graphical
 representation of the inside of a maze from a
 first-person perspective. You have to create this
