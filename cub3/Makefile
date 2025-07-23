@@ -2,14 +2,23 @@ NAME     := cub3d
 CC       := cc
 CFLAGS   := -Wall -Wextra -Werror -g
 
-LIBMLX   := lib/MLX42
+LIBMLX   := lib/minilibx_linux
 HEADERS  := -I./include -I$(LIBMLX)/include
 
-LIBS     := $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
+#LIBS     := $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
+#Uses a static prebuilt library: libmlx42.a
+#Requires modern dependencies: dl, glfw, pthread
+#Needs header from MLX42/MLX42.h
+
+LIBS     := -L$(LIBMLX) -lmlx -lX11 -lXext -lm
+#Links against libmlx.so / libmlx.a found in libminilibx_linux
+#Uses X11 display system (X11 + Xext)
+#Needs header from mlx.h
 
 SRC      := src/main.c \
 		   src/init_data.c \
 		   src/draw_maze.c \
+		   src/player_control.c \
 
 OBJDIR   := obj
 OBJ      := $(SRC:src/%.c=$(OBJDIR)/%.o)
