@@ -6,7 +6,7 @@
 /*   By: pekatsar <pekatsar@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/07/23 15:13:27 by pekatsar      #+#    #+#                 */
-/*   Updated: 2025/07/23 17:06:33 by pekatsar      ########   odam.nl         */
+/*   Updated: 2025/07/25 13:58:19 by pekatsar      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,17 @@ static int key_hook(int keycode, t_data *d)
 	mlx_put_image_to_window(d->mlx, d->win, d->img, 0, 0);
 	return (0);
 }
+
+//int	loop_hook(t_data *d)
+//{
+//	if (d->key_pressed)
+//	{
+//		player_control(d, d->key_pressed);
+//		draw_maze(d);
+//		mlx_put_image_to_window(d->mlx, d->win, d->img, 0, 0);
+//	}
+//	return (0);
+//}
 
 static int	close_window(void *param)
 {
@@ -37,6 +48,7 @@ int	main(void)
 	mlx_key_hook(data.win, key_hook, &data);
 	mlx_hook(data.win, 17, 0, close_window, &data); // event code: 17 for x
 	mlx_loop(data.mlx);
-	//mlx_terminate(data.mlx); // todo: clean more
+	//mlx_loop_hook(data.mlx, loop_hook, &data);  
+	// todo: clean more
 	return (0);
 }

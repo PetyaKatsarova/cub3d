@@ -9,6 +9,7 @@
 # define WIDTH      	1800
 # define HEIGHT     	1200
 # define TILE_SIZE  	50
+#define  PLAYER_SIZE 	7
 # define WALL_COLOR 	0xBFFF00  // lime
 # define FLOOR_COLOR 	0xB48E8E // favorite
 #define PLAYER_COLOR    0x0d0832ff // dark blue

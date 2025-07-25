@@ -6,7 +6,7 @@
 /*   By: pekatsar <pekatsar@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/07/23 15:21:24 by pekatsar      #+#    #+#                 */
-/*   Updated: 2025/07/23 17:01:31 by pekatsar      ########   odam.nl         */
+/*   Updated: 2025/07/25 14:07:55 by pekatsar      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ int place_player(t_data *d)
 	return (1); // Player not found in map
 }
 
+// TODO:  protect on all
 static char **copy_map(char **map)
 {
 	int i = 0;
@@ -90,19 +91,13 @@ int	init_data(t_data *d)
 		return (1);
 	d->win = mlx_new_window(d->mlx, WIDTH, HEIGHT, "Cub3D");
 	if (!d->win)
-	{
 		return (1);
-	}
 	d->img = mlx_new_image(d->mlx, WIDTH, HEIGHT);
 	if (!d->img)
-	{
 		return (1);
-	}
 	d->addr = mlx_get_data_addr(d->img, &d->bpp, &d->line_length, &d->endian);
 	if (!d->addr)
-	{
 		return (1);
-	}
 	d->map = copy_map(maze_map);
 	if (!d->map)
 	{

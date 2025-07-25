@@ -1,11 +1,11 @@
 
 #include "../include/cub3d.h"
 
-static void draw_tile(t_data *d, int x, int y, uint32_t color)
+static void draw_tile(t_data *d, int x, int y, uint32_t color, int size)
 {
-	for (int i = 0; i < TILE_SIZE; i++)
+	for (int i = 0; i < size; i++)
 	{
-		for (int j = 0; j < TILE_SIZE; j++)
+		for (int j = 0; j < size; j++)
 		{
 			int px = x + j; // pixel x coordinate
 			int py = y + i;
@@ -29,12 +29,12 @@ void	draw_maze(t_data *d)
 		while (d->map[y][x])
 		{
 			if (d->map[y][x] == '1')
-				draw_tile(d, x * TILE_SIZE, y * TILE_SIZE, WALL_COLOR);
+				draw_tile(d, x * TILE_SIZE, y * TILE_SIZE, WALL_COLOR, TILE_SIZE);
 			else if (d->map[y][x] == '0')
-				draw_tile(d, x * TILE_SIZE, y * TILE_SIZE, FLOOR_COLOR);
+				draw_tile(d, x * TILE_SIZE, y * TILE_SIZE, FLOOR_COLOR, TILE_SIZE);
 			x++;
 		}
 		y++;
 	}
-	draw_tile(d, d->player_x, d->player_y, PLAYER_COLOR);
+	draw_tile(d, d->player_x, d->player_y, PLAYER_COLOR, PLAYER_SIZE);
 }
