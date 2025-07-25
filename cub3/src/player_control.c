@@ -6,19 +6,19 @@
 /*   By: pekatsar <pekatsar@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/07/23 15:22:20 by pekatsar      #+#    #+#                 */
-/*   Updated: 2025/07/23 17:05:14 by pekatsar      ########   odam.nl         */
+/*   Updated: 2025/07/25 17:34:36 by pekatsar      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-static int sft_trlen(char *str)
+int ft_strlen(const char *s)
 {
 	int len = 0;
-	while (str[len] != '\0')
+	while (s[len])
 		len++;
 	return len;
-}
+}	
 
 void	player_control(t_data *d, int keycode)
 {
@@ -27,25 +27,27 @@ void	player_control(t_data *d, int keycode)
 
 	if (keycode == 65307) // ESC
 		exit(0);
-	else if (keycode == 65361 && d->player_x >= 1 + TILE_SIZE) // left
+	else if (keycode == 65361 && d->player->x >= 1 + TILE_SIZE) // left
 		dx = -1;
-	else if (keycode == 65363 && d->player_x <= WIDTH - TILE_SIZE - 1) // right
+	else if (keycode == 65363 && d->player->x <= WIDTH - TILE_SIZE - 1) // right
 		dx = 1;
-	else if (keycode == 65362 && d->player_y >= 1 + TILE_SIZE) // up
+	else if (keycode == 65362 && d->player->y >= 1 + TILE_SIZE) // up
 		dy = -1;
-	else if (keycode == 65364 && d->player_y <= HEIGHT - TILE_SIZE - 1) // down
+	else if (keycode == 65364 && d->player->y <= HEIGHT - TILE_SIZE - 1) // down
 		dy = 1;
 
-	int px = d->player_x / TILE_SIZE;
-	int py = d->player_y / TILE_SIZE;
+	int px = d->player->x / TILE_SIZE;
+	int py = d->player->y / TILE_SIZE;
 	int nx = px + dx;
 	int ny = py + dy;
-	if (ny >= 0 && d->map[ny] && nx >= 0 && nx < (int)sft_trlen(d->map[ny])
+	if (ny >= 0 && d->map[ny] && nx >= 0 && nx < (int)ft_strlen(d->map[ny])
 		&& d->map[ny][nx] == '0')
 	{
 		d->map[py][px] = '0';
-		d->map[ny][nx] = 'N';
-		d->player_x = nx * TILE_SIZE;
-		d->player_y = ny * TILE_SIZE;
+		//d->map[ny][nx] = 'N';
+		d->player->x = nx * TILE_SIZE;
+		d->player->y = ny * TILE_SIZE;
 	}
+	printf("Player -> x: %.1f, y: %.1f, angle: %.2f, delta_x: %.2f, delta_y: %.2f\n", d->player->x, d->player->y, d->player->angle, d->player->delta_x, d->player->delta_y);
+
 }

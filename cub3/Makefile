@@ -17,8 +17,11 @@ LIBS     := -L$(LIBMLX) -lmlx -lX11 -lXext -lm
 
 SRC      := src/main.c \
 		   src/init_data.c \
+		   src/init_player.c \
+		   src/cast_ray.c \
 		   src/draw_maze.c \
 		   src/player_control.c \
+		   src/rotate_player.c \
 
 OBJDIR   := obj
 OBJ      := $(SRC:src/%.c=$(OBJDIR)/%.o)

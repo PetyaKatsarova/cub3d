@@ -38,3 +38,46 @@ cos(θ) = x
 sin(θ) = y
 
 θ = angle from right (0 radians) rotating counterclockwise
+==========================================
+In 2D:
+
+A vector is a direction with magnitude.
+
+Defined by:
+origin (x, y)
+direction (dx, dy)
+length (l)
+==========================================
+To draw a vector from (x, y):
+Use this loop:
+
+double i = 0;
+while (i < length)
+{
+	int px = x + cos(angle) * i;
+	int py = y + sin(angle) * i;
+	set_px(d, px, py, COLOR);
+	i += 1;
+}
+---------------------------------------------
+Let’s say:
+
+player->x = 100
+
+player->y = 100
+
+player->angle = 0
+
+Draw vector of length 50:
+raw_vector(t_data *d, double x, double y, double angle, double length)
+{
+	double i = 0;
+	while (i < length)
+	{
+		int px = x + cos(angle) * i;
+		int py = y + sin(angle) * i;
+		set_px(d, px, py, WALL_COLOR); // lime
+		i += 0.5;
+	}
+}
+==========================================

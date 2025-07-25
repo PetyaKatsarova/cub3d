@@ -6,7 +6,7 @@
 /*   By: pekatsar <pekatsar@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/07/23 15:13:27 by pekatsar      #+#    #+#                 */
-/*   Updated: 2025/07/25 13:58:19 by pekatsar      ########   odam.nl         */
+/*   Updated: 2025/07/25 18:13:14 by pekatsar      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,20 +16,10 @@ static int key_hook(int keycode, t_data *d)
 {
 	player_control(d, keycode);
 	draw_maze(d);
+	cast_rays(d);
 	mlx_put_image_to_window(d->mlx, d->win, d->img, 0, 0);
 	return (0);
 }
-
-//int	loop_hook(t_data *d)
-//{
-//	if (d->key_pressed)
-//	{
-//		player_control(d, d->key_pressed);
-//		draw_maze(d);
-//		mlx_put_image_to_window(d->mlx, d->win, d->img, 0, 0);
-//	}
-//	return (0);
-//}
 
 static int	close_window(void *param)
 {
@@ -40,15 +30,16 @@ static int	close_window(void *param)
 int	main(void)
 {
 	t_data	data;
+	t_player player;
 
-	if (init_data(&data))
+	if (init_data(&data, &player)) 
 		return (1);
 	draw_maze(&data);
+	cast_rays(&data);
 	mlx_put_image_to_window(data.mlx, data.win, data.img, 0, 0);
 	mlx_key_hook(data.win, key_hook, &data);
 	mlx_hook(data.win, 17, 0, close_window, &data); // event code: 17 for x
 	mlx_loop(data.mlx);
-	//mlx_loop_hook(data.mlx, loop_hook, &data);  
 	// todo: clean more
 	return (0);
 }

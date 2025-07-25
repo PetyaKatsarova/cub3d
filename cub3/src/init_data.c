@@ -6,7 +6,7 @@
 /*   By: pekatsar <pekatsar@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/07/23 15:21:24 by pekatsar      #+#    #+#                 */
-/*   Updated: 2025/07/25 14:07:55 by pekatsar      ########   odam.nl         */
+/*   Updated: 2025/07/25 18:18:47 by pekatsar      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static char *maze_map[] = {
 	"100000000000000000000000000000000001",
 	"100000000000000011111000000000000001",
 	"100000000000000000000000000000000001",
-	"1000000000000000N0000000000000000111",
+	"1000000000000000E0000000000000000111",
 	"100000000000000000000000000000000001",
 	"100000000000000000000000000000000001",
 	"100000011110000000000000000000000001",
@@ -42,7 +42,7 @@ static char *maze_map[] = {
 	NULL
 };
 
-int place_player(t_data *d)
+static int place_player(t_data *d)
 {
 	int x = 0;
 	int y = 0;
@@ -52,19 +52,24 @@ int place_player(t_data *d)
 		x = 0;
 		while (d->map[y][x])
 		{
-			if (d->map[y][x] == 'N')
+			if (d->map[y][x] == 'N') // hard coded: TODO from parser
 			{
-				d->player_x = x * TILE_SIZE;
-				d->player_y = y * TILE_SIZE;
-				d->map[y][x] = '0'; // Clear the player position in the map
-				return (0);
+				if (init_player(d->player, x, y, 'N')) // Initialize player at the found position
+					return (write(2, "Failed to initialize player\n", 28), 1);
+				return (d->map[y][x] = '0', 0); // Clear the player position in the map
 			}
+			else if (d->map[y][x] == 'E') // hard coded: TODO from parser
+			{
+				if (init_player(d->player, x, y, 'E')) // Initialize player at the found position
+					return (write(2, "Failed to initialize player\n", 28), 1);
+				return (d->map[y][x] = '0', 0); // Clear the player position in the map
+			}
+				
 			x++;
 		}
 		y++;
 	}
-	write(2, "No player start (N) found in map\n", 33);
-	return (1); // Player not found in map
+	return (write(2, "No player start (N) found in map\n", 33), 1); // pl not found
 }
 
 // TODO:  protect on all
@@ -84,7 +89,7 @@ static char **copy_map(char **map)
 }
 
 
-int	init_data(t_data *d)
+int	init_data(t_data *d, t_player *player)
 {
 	d->mlx = mlx_init();
 	if (!d->mlx)
@@ -104,6 +109,7 @@ int	init_data(t_data *d)
 		write(2, "Map initialization failed\n", 26);
 		return (1);
 	}
+	d->player = player;
 	if (place_player(d))
 		return (1);
 	return (0);
