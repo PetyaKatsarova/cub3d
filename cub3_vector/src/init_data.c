@@ -6,14 +6,14 @@
 /*   By: petya <petya@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 15:21:24 by pekatsar          #+#    #+#             */
-/*   Updated: 2025/07/27 20:13:48 by petya            ###   ########.fr       */
+/*   Updated: 2025/07/27 21:46:02 by petya            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 #include <string.h> // todo: remove for strdup
 
-// TODO: gets input from parser
+// TODO: gets input from parser; 24 cols, 34 len(width)
 static char *maze_map[] = {
 	"111111111111111111111111111111111111",
 	"100000000000000000000000000000000001",
@@ -42,7 +42,7 @@ static char *maze_map[] = {
 	NULL
 };
 
-static int place_player(t_data *d)
+static int place_pl(t_data *d)
 {
 	int x = 0;
 	int y = 0;
@@ -54,34 +54,34 @@ static int place_player(t_data *d)
 		{
 			if (d->map[y][x] == 'N') // hard coded: TODO from parser
 			{
-				if (init_player(d->player, x, y, 'N'))
-					return (write(2, "Failed to initialize player\n", 28), 1);
-				return (d->map[y][x] = '0', 0); // Clear the player position in the map
+				if (init_pl(d->pl, x, y, 'N'))
+					return (write(2, "Failed to initialize pl\n", 28), 1);
+				return (d->map[y][x] = '0', 0); // Clear the pl position in the map
 			}
 			else if (d->map[y][x] == 'E')
 			{
-				if (init_player(d->player, x, y, 'E'))
-					return (write(2, "Failed to initialize player\n", 28), 1);
-				return (d->map[y][x] = '0', 0); // Clear the player position in the map
+				if (init_pl(d->pl, x, y, 'E'))
+					return (write(2, "Failed to initialize pl\n", 28), 1);
+				return (d->map[y][x] = '0', 0); // Clear the pl position in the map
 			}
 			else if (d->map[y][x] == 'W')
 			{
-				if (init_player(d->player, x, y, 'W'))
-					return (write(2, "Failed to initialize player\n", 28), 1);
-				return (d->map[y][x] = '0', 0); // Clear the player position in the map
+				if (init_pl(d->pl, x, y, 'W'))
+					return (write(2, "Failed to initialize pl\n", 28), 1);
+				return (d->map[y][x] = '0', 0); // Clear the pl position in the map
 			}
 			else if (d->map[y][x] == 'S')
 			{
-				if (init_player(d->player, x, y, 'W'))
-					return (write(2, "Failed to initialize player\n", 28), 1);
-				return (d->map[y][x] = '0', 0); // Clear the player position in the map
+				if (init_pl(d->pl, x, y, 'W'))
+					return (write(2, "Failed to initialize pl\n", 28), 1);
+				return (d->map[y][x] = '0', 0); // Clear the pl position in the map
 			}
 				
 			x++;
 		}
 		y++;
 	}
-	return (write(2, "No player start (N) found in map\n", 33), 1); // pl not found
+	return (write(2, "No pl start (N) found in map\n", 33), 1); // pl not found
 }
 
 // TODO:  protect on all
@@ -101,15 +101,15 @@ static char **copy_map(char **map)
 }
 
 
-int	init_data(t_data *d, t_player *player)
+int	init_data(t_data *d, t_pl *pl)
 {
 	d->mlx = mlx_init();
 	if (!d->mlx)
 		return (1);
-	d->win = mlx_new_window(d->mlx, WIDTH, HEIGHT, "Cub3D");
+	d->win = mlx_new_window(d->mlx, ROWS * TILE_SIZE, COLS * TILE_SIZE, "Cub3D");
 	if (!d->win)
 		return (1);
-	d->img = mlx_new_image(d->mlx, WIDTH, HEIGHT);
+	d->img = mlx_new_image(d->mlx, ROWS * TILE_SIZE, COLS * TILE_SIZE);
 	if (!d->img)
 		return (1);
 	d->addr = mlx_get_data_addr(d->img, &d->bpp, &d->line_length, &d->endian);
@@ -121,8 +121,8 @@ int	init_data(t_data *d, t_player *player)
 		write(2, "Map initialization failed\n", 26);
 		return (1);
 	}
-	d->player = player;
-	if (place_player(d))
+	d->pl = pl;
+	if (place_pl(d))
 		return (1);
 	return (0);
 }

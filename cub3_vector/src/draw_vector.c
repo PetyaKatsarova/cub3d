@@ -1,23 +1,18 @@
 #include "../include/cub3d.h"
 
 
-// float px, py, pdx, pdy, pa // player position
-// static void drawRays3d(t_data *data)
-// {
-//     int r, mx, my, mp, dof; float rx, ry, ra, xo, yo;
-//     ra=data->player->angle;
-    
-//     for (r=0; r<1; r++) {
-//         dof = 0;
-//         float aTan = -1/tan(ra);
-//         if (ra > M_PI) {
-//             (((int)data->player->y>>6)<<6)-0.0001; // looking up
-//         }
-//     }
-// }
-
-int draw_vector(t_data *data)
+int draw_vector(t_data *d)
 {
-    // drawRays3d(data);
+	double x = d->pl->x;
+	double y = d->pl->y;
+	double angle = d->pl->angle;
+
+	for (int i = 0; i < 30; i++)
+	{
+		int px = (int)(x + cos(angle) * i);
+		int py = (int)(y + sin(angle) * i);
+		if (px >= 0 && px < (COLS * TILE_SIZE) && py >= 0 && py < (ROWS * TILE_SIZE))
+			((int *)d->addr)[py * (d->line_length / 4) + px] = 0x00FF00;
+	}
     return (0);
 }

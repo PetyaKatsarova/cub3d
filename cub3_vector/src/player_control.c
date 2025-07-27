@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   player_control.c                                   :+:      :+:    :+:   */
+/*   pl_control.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: petya <petya@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -20,7 +20,7 @@ int ft_strlen(const char *s)
 	return len;
 }	
 
-void	player_control(t_data *d, int keycode)
+void	pl_control(t_data *d, int keycode)
 {
 	int dx = 0; // direction
 	int dy = 0;
@@ -29,45 +29,32 @@ void	player_control(t_data *d, int keycode)
 		exit(0);
 	else if (keycode == 'a') // left
 	{
-		d->player->angle -= 0.1;
-		if (d->player->angle < 0) {
-			d->player-> angle += 2 * M_PI;
-		}
-		d->player->delta_x = cos(d->player->angle) * 5;
-		d->player->delta_y = sin(d->player->angle) * 5;
+		d->pl->angle -= 0.1;
+		if (d->pl->angle < 0)
+			d->pl-> angle += 2 * M_PI;
+
+		d->pl->delta_x = cos(d->pl->angle) * 5;
+		d->pl->delta_y = sin(d->pl->angle) * 5;
 	}
 	else if (keycode == 'd') // right
 	{
-		d->player->angle += 0.1;
-		if (d->player->angle > 2 * M_PI) {
-			d->player-> angle += 2 * M_PI;
+		d->pl->angle += 0.1;
+		if (d->pl->angle > 2 * M_PI) {
+			d->pl-> angle -= 2 * M_PI;
 		}
-		d->player->delta_x = cos(d->player->angle) * 5;
-		d->player->delta_y = sin(d->player->angle) * 5;
+		d->pl->delta_x = cos(d->pl->angle) * 5;
+		d->pl->delta_y = sin(d->pl->angle) * 5;
 	}
 	else if (keycode == 'w') // up
 	{
-		d->player->x += d->player->delta_x;
-		d->player->y += d->player->delta_y;
+		d->pl->x += d->pl->delta_x;
+		d->pl->y += d->pl->delta_y;
 	}
 	else if (keycode == 's') // down
 	{
-		d->player->x -= d->player->delta_x;
-		d->player->y -= d->player->delta_y;
+		d->pl->x -= d->pl->delta_x;
+		d->pl->y -= d->pl->delta_y;
 	}
-
-	int px = d->player->x / TILE_SIZE;
-	int py = d->player->y / TILE_SIZE;
-	int nx = px + dx;
-	int ny = py + dy;
-	if (ny >= 0 && d->map[ny] && nx >= 0 && nx < (int)ft_strlen(d->map[ny])
-		&& d->map[ny][nx] == '0')
-	{
-		d->map[py][px] = '0';
-		//d->map[ny][nx] = 'N';
-		d->player->x = nx * TILE_SIZE;
-		d->player->y = ny * TILE_SIZE;
-	}
-	printf("Player -> x: %.1f, y: %.1f, angle: %.2f, delta_x: %.2f, delta_y: %.2f\n", d->player->x, d->player->y, d->player->angle, d->player->delta_x, d->player->delta_y);
+	printf("pl -> x: %.1f, y: %.1f, angle: %.2f, delta_x: %.2f, delta_y: %.2f\n", d->pl->x, d->pl->y, d->pl->angle, d->pl->delta_x, d->pl->delta_y);
 
 }

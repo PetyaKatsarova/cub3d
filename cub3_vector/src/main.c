@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   main.c                                             :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: pekatsar <pekatsar@student.codam.nl>         +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2025/07/23 15:13:27 by pekatsar      #+#    #+#                 */
-/*   Updated: 2025/07/25 18:13:14 by pekatsar      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: petya <petya@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/23 15:13:27 by pekatsar          #+#    #+#             */
+/*   Updated: 2025/07/27 20:45:36 by petya            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int key_hook(int keycode, t_data *d)
 {
-	player_control(d, keycode);
+	pl_control(d, keycode);
 	draw_maze(d);
 	draw_vector(d);
 	mlx_put_image_to_window(d->mlx, d->win, d->img, 0, 0);
@@ -30,9 +30,9 @@ static int	close_window(void *param)
 int	main(void)
 {
 	t_data	data;
-	t_player player;
+	t_pl pl;
 
-	if (init_data(&data, &player)) 
+	if (init_data(&data, &pl)) 
 		return (1);
 	draw_maze(&data);
 	draw_vector(&data);

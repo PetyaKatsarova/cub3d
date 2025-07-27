@@ -9,7 +9,7 @@ static void draw_tile(t_data *d, int x, int y, uint32_t color, int size)
 		{
 			int px = x + j; // pixel x coordinate
 			int py = y + i;
-			if (px >= 0 && px < WIDTH && py >= 0 && py < HEIGHT)
+			if (px >= 0 && px < (COLS * TILE_SIZE) && py >= 0 && py < (ROWS * TILE_SIZE))
 			{
 				((int *)d->addr)[py * (d->line_length / 4) + px] = color;
 			}
@@ -36,5 +36,5 @@ void	draw_maze(t_data *d)
 		}
 		y++;
 	}
-	draw_tile(d, d->player->x, d->player->y, PLAYER_COLOR, PLAYER_SIZE);
+	draw_tile(d, d->pl->x, d->pl->y, pl_COLOR, pl_SIZE);
 }

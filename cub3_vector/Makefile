@@ -9,10 +9,11 @@ LIBS     := -L$(LIBMLX) -lmlx -lX11 -lXext -lm
 SRC      := src/main.c \
 		   src/init_data.c \
 		   src/init_player.c \
+		   src/init_ray.c \
 		   src/draw_vector.c \
 		   src/draw_maze.c \
 		   src/player_control.c \
-		   src/rotate_player.c \
+		   src/draw_rays.c \
 
 OBJDIR   := obj
 OBJ      := $(SRC:src/%.c=$(OBJDIR)/%.o)

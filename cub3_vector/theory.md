@@ -97,7 +97,7 @@ Example of delta dist x and y
 	double delta_dist_y = fabs(1 / ray_dir_y);
 
 	// ...
-This gives us the distance the ray must travel to reach the next grid line in each direction. Note here that the pos_x and pos_y both refer to the player’s position.
+This gives us the distance the ray must travel to reach the next grid line in each direction. Note here that the pos_x and pos_y both refer to the pl’s position.
 
 Step 3: Calculating the Step and Initial Side Distances
 Now we need to calculate the step_x, step_y and the initial side distances for the ray. The step_x and step_y variables determine the direction in which the ray moves through the grid.
