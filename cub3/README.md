@@ -3,10 +3,16 @@ b4 starting, do:
 sudo apt install cmake libglfw3-dev libgl1-mesa-dev xorg build-essential
 Install X server (VcXsrv for Windows) and set $DISPLAY.
 
-b4 make command need to compile the mlx42 library:
-cd lib/MLX42
+-- now using minilibx_linux ----
+b4 make command need to compile the mlx(minilibx) library:
+cd lib/minilibx_linux
 cmake -B build
 cmake --build build
+
+;; b4 make command need to compile the mlx42 library:
+;; cd lib/MLX42
+;; cmake -B build
+;; cmake --build build
 ===================================================
 mxl42:
 https://github.com/codam-coding-college/MLX42/wiki

@@ -69,3 +69,6 @@ int	main(void)
 	mlx_terminate(g.mlx);
 	return (0);
 }
+
+// cc -Wall -Wextra -Werror -g  main.c  ../../cub3/lib/MLX42/build/libmlx42.a  -I../../cub3/lib/MLX42/include   -ldl -lglfw -lm -pthread \
+//   -o play && ./play
