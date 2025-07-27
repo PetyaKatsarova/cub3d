@@ -4,16 +4,7 @@ CFLAGS   := -Wall
 
 LIBMLX   := lib/minilibx_linux
 HEADERS  := -I./include -I$(LIBMLX)/include
-
-#LIBS     := $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
-#Uses a static prebuilt library: libmlx42.a
-#Requires modern dependencies: dl, glfw, pthread
-#Needs header from MLX42/MLX42.h
-
 LIBS     := -L$(LIBMLX) -lmlx -lX11 -lXext -lm
-#Links against libmlx.so / libmlx.a found in libminilibx_linux
-#Uses X11 display system (X11 + Xext)
-#Needs header from mlx.h
 
 SRC      := src/main.c \
 		   src/init_data.c \
@@ -28,6 +19,11 @@ OBJ      := $(SRC:src/%.c=$(OBJDIR)/%.o)
 
 all: $(NAME)
 
+# Build MLX library first
+$(LIBMLX)/libmlx.a:
+	@echo "Building MLX library..."
+	@make -C $(LIBMLX)
+
 $(OBJDIR)/%.o: src/%.c | $(OBJDIR)
 	@$(CC) $(CFLAGS) -I/usr/include -Imlx_linux -O3 -c $< -o $@ $(HEADERS)
 	@echo "Compiled $<"
@@ -35,15 +31,18 @@ $(OBJDIR)/%.o: src/%.c | $(OBJDIR)
 $(OBJDIR):
 	@mkdir -p $(OBJDIR)
 
-$(NAME): $(OBJ)
+# Make sure MLX is built before linking
+$(NAME): $(LIBMLX)/libmlx.a $(OBJ)
 	@$(CC) $(CFLAGS) $(OBJ) $(LIBS) -o $(NAME)
 	@echo "Build successful!"
 
 clean:
 	@rm -rf $(OBJDIR)
+	@make -C $(LIBMLX) clean
 
 fclean: clean
 	@rm -f $(NAME)
+	@make -C $(LIBMLX) fclean
 
 re: fclean all
 

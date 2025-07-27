@@ -5,7 +5,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 #include <stdint.h> // for uint32_t
-#define _USE_MATH_DEFINES
+#define _USE_MATH_DEFINES // M_PI
 #include <math.h>
 #include <stdio.h> // printf
 
@@ -20,10 +20,17 @@
 typedef struct s_player {
 	double x;
 	double y;
-	double angle;
-	double delta_x;
+	double angle; // pl viewing angle in radians
+	double delta_x; // x component of direction vector
 	double delta_y;
+	double fov; // field of view
 } t_player;
+
+typedef struct s_ray {
+	double 	angle; // ray angle
+	double 	distance; // distance to wall
+	int		hit_vertical; // 1 if hit vertical wall
+} t_ray;
 
 typedef struct s_data {
 	void		*mlx;
@@ -33,14 +40,14 @@ typedef struct s_data {
 	int			bpp; // bits per pixel
 	int			line_length;
 	int			endian;
-	char		**map;
+	char		**map; // or int?
 	t_player 	*player;
 }	t_data;
 
 int 	init_player (t_player *player, int x, int y, char dir);
 int		init_data(t_data *d, t_player *player);
 void	draw_maze(t_data *d);
-void	draw_vector();
+int		draw_vector(t_data *data);
 void	player_control(t_data *d, int keycode);
 
 #endif

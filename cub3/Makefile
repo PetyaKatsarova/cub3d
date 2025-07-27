@@ -1,6 +1,6 @@
 NAME     := cub3d
 CC       := cc
-CFLAGS   := -Wall -Wextra -Werror -g
+CFLAGS   := -Wall -Wextra -Werror
 
 LIBMLX   := lib/minilibx_linux
 HEADERS  := -I./include -I$(LIBMLX)/include
@@ -10,6 +10,7 @@ HEADERS  := -I./include -I$(LIBMLX)/include
 #Requires modern dependencies: dl, glfw, pthread
 #Needs header from MLX42/MLX42.h
 
+# when running on new machine, lin lib/minilibx_linux need to run "make"
 LIBS     := -L$(LIBMLX) -lmlx -lX11 -lXext -lm
 #Links against libmlx.so / libmlx.a found in libminilibx_linux
 #Uses X11 display system (X11 + Xext)

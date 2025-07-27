@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   player_control.c                                   :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: pekatsar <pekatsar@student.codam.nl>         +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2025/07/23 15:22:20 by pekatsar      #+#    #+#                 */
-/*   Updated: 2025/07/25 17:34:36 by pekatsar      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   player_control.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: petya <petya@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/23 15:22:20 by pekatsar          #+#    #+#             */
+/*   Updated: 2025/07/27 20:27:45 by petya            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,34 @@ void	player_control(t_data *d, int keycode)
 
 	if (keycode == 'q' || keycode == 65307) // ESC or Q
 		exit(0);
-	else if (keycode == 'a' && d->player->x >= 1 + TILE_SIZE) // left
-		dx = -1;
-	else if (keycode == 'd' && d->player->x <= WIDTH - TILE_SIZE - 1) // right
-		dx = 1;
-	else if (keycode == 'w' && d->player->y >= 1 + TILE_SIZE) // up
-		dy = -1;
-	else if (keycode == 's' && d->player->y <= HEIGHT - TILE_SIZE - 1) // down
-		dy = 1;
+	else if (keycode == 'a') // left
+	{
+		d->player->angle -= 0.1;
+		if (d->player->angle < 0) {
+			d->player-> angle += 2 * M_PI;
+		}
+		d->player->delta_x = cos(d->player->angle) * 5;
+		d->player->delta_y = sin(d->player->angle) * 5;
+	}
+	else if (keycode == 'd') // right
+	{
+		d->player->angle += 0.1;
+		if (d->player->angle > 2 * M_PI) {
+			d->player-> angle += 2 * M_PI;
+		}
+		d->player->delta_x = cos(d->player->angle) * 5;
+		d->player->delta_y = sin(d->player->angle) * 5;
+	}
+	else if (keycode == 'w') // up
+	{
+		d->player->x += d->player->delta_x;
+		d->player->y += d->player->delta_y;
+	}
+	else if (keycode == 's') // down
+	{
+		d->player->x -= d->player->delta_x;
+		d->player->y -= d->player->delta_y;
+	}
 
 	int px = d->player->x / TILE_SIZE;
 	int py = d->player->y / TILE_SIZE;
