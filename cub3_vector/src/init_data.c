@@ -6,7 +6,7 @@
 /*   By: petya <petya@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 15:21:24 by pekatsar          #+#    #+#             */
-/*   Updated: 2025/07/27 21:46:02 by petya            ###   ########.fr       */
+/*   Updated: 2025/07/28 17:04:25 by petya            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,32 +47,32 @@ static int place_pl(t_data *d)
 	int x = 0;
 	int y = 0;
 
-	while (d->map[y])
+	while (d->map[y]) // cols
 	{
 		x = 0;
-		while (d->map[y][x])
+		while (d->map[y][x]) // rows
 		{
 			if (d->map[y][x] == 'N') // hard coded: TODO from parser
 			{
-				if (init_pl(d->pl, x, y, 'N'))
+				if (init_pl(d->pl, x * TILE_SIZE, y * TILE_SIZE, 'N'))
 					return (write(2, "Failed to initialize pl\n", 28), 1);
 				return (d->map[y][x] = '0', 0); // Clear the pl position in the map
 			}
 			else if (d->map[y][x] == 'E')
 			{
-				if (init_pl(d->pl, x, y, 'E'))
+				if (init_pl(d->pl, x * TILE_SIZE, y * TILE_SIZE, 'E'))
 					return (write(2, "Failed to initialize pl\n", 28), 1);
 				return (d->map[y][x] = '0', 0); // Clear the pl position in the map
 			}
 			else if (d->map[y][x] == 'W')
 			{
-				if (init_pl(d->pl, x, y, 'W'))
+				if (init_pl(d->pl, x * TILE_SIZE, y * TILE_SIZE, 'W'))
 					return (write(2, "Failed to initialize pl\n", 28), 1);
 				return (d->map[y][x] = '0', 0); // Clear the pl position in the map
 			}
 			else if (d->map[y][x] == 'S')
 			{
-				if (init_pl(d->pl, x, y, 'W'))
+				if (init_pl(d->pl, x * TILE_SIZE, y * TILE_SIZE, 'S'))
 					return (write(2, "Failed to initialize pl\n", 28), 1);
 				return (d->map[y][x] = '0', 0); // Clear the pl position in the map
 			}
@@ -95,7 +95,7 @@ static char **copy_map(char **map)
 	if (!copy)
 		return NULL;
 	for (int j = 0; j < i; j++)
-		copy[j] = strdup(map[j]);
+		copy[j] = strdup(map[j]); // todo: wrtie ft_strdup and protect here
 	copy[i] = NULL;
 	return copy;
 }
@@ -106,10 +106,10 @@ int	init_data(t_data *d, t_pl *pl)
 	d->mlx = mlx_init();
 	if (!d->mlx)
 		return (1);
-	d->win = mlx_new_window(d->mlx, ROWS * TILE_SIZE, COLS * TILE_SIZE, "Cub3D");
+	d->win = mlx_new_window(d->mlx, WIN_WIDTH, WIN_HEIGHT, "Cub3D");
 	if (!d->win)
 		return (1);
-	d->img = mlx_new_image(d->mlx, ROWS * TILE_SIZE, COLS * TILE_SIZE);
+	d->img = mlx_new_image(d->mlx, WIN_WIDTH, WIN_HEIGHT);
 	if (!d->img)
 		return (1);
 	d->addr = mlx_get_data_addr(d->img, &d->bpp, &d->line_length, &d->endian);

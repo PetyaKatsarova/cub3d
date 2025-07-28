@@ -36,5 +36,5 @@ void	draw_maze(t_data *d)
 		}
 		y++;
 	}
-	draw_tile(d, d->player->x, d->player->y, PLAYER_COLOR, PLAYER_SIZE);
+	draw_tile(d, d->pl->x, d->pl->y, pl_COLOR, PL_SIZE);
 }

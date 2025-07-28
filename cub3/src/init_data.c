@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   init_data.c                                        :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: pekatsar <pekatsar@student.codam.nl>         +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2025/07/23 15:21:24 by pekatsar      #+#    #+#                 */
-/*   Updated: 2025/07/25 18:18:47 by pekatsar      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   init_data.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: petya <petya@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/23 15:21:24 by pekatsar          #+#    #+#             */
+/*   Updated: 2025/07/27 20:45:36 by petya            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static char *maze_map[] = {
 	NULL
 };
 
-static int place_player(t_data *d)
+static int place_pl(t_data *d)
 {
 	int x = 0;
 	int y = 0;
@@ -54,22 +54,22 @@ static int place_player(t_data *d)
 		{
 			if (d->map[y][x] == 'N') // hard coded: TODO from parser
 			{
-				if (init_player(d->player, x, y, 'N')) // Initialize player at the found position
-					return (write(2, "Failed to initialize player\n", 28), 1);
-				return (d->map[y][x] = '0', 0); // Clear the player position in the map
+				if (init_pl(d->pl, x, y, 'N')) // Initialize pl at the found position
+					return (write(2, "Failed to initialize pl\n", 28), 1);
+				return (d->map[y][x] = '0', 0); // Clear the pl position in the map
 			}
 			else if (d->map[y][x] == 'E') // hard coded: TODO from parser
 			{
-				if (init_player(d->player, x, y, 'E')) // Initialize player at the found position
-					return (write(2, "Failed to initialize player\n", 28), 1);
-				return (d->map[y][x] = '0', 0); // Clear the player position in the map
+				if (init_pl(d->pl, x, y, 'E')) // Initialize pl at the found position
+					return (write(2, "Failed to initialize pl\n", 28), 1);
+				return (d->map[y][x] = '0', 0); // Clear the pl position in the map
 			}
 				
 			x++;
 		}
 		y++;
 	}
-	return (write(2, "No player start (N) found in map\n", 33), 1); // pl not found
+	return (write(2, "No pl start (N) found in map\n", 33), 1); // pl not found
 }
 
 // TODO:  protect on all
@@ -89,7 +89,7 @@ static char **copy_map(char **map)
 }
 
 
-int	init_data(t_data *d, t_player *player)
+int	init_data(t_data *d, t_pl *pl)
 {
 	d->mlx = mlx_init();
 	if (!d->mlx)
@@ -109,8 +109,8 @@ int	init_data(t_data *d, t_player *player)
 		write(2, "Map initialization failed\n", 26);
 		return (1);
 	}
-	d->player = player;
-	if (place_player(d))
+	d->pl = pl;
+	if (place_pl(d))
 		return (1);
 	return (0);
 }

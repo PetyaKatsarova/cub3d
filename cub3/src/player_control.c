@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   player_control.c                                   :+:    :+:            */
+/*   pl_control.c                                   :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: pekatsar <pekatsar@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
@@ -20,24 +20,24 @@ int ft_strlen(const char *s)
 	return len;
 }	
 
-void	player_control(t_data *d, int keycode)
+void	pl_control(t_data *d, int keycode)
 {
 	int dx = 0; // direction
 	int dy = 0;
 
 	if (keycode == 65307) // ESC
 		exit(0);
-	else if (keycode == 65361 && d->player->x >= 1 + TILE_SIZE) // left
+	else if (keycode == 65361 && d->pl->x >= 1 + TILE_SIZE) // left
 		dx = -1;
-	else if (keycode == 65363 && d->player->x <= WIDTH - TILE_SIZE - 1) // right
+	else if (keycode == 65363 && d->pl->x <= WIDTH - TILE_SIZE - 1) // right
 		dx = 1;
-	else if (keycode == 65362 && d->player->y >= 1 + TILE_SIZE) // up
+	else if (keycode == 65362 && d->pl->y >= 1 + TILE_SIZE) // up
 		dy = -1;
-	else if (keycode == 65364 && d->player->y <= HEIGHT - TILE_SIZE - 1) // down
+	else if (keycode == 65364 && d->pl->y <= HEIGHT - TILE_SIZE - 1) // down
 		dy = 1;
 
-	int px = d->player->x / TILE_SIZE;
-	int py = d->player->y / TILE_SIZE;
+	int px = d->pl->x / TILE_SIZE;
+	int py = d->pl->y / TILE_SIZE;
 	int nx = px + dx;
 	int ny = py + dy;
 	if (ny >= 0 && d->map[ny] && nx >= 0 && nx < (int)ft_strlen(d->map[ny])
@@ -45,9 +45,9 @@ void	player_control(t_data *d, int keycode)
 	{
 		d->map[py][px] = '0';
 		//d->map[ny][nx] = 'N';
-		d->player->x = nx * TILE_SIZE;
-		d->player->y = ny * TILE_SIZE;
+		d->pl->x = nx * TILE_SIZE;
+		d->pl->y = ny * TILE_SIZE;
 	}
-	printf("Player -> x: %.1f, y: %.1f, angle: %.2f, delta_x: %.2f, delta_y: %.2f\n", d->player->x, d->player->y, d->player->angle, d->player->delta_x, d->player->delta_y);
+	printf("pl -> x: %.1f, y: %.1f, angle: %.2f, delta_x: %.2f, delta_y: %.2f\n", d->pl->x, d->pl->y, d->pl->angle, d->pl->delta_x, d->pl->delta_y);
 
 }

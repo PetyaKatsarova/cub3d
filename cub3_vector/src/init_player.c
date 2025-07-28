@@ -20,9 +20,9 @@ int init_pl (t_pl *pl, int x, int y, char dir)
 		write(2, "Invalid pl position\n", 24);
 		return (1);
 	}
-	pl->x = (COLS * TILE_SIZE) / 2; // check logic : TODO
-	pl->y = (ROWS * TILE_SIZE) / 2;
-	if (dir == 'N')
+	pl->x = x;
+	pl->y = y;
+	if (dir == 'N') // cause screen is inverted, on paper is pi/2: 90 deg
 		pl->angle = 3 * M_PI / 2;
 	else if (dir == 'S')
 		pl->angle = M_PI / 2;
@@ -32,8 +32,8 @@ int init_pl (t_pl *pl, int x, int y, char dir)
 		pl->angle = M_PI;
 	else
 		return (1);
-	pl->delta_x = cos(pl->angle);
-	pl->delta_y = sin(pl->angle);
+	pl->delta_x = cos(pl->angle) * 5;
+	pl->delta_y = sin(pl->angle) * 5;
 	pl->fov = 0; //field of view
 	return (0);
 }

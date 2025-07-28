@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   rotate_player.c                                    :+:    :+:            */
+/*   rotate_pl.c                                    :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: pekatsar <pekatsar@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 /**
- * changes player direction according to key pressed
+ * changes pl direction according to key pressed
  * KEYS:
  * a -> east
  * s -> south
@@ -19,7 +19,7 @@
  * w -> north
  */
 
-// static void player_dir(unsigned char *key, int x, int y)
+// static void pl_dir(unsigned char *key, int x, int y)
 // {
 //	if (key == 'a')
 //	{

@@ -19,7 +19,7 @@ int ft_strlen(const char *s)
 		len++;
 	return len;
 }	
-
+// float px, py, pdx, pdy, pa
 void	pl_control(t_data *d, int keycode)
 {
 	int dx = 0; // direction
@@ -27,7 +27,7 @@ void	pl_control(t_data *d, int keycode)
 
 	if (keycode == 'q' || keycode == 65307) // ESC or Q
 		exit(0);
-	else if (keycode == 'a') // left
+	else if (keycode == 'a') // rotate left
 	{
 		d->pl->angle -= 0.1;
 		if (d->pl->angle < 0)
@@ -36,7 +36,7 @@ void	pl_control(t_data *d, int keycode)
 		d->pl->delta_x = cos(d->pl->angle) * 5;
 		d->pl->delta_y = sin(d->pl->angle) * 5;
 	}
-	else if (keycode == 'd') // right
+	else if (keycode == 'd') // rotate right
 	{
 		d->pl->angle += 0.1;
 		if (d->pl->angle > 2 * M_PI) {
@@ -45,12 +45,12 @@ void	pl_control(t_data *d, int keycode)
 		d->pl->delta_x = cos(d->pl->angle) * 5;
 		d->pl->delta_y = sin(d->pl->angle) * 5;
 	}
-	else if (keycode == 'w') // up
+	else if (keycode == 'w') // move fwd/towards
 	{
 		d->pl->x += d->pl->delta_x;
 		d->pl->y += d->pl->delta_y;
 	}
-	else if (keycode == 's') // down
+	else if (keycode == 's') // move away/backwards
 	{
 		d->pl->x -= d->pl->delta_x;
 		d->pl->y -= d->pl->delta_y;

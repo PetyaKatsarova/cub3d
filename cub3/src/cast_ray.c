@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   cast_ray.c                                         :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: pekatsar <pekatsar@student.codam.nl>         +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2025/07/25 17:36:45 by pekatsar      #+#    #+#                 */
-/*   Updated: 2025/07/25 18:11:18 by pekatsar      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   cast_ray.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: petya <petya@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/25 17:36:45 by pekatsar          #+#    #+#             */
+/*   Updated: 2025/07/27 20:45:36 by petya            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void set_px (t_data *d, int x, int y, uint32_t color)
 }
 
 /**
- * For every vertical stripe on screen (or every N pixels), cast a ray from the player’s position.
+ * For every vertical stripe on screen (or every N pixels), cast a ray from the pl’s position.
 	Step along that ray direction until it hits a wall.
 	Draw a vertical line to simulate the 3D wall.
  */
@@ -33,14 +33,14 @@ void cast_rays(t_data *d)
 	int ray;
 	double ray_angle;
 
-	ray_angle = d->player->angle - (M_PI / 6); // 30 degrees to the left
+	ray_angle = d->pl->angle - (M_PI / 6); // 30 degrees to the left
 	ray = 0;
 	if (ray_angle < 0)
 		ray_angle += 2 * M_PI; // wrap around
 	while (ray < WIDTH)
 	{
-		double ray_x = d->player->x;
-		double ray_y = d->player->y;
+		double ray_x = d->pl->x;
+		double ray_y = d->pl->y;
 		double ray_dx = cos(ray_angle);
 		double ray_dy = sin(ray_angle);
 		while (1)

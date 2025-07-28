@@ -62,11 +62,11 @@ while (i < length)
 ---------------------------------------------
 Let’s say:
 
-player->x = 100
+pl->x = 100
 
-player->y = 100
+pl->y = 100
 
-player->angle = 0
+pl->angle = 0
 
 Draw vector of length 50:
 raw_vector(t_data *d, double x, double y, double angle, double length)
