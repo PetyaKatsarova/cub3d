@@ -10,16 +10,18 @@
 # include <stdio.h> // printf
 
 // rows and columns, will be taken from the map
-# define WIN_WIDTH      800
-# define WIN_HEIGHT     600
+# define WIN_WIDTH      2000 //800
+# define WIN_HEIGHT     1200 // 600
 # define COLS			36 // map with
 # define ROWS			24 // map height
 # define TILE_SIZE  	22
 # define PL_SIZE 		7
 # define WALL_COLOR 	0x800080 //0xBFFF55  // lime
 # define FLOOR_COLOR 	0xB48E8E // favorite
+# define CEILING_COLOR  0x87CEEB // sky blue
 # define pl_COLOR    	0x0d0832ff // dark blue
 # define PURPLE 		0x800080
+# define LIME_YELLOW   	0xBFFF00 
 # define DEG_RAD		0.0174533 // one degree in radians
 
 # define KEY_LEFT   65361

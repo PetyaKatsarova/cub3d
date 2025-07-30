@@ -18,6 +18,13 @@ SRC      := src/main.c \
 OBJDIR   := obj
 OBJ      := $(SRC:src/%.c=$(OBJDIR)/%.o)
 
+# Colors
+GREEN    := \033[0;32m
+RESET    := \033[0m
+
+# Header files for dependency tracking
+HEADER_FILES := include/cub3d.h
+
 all: $(NAME)
 
 # Build MLX library first
@@ -25,26 +32,44 @@ $(LIBMLX)/libmlx.a:
 	@echo "Building MLX library..."
 	@make -C $(LIBMLX)
 
-$(OBJDIR)/%.o: src/%.c | $(OBJDIR)
+# Compile with dependency on header files and Makefile
+$(OBJDIR)/%.o: src/%.c $(HEADER_FILES) Makefile | $(OBJDIR)
 	@$(CC) $(CFLAGS) -I/usr/include -Imlx_linux -O3 -c $< -o $@ $(HEADERS)
-	@echo "Compiled $<"
+	@echo "$(GREEN)Compiled$(RESET) $<"
 
 $(OBJDIR):
 	@mkdir -p $(OBJDIR)
 
-# Make sure MLX is built before linking
-$(NAME): $(LIBMLX)/libmlx.a $(OBJ)
+# Make sure MLX is built before linking, also depend on Makefile
+$(NAME): $(LIBMLX)/libmlx.a $(OBJ) Makefile
 	@$(CC) $(CFLAGS) $(OBJ) $(LIBS) -o $(NAME)
-	@echo "Build successful!"
+	@echo "$(GREEN)Build successful!$(RESET)"
 
 clean:
-	@rm -rf $(OBJDIR)
-	@make -C $(LIBMLX) clean
+	@if [ -d "$(OBJDIR)" ]; then \
+		rm -rf $(OBJDIR) && echo "$(GREEN)Object files cleaned$(RESET)"; \
+	else \
+		echo "$(GREEN)Object files already clean$(RESET)"; \
+	fi
+	@make -C $(LIBMLX) clean > /dev/null 2>&1 || true
+	@echo "$(GREEN)MLX library cleaned$(RESET)"
 
 fclean: clean
-	@rm -f $(NAME)
-	@make -C $(LIBMLX) fclean
+	@if [ -f "$(NAME)" ]; then \
+		rm -f $(NAME) && echo "$(GREEN)Executable $(NAME) removed$(RESET)"; \
+	else \
+		echo "$(GREEN)Executable $(NAME) already clean$(RESET)"; \
+	fi
+	@echo "$(GREEN)Full clean completed$(RESET)"
 
 re: fclean all
 
-.PHONY: all clean fclean re
+# Check if everything is up to date
+check:
+	@if [ -f "$(NAME)" ]; then \
+		echo "$(GREEN)$(NAME) exists and is up to date$(RESET)"; \
+	else \
+		echo "$(NAME) needs to be built"; \
+	fi
+
+.PHONY: all clean fclean re check
