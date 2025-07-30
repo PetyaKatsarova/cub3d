@@ -47,9 +47,6 @@ Imagine you're standing in a giant room full of tiles (a grid).
 You're looking straight ahead.
 That’s your view direction — a tiny invisible arrow called:
 
-scss
-Copy
-Edit
 (dir_x, dir_y)
 It points where your nose is pointing.
 

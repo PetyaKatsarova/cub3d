@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: petya <petya@student.42.fr>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/23 15:13:27 by pekatsar          #+#    #+#             */
-/*   Updated: 2025/07/28 18:11:42 by petya            ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   main.c                                             :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: petya <petya@student.42.fr>                  +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2025/07/23 15:13:27 by pekatsar      #+#    #+#                 */
+/*   Updated: 2025/07/30 10:26:42 by pekatsar      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,6 @@
 static int key_hook(int keycode, t_data *d)
 {
 	pl_control(d, keycode);
-	// draw_maze(d);
-
-	// t_ray ray;
-	// ray.angle = d->pl->angle;
-	// draw_rays(d, &ray);
-	// draw_vector(d);
-	// mlx_put_image_to_window(d->mlx, d->win, d->img, 0, 0);
 	return (0);
 }
 
@@ -38,13 +31,8 @@ int	main(void)
 
 	if (init_data(&data, &pl)) 
 		return (1);
-	// draw_maze(&data);
-	// draw_vector(&data);
-	// mlx_put_image_to_window(data.mlx, data.win, data.img, 0, 0);
-	// mlx_key_hook(data.win, key_hook, &data);
 	mlx_loop_hook(data.mlx, render_frame, &data);
 	mlx_key_hook(data.win, key_hook, &data);
-
 	mlx_hook(data.win, 17, 0, close_window, &data); // event code: 17 for x
 	mlx_loop(data.mlx);
 	// todo: clean more

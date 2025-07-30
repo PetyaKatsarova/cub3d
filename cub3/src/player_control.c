@@ -25,15 +25,15 @@ void	pl_control(t_data *d, int keycode)
 	int dx = 0; // direction
 	int dy = 0;
 
-	if (keycode == 65307) // ESC
+	if (keycode == KEY_ESC)
 		exit(0);
-	else if (keycode == 65361 && d->pl->x >= 1 + TILE_SIZE) // left
+	else if (keycode == KEY_LEFT && d->pl->x >= 1 + TILE_SIZE)
 		dx = -1;
-	else if (keycode == 65363 && d->pl->x <= WIDTH - TILE_SIZE - 1) // right
+	else if (keycode == KEY_RIGHT && d->pl->x <= WIDTH - TILE_SIZE - 1)
 		dx = 1;
-	else if (keycode == 65362 && d->pl->y >= 1 + TILE_SIZE) // up
+	else if (keycode == KEY_UP && d->pl->y >= 1 + TILE_SIZE)
 		dy = -1;
-	else if (keycode == 65364 && d->pl->y <= HEIGHT - TILE_SIZE - 1) // down
+	else if (keycode == KEY_DOWN && d->pl->y <= HEIGHT - TILE_SIZE - 1)
 		dy = 1;
 
 	int px = d->pl->x / TILE_SIZE;

@@ -12,10 +12,15 @@
 # define WIDTH      	1800
 # define HEIGHT     	1200
 # define TILE_SIZE  	50
-#define  PL_SIZE 	7
+# define  PL_SIZE 	7
 # define WALL_COLOR 	0xBFFF00  // lime
 # define FLOOR_COLOR 	0xB48E8E // favorite
-#define pl_COLOR    0x0d0832ff // dark blue
+# define pl_COLOR    0x0d0832ff // dark blue
+# define KEY_ESC    65307
+# define KEY_LEFT   65361
+# define KEY_RIGHT  65363
+# define KEY_UP     65362
+# define KEY_DOWN   65364
 
 typedef struct s_pl {
 	double x;
