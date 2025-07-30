@@ -7,6 +7,6 @@ int init_ray(t_ray *ray)
     ray->hit_vertical = 0;
     ray->y = 0;
     ray->x = 0;
-
+	ray->radian = 0;
 	return (0);
 }

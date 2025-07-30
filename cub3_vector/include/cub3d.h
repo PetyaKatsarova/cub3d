@@ -15,13 +15,17 @@
 # define COLS			36 // map with
 # define ROWS			24 // map height
 # define TILE_SIZE  	22
-# define  PL_SIZE 		7
+# define PL_SIZE 		7
 # define WALL_COLOR 	0x800080 //0xBFFF55  // lime
 # define FLOOR_COLOR 	0xB48E8E // favorite
 # define pl_COLOR    	0x0d0832ff // dark blue
-#define PURPLE 			0x800080;
-# define P2				(M_PI/2)
-# define P3				(M_PI/3)
+# define PURPLE 		0x800080
+# define DEG_RAD		0.0174533 // one degree in radians
+
+# define KEY_LEFT   65361
+# define KEY_RIGHT  65363
+# define KEY_ESC    65307
+# define KEY_SPACE  32
 
 typedef struct s_pl {
 	double x;
@@ -36,6 +40,7 @@ typedef struct s_ray {
 	double 	angle; // ray angle
 	double 	distance; // distance to wall
 	int		hit_vertical; // 1 if hit vertical wall
+	float	radian;
 	double	x;
 	double	y;
 } t_ray;

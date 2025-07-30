@@ -12,7 +12,7 @@ int draw_vector(t_data *d)
 		int px = (int)(x + cos(angle) * i);
 		int py = (int)(y + sin(angle) * i);
 		if (px >= 0 && px < (COLS * TILE_SIZE) && py >= 0 && py < (ROWS * TILE_SIZE))
-			((int *)d->addr)[py * (d->line_length / 4) + px] = PURPLE;
+			((int *)d->addr)[py * (d->line_length / 4) + px] = pl_COLOR;
 	}
     return (0);
 }
