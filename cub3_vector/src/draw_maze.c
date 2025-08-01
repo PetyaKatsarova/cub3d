@@ -1,5 +1,5 @@
 
-#include "../include/cub3d.h"
+#include "../include/cub3D.h"
 
 static void draw_tile(t_data *d, int x, int y, uint32_t color, int size)
 {

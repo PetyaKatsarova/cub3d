@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   init_data.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: petya <petya@student.42.fr>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/23 15:21:24 by pekatsar          #+#    #+#             */
-/*   Updated: 2025/07/28 17:04:25 by petya            ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   init_data.c                                        :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: petya <petya@student.42.fr>                  +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2025/07/23 15:21:24 by pekatsar      #+#    #+#                 */
+/*   Updated: 2025/08/01 14:53:34 by pekatsar      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3d.h"
+#include "../include/cub3D.h"
 #include <string.h> // todo: remove for strdup
 
 // TODO: gets input from parser; 24 cols, 34 len(width)
@@ -106,7 +106,7 @@ int	init_data(t_data *d, t_pl *pl)
 	d->mlx = mlx_init();
 	if (!d->mlx)
 		return (1);
-	d->win = mlx_new_window(d->mlx, WIN_WIDTH, WIN_HEIGHT, "Cub3D");
+	d->win = mlx_new_window(d->mlx, WIN_WIDTH, WIN_HEIGHT, "cub3D");
 	if (!d->win)
 		return (1);
 	d->img = mlx_new_image(d->mlx, WIN_WIDTH, WIN_HEIGHT);

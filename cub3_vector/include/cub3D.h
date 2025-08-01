@@ -16,18 +16,23 @@
 # define ROWS			24 // map height
 # define TILE_SIZE  	22
 # define PL_SIZE 		7
-# define WALL_COLOR 	0x800080 //0xBFFF55  // lime
+# define RAYS_NUM		20
+# define DEG_RAD		0.0174533 // one degree in radians
+
+# define WALL_COLOR 	0x800080 // purple 0xBFFF55  // lime
+# define EAST_COLOR		0xFFFF00 // yellow 
+# define WEST_COLOR		0x0000FF  // blue
+# define NORTH_COLOR	0x00FF00  // green
+# define SOUTH_COLOR	0xFF0000  // red
 # define FLOOR_COLOR 	0xB48E8E // favorite
 # define CEILING_COLOR  0x87CEEB // sky blue
 # define pl_COLOR    	0x0d0832ff // dark blue
+# define BACKGROUND_COLOR 0xD3D3D3
 # define PURPLE 		0x800080
 # define LIME_YELLOW   	0xBFFF00 
-# define DEG_RAD		0.0174533 // one degree in radians
 
 # define KEY_LEFT   65361
 # define KEY_RIGHT  65363
-# define KEY_ESC    65307
-# define KEY_SPACE  32
 
 typedef struct s_pl {
 	double x;
@@ -42,7 +47,7 @@ typedef struct s_ray {
 	double 	angle; // ray angle
 	double 	distance; // distance to wall
 	int		hit_vertical; // 1 if hit vertical wall
-	float	radian;
+	double	radian;
 	double	x;
 	double	y;
 } t_ray;
@@ -59,12 +64,14 @@ typedef struct s_data {
 	t_pl 		*pl;
 }	t_data;
 
-int 	init_pl (t_pl *pl, int x, int y, char dir);
-// int		init_ray();
-int		init_data(t_data *d, t_pl *pl);
-void	draw_maze(t_data *d);
-int		draw_vector(t_data *data);
-void	pl_control(t_data *d, int keycode);
-int		render_frame(t_data *data);
+int 		init_pl (t_pl *pl, int x, int y, char dir);
+int			init_data(t_data *d, t_pl *pl);
+void 		set_px(t_data *d, int x, int y, uint32_t color);
+void 		horizontal_check(t_ray *ray, t_data *d, float *hx, float *hy);
+void 		vertical_check(t_ray *ray, t_data *d, float *vx, float *vy);
+void		draw_maze(t_data *d);
+void 		draw_minimap(t_data *d);
+void		pl_control(t_data *d, int keycode);
+int			render_frame(t_data *data);
 
 #endif

@@ -6,11 +6,11 @@
 /*   By: petya <petya@student.42.fr>                  +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/07/23 15:13:27 by pekatsar      #+#    #+#                 */
-/*   Updated: 2025/07/30 10:26:42 by pekatsar      ########   odam.nl         */
+/*   Updated: 2025/08/01 14:53:34 by pekatsar      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3d.h"
+#include "../include/cub3D.h"
 
 static int key_hook(int keycode, t_data *d)
 {

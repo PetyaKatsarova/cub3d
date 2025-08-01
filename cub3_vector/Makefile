@@ -10,10 +10,10 @@ SRC      := src/main.c \
 		   src/init_data.c \
 		   src/init_player.c \
 		   src/init_ray.c \
-		   src/draw_vector.c \
 		   src/draw_maze.c \
+		   src/draw_minimap.c \
 		   src/player_control.c \
-		   src/draw_rays.c \
+		   src/draw_3d_map.c \
 
 OBJDIR   := obj
 OBJ      := $(SRC:src/%.c=$(OBJDIR)/%.o)
@@ -23,7 +23,7 @@ GREEN    := \033[0;32m
 RESET    := \033[0m
 
 # Header files for dependency tracking
-HEADER_FILES := include/cub3d.h
+HEADER_FILES := include/cub3D.h
 
 all: $(NAME)
 
