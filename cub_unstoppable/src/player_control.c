@@ -56,19 +56,27 @@ int key_release(int keycode, t_data *d)
 
 int check_collision(t_data *d, double new_x, double new_y)
 {
-    int map_x = (int)(new_x / TILE_SIZE);
-    int map_y = (int)(new_y / TILE_SIZE);
+    float buffer = 8.0; // Stop 8 pixels before wall: hardcoded: todo: in header
+    
+    // Check multiple points around the player position with buffer
+    int map_x1 = (int)((new_x - buffer) / TILE_SIZE);
+    int map_y1 = (int)((new_y - buffer) / TILE_SIZE);
+    int map_x2 = (int)((new_x + buffer) / TILE_SIZE);
+    int map_y2 = (int)((new_y + buffer) / TILE_SIZE);
 
-    if (map_x < 0 || map_x >= COLS || map_y < 0 || map_y >= ROWS)
+    // Check bounds with buffer
+    if (map_x1 < 0 || map_x2 >= COLS || map_y1 < 0 || map_y2 >= ROWS)
         return 1; // Out of bounds
 
-    if (d->map[map_y][map_x] == '1')
+    // Check all four corners of the player's buffered area
+    if (d->map[map_y1][map_x1] == '1' || 
+        d->map[map_y1][map_x2] == '1' ||
+        d->map[map_y2][map_x1] == '1' ||
+        d->map[map_y2][map_x2] == '1')
         return 1; // Wall detected
 
     return 0;
 }
-
-
 
 // Continuous movement handler - called every frame
 void pl_control(t_data *d)
