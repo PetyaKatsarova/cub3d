@@ -64,6 +64,16 @@ typedef struct s_ray {
 	double	y;
 } t_ray;
 
+typedef struct s_texture {
+    void    *img;
+    char    *addr;
+    int     width;
+    int     height;
+    int     bpp;
+    int     line_length;
+    int     endian;
+} t_texture;
+
 typedef struct s_data {
 	void		*mlx;
 	void		*win;
@@ -75,6 +85,10 @@ typedef struct s_data {
 	char		**map; // or int?
 	t_pl 		*pl;
 	t_btns		*btns;
+	t_texture 	north_tex;
+    t_texture 	south_tex;
+    t_texture 	east_tex;
+	t_texture   west_tex;
 }	t_data;
 
 
