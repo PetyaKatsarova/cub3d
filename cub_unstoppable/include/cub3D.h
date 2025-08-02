@@ -106,5 +106,6 @@ int     	key_press(int keycode, t_data *d);
 int     	key_release(int keycode, t_data *d);
 void    	pl_control(t_data *d);  // Changed signature - no keycode parameter
 void    	handle_arrow_keys(t_data *d, int keycode);
-
+void 		init_textures(t_data *d);
+uint32_t 	get_texture_pixel(t_texture *tex, int x, int y);
 #endif

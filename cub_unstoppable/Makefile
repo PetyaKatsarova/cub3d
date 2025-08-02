@@ -14,6 +14,7 @@ SRC      := src/main.c \
 		   src/draw_minimap.c \
 		   src/player_control.c \
 		   src/draw_3d_map.c \
+		   src/manipulate_textures.c \
 
 OBJDIR   := obj
 OBJ      := $(SRC:src/%.c=$(OBJDIR)/%.o)
