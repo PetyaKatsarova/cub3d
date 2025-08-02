@@ -10,8 +10,8 @@
 # include <stdio.h> // printf
 
 // rows and columns, will be taken from the map
-# define WIN_WIDTH      	2000 //800
-# define WIN_HEIGHT     	1200 // 600
+# define WIN_WIDTH      	800 //2000 //800
+# define WIN_HEIGHT     	600 //1200 // 600
 # define COLS				8 // map with: hardcoded, todo: use form parser!!
 # define ROWS				8 // map height
 # define TILE_SIZE  		64 // px width and height: balanced performance, fixed
