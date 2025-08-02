@@ -12,59 +12,6 @@
 
 #include "../include/cub3D.h"
 
-//static int ft_strlen(const char *s)
-//{
-//	int len = 0;
-//	while (s[len])
-//		len++;
-//	return len;
-//}	
-
-
-
-//void pl_control(t_data *d, int keycode) {
-//    if (keycode == 'q' || keycode == 65307) // ESC or Q
-//        exit(0);
-//    else if (keycode == KEY_LEFT) // LEFT ARROW - rotate left
-//    {
-//        d->pl->angle -= 0.1;
-//        if (d->pl->angle < 0)
-//            d->pl->angle += 2 * M_PI;
-//        d->pl->delta_x = cos(d->pl->angle) * 5;
-//        d->pl->delta_y = sin(d->pl->angle) * 5;
-//    }
-//    else if (keycode == KEY_RIGHT) // RIGHT ARROW - rotate right
-//    {
-//        d->pl->angle += 0.1;
-//        if (d->pl->angle > 2 * M_PI)
-//            d->pl->angle -= 2 * M_PI;
-//        d->pl->delta_x = cos(d->pl->angle) * 5;
-//        d->pl->delta_y = sin(d->pl->angle) * 5;
-//    }
-//    else if (keycode == 'w') // move forward
-//    {
-//        d->pl->x += d->pl->delta_x;
-//        d->pl->y += d->pl->delta_y;
-//    }
-//    else if (keycode == 's') // move backward
-//    {
-//        d->pl->x -= d->pl->delta_x;
-//        d->pl->y -= d->pl->delta_y;
-//    }
-//    else if (keycode == 'a') // strafe left
-//    {
-//        d->pl->x += d->pl->delta_y;  // perpendicular to forward
-//        d->pl->y -= d->pl->delta_x;
-//    }
-//    else if (keycode == 'd') // strafe right
-//    {
-//        d->pl->x -= d->pl->delta_y;  // perpendicular to forward
-//        d->pl->y += d->pl->delta_x;
-//    }
-//}
-
-
-
 
 // Key press handler - sets button state to pressed
 int key_press(int keycode, t_data *d)
@@ -107,49 +54,76 @@ int key_release(int keycode, t_data *d)
     return (0);
 }
 
+int check_collision(t_data *d, double new_x, double new_y)
+{
+    int map_x = (int)(new_x / TILE_SIZE);
+    int map_y = (int)(new_y / TILE_SIZE);
+
+    if (map_x < 0 || map_x >= COLS || map_y < 0 || map_y >= ROWS)
+        return 1; // Out of bounds
+
+    if (d->map[map_y][map_x] == '1')
+        return 1; // Wall detected
+
+    return 0;
+}
+
+
+
 // Continuous movement handler - called every frame
 void pl_control(t_data *d)
 {
+    float move_x = 0;
+    float move_y = 0;
+
     // Player movement based on button states (slower speed)
     if (d->btns->w) // Move forward
     {
-        d->pl->x += d->pl->delta_x * 0.2;  // Much slower
-        d->pl->y += d->pl->delta_y * 0.2;
+        move_x = d->pl->delta_x * 0.2;
+        move_y = d->pl->delta_y * 0.2;
     }
     if (d->btns->s) // Move backward
     {
-        d->pl->x -= d->pl->delta_x * 0.2;
-        d->pl->y -= d->pl->delta_y * 0.2;
+        move_x = -d->pl->delta_x * 0.2;
+        move_y = -d->pl->delta_y * 0.2;
     }
     if (d->btns->a) // Strafe left
     {
-        d->pl->x += d->pl->delta_y * 0.2;  // perpendicular to forward
-        d->pl->y -= d->pl->delta_x * 0.2;
+        move_x = d->pl->delta_y * 0.2;
+        move_y = -d->pl->delta_x * 0.2;
     }
     if (d->btns->d) // Strafe right
     {
-        d->pl->x -= d->pl->delta_y * 0.2;  // perpendicular to forward
-        d->pl->y += d->pl->delta_x * 0.2;
+        move_x = -d->pl->delta_y * 0.2;
+        move_y = d->pl->delta_x * 0.2;
     }
-    
+
+    // Check for collisions before moving
+    if (!check_collision(d, d->pl->x + move_x, d->pl->y + move_y))
+    {
+        d->pl->x += move_x;
+        d->pl->y += move_y;
+    }
+
     // Continuous rotation (slower speed)
     if (d->btns->left_arrow) // Rotate left continuously
     {
-        d->pl->angle -= 0.03;  // Much slower rotation
+        d->pl->angle -= 0.02;  // Much slower rotation
         if (d->pl->angle < 0)
             d->pl->angle += 2 * M_PI;
-        d->pl->delta_x = cos(d->pl->angle) * 5;
-        d->pl->delta_y = sin(d->pl->angle) * 5;
     }
     if (d->btns->right_arrow) // Rotate right continuously
     {
-        d->pl->angle += 0.03;  // Much slower rotation
+        d->pl->angle += 0.02;  // Much slower rotation
         if (d->pl->angle > 2 * M_PI)
             d->pl->angle -= 2 * M_PI;
-        d->pl->delta_x = cos(d->pl->angle) * 5;
-        d->pl->delta_y = sin(d->pl->angle) * 5;
     }
+
+    // Update player movement vectors after rotation
+    d->pl->delta_x = cos(d->pl->angle) * 5;
+    d->pl->delta_y = sin(d->pl->angle) * 5;
 }
+
 
 // Arrow key handler for rotation (can be immediate response)
 void handle_arrow_keys(t_data *d, int keycode)
