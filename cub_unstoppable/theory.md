@@ -114,3 +114,106 @@ mlx_loop: Starts the MLX event loop to repeatedly call the frame function.
 
 ================================================
 
+Radians are a unit for measuring angles, like degrees but more mathematically natural:
+
+1 full circle = 2π radians = 360°
+π radians = 180°
+π/2 radians = 90°
+0.1 radians ≈ 5.7°
+The angle represents the player's viewing direction - where the player is looking.
+     North (90° or π/2)
+           ↑
+           |
+West ←────●────→ East (0° or 0 radians)
+           |
+           ↓
+     South (270° or 3π/2)
+From: Player's position (center point)
+To: The direction the player is facing
+Player view:
+    
+    ↗ angle = π/4 (45°)
+   ●   ← player position
+    
+    → angle = 0 (facing right/east)
+   ●
+    
+    ↓ angle = 3π/2 (270°, facing down/south)
+   ●
+   The angle is between:
+
+Starting line: Positive X-axis (horizontal line pointing right)
+Ending line: Your viewing direction vector
+
+Example - facing northwest:
+
+     Y ↑
+       |    ↗ viewing direction
+       |   /
+       |  / angle = 3π/4
+       | /
+───────●────────→ X
+       starting reference line
+Standard Mathematical Convention
+This follows the standard trigonometric convention:
+
+0 radians = positive X-axis (east)
+π/2 radians = positive Y-axis (north)
+π radians = negative X-axis (west)
+3π/2 radians = negative Y-axis (south)
+
+The angle is always measured counterclockwise from the positive X-axis to your current viewing direction. This is why when you press LEFT arrow (rotate left), the angle increases, and when it goes negative, it wraps around to 2π.
+
+Angle = 0 (facing east):
+cos(0) = 1, sin(0) = 0
+     Y ↑
+       |
+───────●────────→ X
+       direction = (1, 0)
+
+Angle = π/2 (facing north):
+cos(π/2) = 0, sin(π/2) = 1
+     Y ↑ direction = (0, 1)
+       |
+       |
+───────●────────→ X
+
+Angle = π (facing west):
+cos(π) = -1, sin(π) = 0
+     Y ↑
+       |
+   ←───●────────→ X
+   direction = (-1, 0)
+
+d->pl->delta_x = cos(d->pl->angle) * 5;
+d->pl->delta_y = sin(d->pl->angle) * 5;
+
+cos(angle) gives how much to move in X direction (-1 to +1)
+sin(angle) gives how much to move in Y direction (-1 to +1)
+
+The 0.1 is a speed control factor:
+cd->pl->delta_x = cos(d->pl->angle) * 5;  // Direction vector with magnitude 5
+// Then in movement:
+move_x = d->pl->delta_x * 0.1;           // 5 * 0.1 = 0.5 pixels per frame
+Speed Breakdown
+
+Delta magnitude: 5 (your direction vector length)
+Movement multiplier: 0.1
+Actual movement per frame: 5 × 0.1 = 0.5 pixels
+
+Why This Small Value?
+
+Frame rate: pl_control() is called every frame (60+ FPS)
+Smooth movement: 0.5 pixels × 60 FPS = 30 pixels/second
+Control: Without the 0.1, you'd move 5 pixels per frame = 300 pixels/second (way too fast!)
+
+Speed Comparison in Your Code
+c// Continuous rotation: 0.02 radians per frame (very slow)
+d->pl->angle -= 0.02;
+
+// Immediate rotation: 0.1 radians per keypress (faster)
+d->pl->angle -= 0.1;  // in handle_arrow_keys()
+
+// Movement: 0.1 × delta per frame (moderate speed)
+move_x = d->pl->delta_x * 0.1;
+The 0.1 makes movement smooth and controllable instead of lightning-fast.
