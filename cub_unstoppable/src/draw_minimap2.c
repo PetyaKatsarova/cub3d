@@ -6,12 +6,13 @@
 /*   By: pekatsar <pekatsar@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/08/06 16:56:33 by pekatsar      #+#    #+#                 */
-/*   Updated: 2025/08/06 16:58:00 by pekatsar      ########   odam.nl         */
+/*   Updated: 2025/08/06 18:33:19 by pekatsar      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3D.h"
 
+/* make pl_x,pl_y center fo the player 5px dot diameter dot */
 static void	draw_player_dot(t_data *d, int player_x, int player_y, t_minimap_params *params)
 {
 	int	x;
@@ -31,7 +32,7 @@ static void	draw_player_dot(t_data *d, int player_x, int player_y, t_minimap_par
 		y++;
 	}
 }
-
+/* could be refactored, still neat enough, t_line_info struct is needed to pass coding norms(max 4 args in func draw_line) */
 static void	draw_player_direction(t_data *d, int player_x, int player_y)
 {
 	t_line_info	line;
@@ -40,7 +41,7 @@ static void	draw_player_direction(t_data *d, int player_x, int player_y)
 	line.y0 = player_y;
 	line.x1 = player_x + (cos(d->pl->angle) * 20);
 	line.y1 = player_y + (sin(d->pl->angle) * 20);
-	line.color = PURPLE;
+	line.color = PURPLE_RAY;
 	draw_line(d, &line);
 }
 

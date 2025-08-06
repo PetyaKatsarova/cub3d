@@ -6,7 +6,7 @@
 /*   By: pekatsar <pekatsar@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/08/01 14:51:30 by pekatsar      #+#    #+#                 */
-/*   Updated: 2025/08/06 17:02:19 by pekatsar      ########   odam.nl         */
+/*   Updated: 2025/08/06 17:59:32 by pekatsar      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@
  * Connects two points with a straight line made of pxs
  * start at (0,0) and end at (4,2).
 Compute total move:
-dx = 4 − 0 = 4
-dy = 2 − 0 = 2
+dx = 4 − 0 = 4 px
+dy = 2 − 0 = 2 px
 Choose steps: the larger of |4| and |2| is 4.
 Compute per‐step move:
-x_inc = dx/steps = 4/4 = 1
-y_inc = dy/steps = 2/4 = 0.5
+x_inc = dx/steps = 4/4 = 1 px
+y_inc = dy/steps = 2/4 = 0.5 px
 Draw:
 Step 0: plot at (0,0)
 Step 1: move to (1,0.5) → plot at (1,0)
@@ -56,7 +56,7 @@ void	draw_line(t_data *data, t_line_info *line_info)
 	}
 }
 
-// keep it in the range [0, 2*PI]
+/* keep it in the range [0, 2*PI] */
 double normalize_angle(double angle)
 {
     while (angle < 0)

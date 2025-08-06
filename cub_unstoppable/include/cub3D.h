@@ -32,7 +32,7 @@
 # define CEILING_COLOR  	0x87CEEB // sky blue
 # define PL_COLOR    		0x0d0832ff // dark blue
 # define BACKGROUND_COLOR 	0xD3D3D3
-# define PURPLE 			0x800080
+# define PURPLE_RAY			0x800080
 # define LIME_YELLOW   		0xBFFF00 
 
 # define KEY_LEFT   		65361
@@ -94,6 +94,8 @@ typedef struct s_minimap_params {
     int     start_y;
     int     end_x;
     int     end_y;
+	int		player_x;
+	int		player_y;
 } t_minimap_params;
 
 typedef struct s_data {
