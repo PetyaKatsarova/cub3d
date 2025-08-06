@@ -34,10 +34,18 @@ int init_pl (t_pl *pl, int x, int y, char dir)
 		return (1);
 	pl->delta_x = cos(pl->angle) * 5;
 	pl->delta_y = sin(pl->angle) * 5;
-	//pl.fov = 0; //field of view
+	//pl->fov = 0; //field of view
 	pl->fov = 60 * DEG_RAD;  // Set the FOV to 60 degrees
 	return (0);
 }
 
-
-
+int init_btns(t_btns *btns)
+{
+	btns->w = 0;
+    btns->a = 0;
+    btns->s = 0;
+    btns->d = 0;
+	btns->left_arrow = 0;
+    btns->right_arrow = 0;
+	return (0);
+}

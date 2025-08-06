@@ -17,6 +17,9 @@
 # define TILE_SIZE  		64 // px width and height: balanced performance, fixed
 # define MINIMAP_SIZE		350
 # define PL_SIZE 			7
+# define STEP 				5
+# define SLOW_MOVE			0.2
+#define	 ANGLE_ROT			0.1
 # define RAYS_NUM			30
 # define DEG_RAD			0.0174533 // one degree in radians
 
@@ -34,6 +37,7 @@
 
 # define KEY_LEFT   		65361
 # define KEY_RIGHT  		65363
+# define ESC				65307
 
 typedef struct  s_btns
 {
@@ -82,9 +86,10 @@ typedef struct s_data {
 	int			bpp; // bits per pixel
 	int			line_length;
 	int			endian;
+	int			needs_redraw;
 	char		**map; // or int?
 	t_pl 		*pl;
-	t_btns		*btns;
+	t_btns		btns;
 	t_texture 	north_tex;
     t_texture 	south_tex;
     t_texture 	east_tex;

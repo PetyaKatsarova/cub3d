@@ -12,6 +12,48 @@
 
 #include "../include/cub3D.h"
 
+
+// Key press handler - sets button state to pressed
+int key_press(int keycode, t_data *d)
+{
+    if (keycode == 'q' || keycode == 65307) // ESC or Q
+        exit(0);
+    
+    if (keycode == 'w')
+        d->btns->w = 1;
+    else if (keycode == 'a')
+        d->btns->a = 1;
+    else if (keycode == 's')
+        d->btns->s = 1;
+    else if (keycode == 'd')
+        d->btns->d = 1;
+	else if (keycode == KEY_LEFT)
+        d->btns->left_arrow = 1;
+    else if (keycode == KEY_RIGHT)
+        d->btns->right_arrow = 1;
+    handle_arrow_keys(d, keycode); 
+    return (0);
+}
+
+// Key release handler - sets button state to released
+int key_release(int keycode, t_data *d)
+{
+    if (keycode == 'w')
+        d->btns->w = 0;
+    else if (keycode == 'a')
+        d->btns->a = 0;
+    else if (keycode == 's')
+        d->btns->s = 0;
+    else if (keycode == 'd')
+        d->btns->d = 0;
+	else if (keycode == KEY_LEFT)
+        d->btns->left_arrow = 0;
+    else if (keycode == KEY_RIGHT)
+        d->btns->right_arrow = 0;
+    
+    return (0);
+}
+
 int check_collision(t_data *d, double new_x, double new_y)
 {
     float buffer = 4.0; // Stop 4 pixels before wall: hardcoded: todo: in header
@@ -41,22 +83,22 @@ void pl_control(t_data *d)
     float move_x = 0;
     float move_y = 0;
 
-    if (d->btns.w) // Move forward
+    if (d->btns->w) // Move forward
     {
         move_x = d->pl->delta_x * 0.07;
         move_y = d->pl->delta_y * 0.07;
     }
-    if (d->btns.s) // Move backward
+    if (d->btns->s) // Move backward
     {
         move_x = -d->pl->delta_x * 0.07;
         move_y = -d->pl->delta_y * 0.07;
     }
-    if (d->btns.a) // Strafe left
+    if (d->btns->a) // Strafe left
     {
         move_x = d->pl->delta_y * 0.07;
         move_y = -d->pl->delta_x * 0.07;
     }
-    if (d->btns.d) // Strafe right
+    if (d->btns->d) // Strafe right
     {
         move_x = -d->pl->delta_y * 0.07;
         move_y = d->pl->delta_x * 0.07;
@@ -69,13 +111,13 @@ void pl_control(t_data *d)
     }
 
     // Continuous rotation (slower speed)
-    if (d->btns.left_arrow) // Rotate left continuously
+    if (d->btns->left_arrow) // Rotate left continuously
     {
         d->pl->angle -= 0.01;  // Much slower rotation
         if (d->pl->angle < 0)
             d->pl->angle += 2 * M_PI;
     }
-    if (d->btns.right_arrow) // Rotate right continuously
+    if (d->btns->right_arrow) // Rotate right continuously
     {
         d->pl->angle += 0.01;  // Much slower rotation
         if (d->pl->angle > 2 * M_PI)

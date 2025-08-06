@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: petya <petya@student.42.fr>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/23 15:13:27 by pekatsar          #+#    #+#             */
-/*   Updated: 2025/08/05 09:00:39 by petya            ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   main.c                                             :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: petya <petya@student.42.fr>                  +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2025/07/23 15:13:27 by pekatsar      #+#    #+#                 */
+/*   Updated: 2025/08/06 14:43:50 by pekatsar      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,22 +18,49 @@ static int close_window(void *param)
     exit(0);
 }
 
+/**
+ * int mlx_hook(void *win_ptr, int x_event, int x_mask, int (*funct)(), void *param);
+ * mlx_key_hook:
+
+Only detects key press (not release)
+Simpler: 3 arguments
+Good for basic key handling
+
+mlx_hook:
+
+Can handle any X11 event (press, release, mouse, etc.)
+More arguments: event type + mask
+Better for continuous movement (press/release)
+mlx_hook parameters:
+
+win_ptr - Your window
+x_event - Event type number:
+
+2 = KeyPress
+3 = KeyRelease
+17 = Window close
+
+
+x_mask - Event mask (which events to listen for):
+
+1 = KeyPress mask
+2 = KeyRelease mask
+0 = No mask (for window close)
+
+
+funct - Your callback function
+param - Data passed to callback
+ */
 int main(void)
 {
     t_data data;
     t_pl    pl;
-    t_btns btns;
 
-    // btns to all zeros
-    init_btns(&btns);
-    data.btns = &btns;
     if (init_data(&data, &pl)) 
         return (1);
-    
-    // event hooks
     mlx_loop_hook(data.mlx, render_frame, &data);
-    mlx_hook(data.win, 2, 1L<<0, key_press, &data); // 
-    mlx_hook(data.win, 3, 1L<<1, key_release, &data); 
+    mlx_hook(data.win, 2, 1, key_press, &data); // 
+    mlx_hook(data.win, 3, 2, key_release, &data); 
     mlx_hook(data.win, 17, 0, close_window, &data);
     
     mlx_loop(data.mlx);
