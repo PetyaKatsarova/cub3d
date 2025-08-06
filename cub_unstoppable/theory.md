@@ -218,4 +218,3 @@ d->pl->angle -= 0.1;  // in handle_arrow_keys()
 move_x = d->pl->delta_x * 0.1;
 The 0.1 makes movement smooth and controllable instead of lightning-fast.
 
-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 token
