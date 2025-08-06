@@ -78,6 +78,24 @@ typedef struct s_texture {
     int     endian;
 } t_texture;
 
+typedef struct s_line_info {
+	float 		x0;
+	float 		y0;
+	float 		x1;
+	float 		y1;
+	uint32_t	color;
+} t_line_info;
+
+typedef struct s_minimap_params {
+    int     offset_x; // position on screen
+    int     offset_y;
+    float   scale; // shrinking factor from 3d map
+    int     start_x;
+    int     start_y;
+    int     end_x;
+    int     end_y;
+} t_minimap_params;
+
 typedef struct s_data {
 	void		*mlx;
 	void		*win;
@@ -105,6 +123,10 @@ void 		set_px(t_data *d, int x, int y, uint32_t color);
 void 		horizontal_check(t_ray *ray, t_data *d, float *hx, float *hy);
 void 		vertical_check(t_ray *ray, t_data *d, float *vx, float *vy);
 void		draw_maze(t_data *d);
+void		draw_line(t_data *data, t_line_info *line_info);
+double 		normalize_angle(double angle);
+void		draw_minimap_background(t_data *d, int offset_x, int offset_y);
+void		draw_minimap_walls(t_data *d, int offset_x, int offset_y, float scale);
 void 		draw_minimap(t_data *d);
 int			render_frame(t_data *data);
 int     	key_press(int keycode, t_data *d);

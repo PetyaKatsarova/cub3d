@@ -6,32 +6,58 @@
 /*   By: pekatsar <pekatsar@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/08/01 14:51:30 by pekatsar      #+#    #+#                 */
-/*   Updated: 2025/08/06 14:26:03 by pekatsar      ########   odam.nl         */
+/*   Updated: 2025/08/06 17:02:19 by pekatsar      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3D.h"
 
-// Bresenham's line algorithm (for 2D debugging)
-static void draw_line(t_data *data, float x0, float y0, float x1, float y1, uint32_t color)
+/**
+ * Connects two points with a straight line made of pxs
+ * start at (0,0) and end at (4,2).
+Compute total move:
+dx = 4 − 0 = 4
+dy = 2 − 0 = 2
+Choose steps: the larger of |4| and |2| is 4.
+Compute per‐step move:
+x_inc = dx/steps = 4/4 = 1
+y_inc = dy/steps = 2/4 = 0.5
+Draw:
+Step 0: plot at (0,0)
+Step 1: move to (1,0.5) → plot at (1,0)
+Step 2: move to (2,1.0) → plot at (2,1)
+Step 3: move to (3,1.5) → plot at (3,1)
+Step 4: move to (4,2.0) → plot at (4,2)
+ */
+void	draw_line(t_data *data, t_line_info *line_info)
 {
-    float distance_x = x1 - x0;
-    float distance_y = y1 - y0;
-    int steps = (fabs(distance_x) > fabs(distance_y)) ? fabs(distance_x) : fabs(distance_y);
-    float x_increment = distance_x / steps;
-    float y_increment = distance_y / steps;
+	float	distance_x;
+	float	distance_y;
+	int		steps;
+	float	x_increment;
+	float	y_increment;
+	int		i;
 
-    for (int i = 0; i < steps; i++)
-    {
-        if (x0 >= 0 && x0 < WIN_WIDTH && y0 >= 0 && y0 < WIN_HEIGHT)
-            set_px(data, (int)x0, (int)y0, color);
-        x0 += x_increment;
-        y0 += y_increment;
-    }
+	distance_x = line_info->x1 - line_info->x0;
+	distance_y = line_info->y1 - line_info->y0;
+	steps = fabs(distance_y);
+	if (fabs(distance_x) > fabs(distance_y))
+		steps = fabs(distance_x);
+	x_increment = distance_x / steps;
+	y_increment = distance_y / steps;
+	i = 0;
+	while (i < steps)
+	{
+		if (line_info->x0 >= 0 && line_info->x0 < WIN_WIDTH && line_info->y0 >= 0 && line_info->y0 < WIN_HEIGHT)
+			set_px(data, (int)line_info->x0, (int)line_info->y0, line_info->color);
+		line_info->x0 += x_increment;
+		line_info->y0 += y_increment;
+		i++;
+	}
 }
 
-// Normalize angle to keep it in the range [0, 2*PI]
-double normalize(double angle)
+// keep it in the range [0, 2*PI]
+double normalize_angle(double angle)
 {
     while (angle < 0)
         angle += 2 * M_PI;
@@ -41,115 +67,75 @@ double normalize(double angle)
 }
 
 /*
-void    draw_ray_2d(t_data *d, double angle, int color)
-{
-    double ray_x = d->pl_x;
-    double ray_y = d->pl_y;
-    double ray_dx = cos(angle);
-    double ray_dy = sin(angle);
-    int map_x = (int)ray_x;
-    int map_y = (int)ray_y;
-
-    while (map_x >= 0 && map_x < WIN_WIDTH / TILE_SIZE && map_y >= 0 && map_y < WIN_HEIGHT / TILE_SIZE)
-    {
-        if (d->map[map_y][map_x] == 1) // Wall hit
-            break;
-        ray_x += ray_dx;
-        ray_y += ray_dy;
-        map_x = (int)ray_x;
-        map_y = (int)ray_y;
-    }
-
-    // Draw the ray on the 2D map (MLX function to plot a pixel)
-    mlx_pixel_put(d->mlx, d->win, (int)ray_x, (int)ray_y, color);
-}
+	Creates a MINMAP_SIZE×MINMAP_SIZE pixel rectangle
+	Positioned at top-right corner: offset_x, offset_y
+	Fills every pixel with BACKGROUND_COLOR (gray)
 */
-
-void draw_minimap(t_data *d)
+void	draw_minimap_background(t_data *d, int offset_x, int offset_y)
 {
-    int offset_x = WIN_WIDTH - MINIMAP_SIZE - 10;  // Top right corner
-    int offset_y = 10;
-    float scale = (float)MINIMAP_SIZE / (COLS * TILE_SIZE);  // Scale factor
-    
-    // Draw minimap background
-    for (int y = 0; y < MINIMAP_SIZE; y++) {
-        for (int x = 0; x < MINIMAP_SIZE; x++) {
-            set_px(d, offset_x + x, offset_y + y, BACKGROUND_COLOR);  // Dark gray background
-        }
-    }
-    
-    // Draw map walls
-    for (int map_y = 0; map_y < ROWS; map_y++) {
-        for (int map_x = 0; map_x < COLS; map_x++) {
-            if (d->map[map_y][map_x] == '1') {
-                int start_x = offset_x + (map_x * TILE_SIZE * scale);
-                int start_y = offset_y + (map_y * TILE_SIZE * scale);
-                int end_x = start_x + (int)ceil(TILE_SIZE * scale);  // Use ceil instead of +1
-                int end_y = start_y + (int)ceil(TILE_SIZE * scale);
-                
-                // Draw wall block
-                for (int y = start_y; y < end_y && y < offset_y + MINIMAP_SIZE; y++) {
-                    for (int x = start_x; x < end_x && x < offset_x + MINIMAP_SIZE; x++) {
-                        if (x >= offset_x && y >= offset_y)
-                            set_px(d, x, y, WALL_COLOR);
-                    }
-                }
-            }
-        }
-    }
-    
-    // Draw player position
-    int player_x = offset_x + (d->pl->x * scale);
-    int player_y = offset_y + (d->pl->y * scale);
-    
-    // Player dot (3x3 pixels)
-    for (int y = -2; y <= 2; y++) {
-        for (int x = -2; x <= 2; x++) {
-            if (player_x + x >= offset_x && player_x + x < offset_x + MINIMAP_SIZE &&
-                player_y + y >= offset_y && player_y + y < offset_y + MINIMAP_SIZE)
-                set_px(d, player_x + x, player_y + y, LIME_YELLOW);
-        }
-    }
-    
-    // Draw player direction vector
-    int dir_end_x = player_x + (cos(d->pl->angle) * 20);
-    int dir_end_y = player_y + (sin(d->pl->angle) * 20);
-    draw_line(d, player_x, player_y, dir_end_x, dir_end_y, PURPLE);  // direction line
-    
-    // Declare ray_angle here, starting at the left of the FOV and spreading rays across the FOV
-    float ray_angle = normalize(d->pl->angle - (d->pl->fov / 2));  // Start rays at the center of FOV
-    
-    for (int i = 0; i < RAYS_NUM; i++) {
-        t_ray ray;
-        ray.angle = ray_angle;
-        
-        // Ray casting logic
-        float hx, hy, vx, vy;
-        horizontal_check(&ray, d, &hx, &hy);
-        vertical_check(&ray, d, &vx, &vy);
-        
-        // Calculate the distance to the wall
-        float hdist = sqrt((hx - d->pl->x) * (hx - d->pl->x) + (hy - d->pl->y) * (hy - d->pl->y));
-        float vdist = sqrt((vx - d->pl->x) * (vx - d->pl->x) + (vy - d->pl->y) * (vy - d->pl->y));
-        
-        float hit_x, hit_y;
-        if (hdist < vdist) {
-            hit_x = hx;
-            hit_y = hy;
-        } else {
-            hit_x = vx;
-            hit_y = vy;
-        }
-        
-        int ray_end_x = offset_x + (hit_x * scale);
-        int ray_end_y = offset_y + (hit_y * scale);
-        
-        // Only draw if within minimap bounds
-        if (ray_end_x >= offset_x && ray_end_x < offset_x + MINIMAP_SIZE &&
-            ray_end_y >= offset_y && ray_end_y < offset_y + MINIMAP_SIZE)
-            draw_line(d, player_x, player_y, ray_end_x, ray_end_y, PL_COLOR);  // Player color for rays
-        
-        // Evenly spread rays across the FOV
-        ray_angle = normalize(ray_angle + (d->pl->fov / RAYS_NUM));
-    }
+	int	x;
+	int	y;
+
+	y = 0;
+	while (y < MINIMAP_SIZE)
+	{
+		x = 0;
+		while (x < MINIMAP_SIZE)
+		{
+			set_px(d, offset_x + x, offset_y + y, BACKGROUND_COLOR);
+			x++;
+		}
+		y++;
+	}
 }
+
+/*
+loop through starty/endy startx/endx tile and fill each px with wall color
+*/
+static void	draw_wall_block(t_data *d, t_minimap_params *params)
+{
+	int	x;
+	int	y;
+
+	y = params->start_y;
+	while (y < params->end_y && y < params->offset_y + MINIMAP_SIZE)
+	{
+		x = params->start_x;
+		while (x < params->end_x && x < params->offset_x + MINIMAP_SIZE)
+		{
+			if (x >= params->offset_x && y >= params->offset_y)
+				set_px(d, x, y, WALL_COLOR);
+			x++;
+		}
+		y++;
+	}
+}
+
+void	draw_minimap_walls(t_data *d, int offset_x, int offset_y, float scale)
+{
+	int					map_x;
+	int					map_y;
+	t_minimap_params	params;
+
+	map_y = 0;
+	while (map_y < ROWS)
+	{
+		map_x = 0;
+		while (map_x < COLS)
+		{
+			if (d->map[map_y][map_x] == '1')
+			{
+				params.offset_x = offset_x;
+				params.offset_y = offset_y;
+				params.start_x = offset_x + (map_x * TILE_SIZE * scale);
+				params.start_y = offset_y + (map_y * TILE_SIZE * scale);
+				params.end_x = params.start_x + (int)ceil(TILE_SIZE * scale);
+				params.end_y = params.start_y + (int)ceil(TILE_SIZE * scale);
+				draw_wall_block(d, &params);
+			}
+			map_x++;
+		}
+		map_y++;
+	}
+}
+

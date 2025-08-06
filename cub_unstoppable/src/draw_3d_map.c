@@ -159,62 +159,6 @@ static void draw_3d_wall_slice(t_data *d, int x, float distance, float ray_angle
     }
 }
 
-// static void draw_3d_wall_slice(t_data *d, int x, float distance, float hit_x, float hit_y, float ray_angle, int hit_vertical)
-// {
-//     // Fix fisheye distortion
-//     distance = distance * cos(ray_angle - d->pl->angle);
-    
-//     // wall height on screen
-//     float lineH = (TILE_SIZE * WIN_HEIGHT / 2) / distance;
-    
-//     // wall boundaries
-//     int wall_top = (WIN_HEIGHT / 2) - (lineH / 2);
-//     int wall_bottom = (WIN_HEIGHT / 2) + (lineH / 2);
-    
-//     // Clamp(constrain) to screen bounds:
-//     if (wall_top < 0) wall_top = 0;
-//     if (wall_bottom >= WIN_HEIGHT) wall_bottom = WIN_HEIGHT - 1;
-   
-//     t_texture *tex;
-//     if (hit_vertical) {
-//         if (ray_angle > M_PI/2 && ray_angle < 3*M_PI/2)
-//             tex = &d->west_tex;
-//         else
-//             tex = &d->east_tex;
-//     } else {
-//         if (ray_angle > M_PI)
-//             tex = &d->north_tex;
-//         else
-//             tex = &d->south_tex;
-//     }
-
-//     int tex_x;
-//     if (hit_vertical) {
-//         tex_x = (int)(hit_y) % TILE_SIZE;
-//     } else {
-//         tex_x = (int)(hit_x) % TILE_SIZE;
-//     }
-//     tex_x = (tex_x * tex->width) / TILE_SIZE; // Scale to texture width
-    
-//     // Draw the wall column
-//     for (int y = 0; y < WIN_HEIGHT; y++)
-//     {
-//         uint32_t color;
-        
-//         if (y < wall_top)
-//             color = CEILING_COLOR;
-//         else if (y > wall_bottom)
-//             color = FLOOR_COLOR;
-//         else {
-//             // Calculate which row of the texture to use
-//             int tex_y = ((y - wall_top) * tex->height) / (wall_bottom - wall_top);
-//             color = get_texture_pixel(tex, tex_x, tex_y);
-//         }
-        
-//         set_px(d, x, y, color);
-//     }
-// }
-
 static void draw_3d_map(t_data *d, t_ray *ray) 
 {
     //ray->angle = d->pl->angle - (30.0 * DEG_RAD);
@@ -268,18 +212,20 @@ static void draw_3d_map(t_data *d, t_ray *ray)
 
 int render_frame(t_data *d)
 {
-    // Handle continuous movement every frame
-    pl_control(d);
-    
+    //if (d->needs_redraw) slows down start
+	//{
+		pl_control(d);
     // Clear screen to black
     for (int i = 0; i < WIN_WIDTH * WIN_HEIGHT; i++)
         ((uint32_t*)d->addr)[i] = 0x000000;
-    
+
     t_ray ray;
     ray.angle = d->pl->angle;
-    
     draw_3d_map(d, &ray);
     draw_minimap(d);
     mlx_put_image_to_window(d->mlx, d->win, d->img, 0, 0);
+	//}
+	//d->needs_redraw = 0;
+    
     return (0);
 }

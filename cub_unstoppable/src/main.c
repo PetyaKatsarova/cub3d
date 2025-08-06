@@ -6,12 +6,13 @@
 /*   By: petya <petya@student.42.fr>                  +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/07/23 15:13:27 by pekatsar      #+#    #+#                 */
-/*   Updated: 2025/08/06 14:43:50 by pekatsar      ########   odam.nl         */
+/*   Updated: 2025/08/06 14:57:22 by pekatsar      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3D.h"
 
+// for free game, destroy mls?
 static int close_window(void *param)
 {
     (void)param;
@@ -50,6 +51,29 @@ x_mask - Event mask (which events to listen for):
 
 funct - Your callback function
 param - Data passed to callback
+
+mlx_loop_hook(data.mlx, render_frame, &data);  // Called ~60 times/second
+Each frame cycle:
+
+Input handling - Check keys pressed
+Update game state - Move player, rotate camera
+Clear screen - Fill with black pixels
+Render 3D world - Cast rays, draw walls
+Render UI - Draw minimap
+Display frame - Show completed image
+Frame rate = how many complete images per second
+
+60 FPS = smooth
+30 FPS = acceptable
+Lower = choppy
+
+Your approach:
+
+Continuous rendering - Always drawing new frames
+Double buffering - Draw to d->img (invisible), then display all at once
+Real-time - Immediate response to input
+
+Frame = one complete 2000x1200 image of your 3D world.
  */
 int main(void)
 {

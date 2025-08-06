@@ -12,6 +12,7 @@ SRC      := src/main.c \
 		   src/init_ray.c \
 		   src/draw_maze.c \
 		   src/draw_minimap.c \
+		   src/draw_minimap2.c \
 		   src/player_control.c \
 		   src/draw_3d_map.c \
 		   src/manipulate_textures.c \
