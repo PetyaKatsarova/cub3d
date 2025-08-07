@@ -49,6 +49,13 @@ typedef struct  s_btns
 	int	right_arrow;
 } t_btns;
 
+typedef struct s_wall_info {
+    float   distance;
+    float   ray_angle;
+    int     hit_vertical;
+    float   hit_x;
+    float   hit_y;
+} t_wall_info;
 
 typedef struct s_pl {
 	double x;
