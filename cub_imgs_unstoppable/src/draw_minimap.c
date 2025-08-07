@@ -6,7 +6,7 @@
 /*   By: pekatsar <pekatsar@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/08/01 14:51:30 by pekatsar      #+#    #+#                 */
-/*   Updated: 2025/08/06 17:59:32 by pekatsar      ########   odam.nl         */
+/*   Updated: 2025/08/07 15:08:58 by pekatsar      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,35 +18,35 @@
 Compute total move:
 dx = 4 − 0 = 4 px
 dy = 2 − 0 = 2 px
-Choose steps: the larger of |4| and |2| is 4.
-Compute per‐step move:
-x_inc = dx/steps = 4/4 = 1 px
-y_inc = dy/steps = 2/4 = 0.5 px
+Choose STEP_SIZEs: the larger of |4| and |2| is 4.
+Compute per‐STEP_SIZE move:
+x_inc = dx/STEP_SIZEs = 4/4 = 1 px
+y_inc = dy/STEP_SIZEs = 2/4 = 0.5 px
 Draw:
-Step 0: plot at (0,0)
-Step 1: move to (1,0.5) → plot at (1,0)
-Step 2: move to (2,1.0) → plot at (2,1)
-Step 3: move to (3,1.5) → plot at (3,1)
-Step 4: move to (4,2.0) → plot at (4,2)
+STEP_SIZE 0: plot at (0,0)
+STEP_SIZE 1: move to (1,0.5) → plot at (1,0)
+STEP_SIZE 2: move to (2,1.0) → plot at (2,1)
+STEP_SIZE 3: move to (3,1.5) → plot at (3,1)
+STEP_SIZE 4: move to (4,2.0) → plot at (4,2)
  */
 void	draw_line(t_data *data, t_line_info *line_info)
 {
 	float	distance_x;
 	float	distance_y;
-	int		steps;
+	int		STEP_SIZEs;
 	float	x_increment;
 	float	y_increment;
 	int		i;
 
 	distance_x = line_info->x1 - line_info->x0;
 	distance_y = line_info->y1 - line_info->y0;
-	steps = fabs(distance_y);
+	STEP_SIZEs = fabs(distance_y);
 	if (fabs(distance_x) > fabs(distance_y))
-		steps = fabs(distance_x);
-	x_increment = distance_x / steps;
-	y_increment = distance_y / steps;
+		STEP_SIZEs = fabs(distance_x);
+	x_increment = distance_x / STEP_SIZEs;
+	y_increment = distance_y / STEP_SIZEs;
 	i = 0;
-	while (i < steps)
+	while (i < STEP_SIZEs)
 	{
 		if (line_info->x0 >= 0 && line_info->x0 < WIN_WIDTH && line_info->y0 >= 0 && line_info->y0 < WIN_HEIGHT)
 			set_px(data, (int)line_info->x0, (int)line_info->y0, line_info->color);

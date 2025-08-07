@@ -26,7 +26,7 @@ void horizontal_check(t_ray *ray, t_data *d, float *hx, float *hy)
 {
     float aTan = -1/tan(ray->angle);
     int dof = 0;
-    float xo, yo; // step offsets
+    float xo, yo; // STEP_SIZE offsets
     
     if (ray->angle > M_PI) { // looking up
         *hy = (((int)d->pl->y>>6)<<6) - 0.0001;
@@ -46,7 +46,7 @@ void horizontal_check(t_ray *ray, t_data *d, float *hx, float *hy)
         dof = COLS; // skip loop
     }
     
-    // Step through horizontal grid lines
+    // STEP_SIZE through horizontal grid lines
     while (dof < COLS)
     {
         int map_x = (int)(*hx / TILE_SIZE); 
@@ -60,7 +60,7 @@ void horizontal_check(t_ray *ray, t_data *d, float *hx, float *hy)
             break; // hit wall - STOP HERE
         }
         else {
-            *hx += xo; // step to next grid line
+            *hx += xo; // STEP_SIZE to next grid line
             *hy += yo;
             dof++;
         }
@@ -71,7 +71,7 @@ void vertical_check(t_ray *ray, t_data *d, float *vx, float *vy)
 {
     float nTan = -tan(ray->angle);
     int dof = 0;
-    float xo, yo; // step offsets
+    float xo, yo; // STEP_SIZE offsets
     
     if (ray->angle > M_PI/2 && ray->angle < 3*M_PI/2) { // looking left
         *vx = (((int)d->pl->x>>6)<<6) - 0.0001;
@@ -91,7 +91,7 @@ void vertical_check(t_ray *ray, t_data *d, float *vx, float *vy)
         dof = COLS; // skip loop
     }
     
-    // Step through vertical grid lines
+    // STEP_SIZE through vertical grid lines
     while (dof < COLS)
     {
         int map_x = (int)floor(*vx / TILE_SIZE);
@@ -103,14 +103,14 @@ void vertical_check(t_ray *ray, t_data *d, float *vx, float *vy)
             break; // hit wall - STOP HERE
         }
         else {
-            *vx += xo; // step to next grid line
+            *vx += xo; // STEP_SIZE to next grid line
             *vy += yo;
             dof++;
         }
     }
 }
 
-static void draw_3d_wall_slice(t_data *d, int x, float distance, float ray_angle, int hit_vertical)
+static void draw_3d_wall_slice(t_data *d, int x, float distance, float ray_angle, int hit_vertical, float hit_x, float hit_y)
 {
     // Fix fisheye distortion
     distance = distance * cos(ray_angle - d->pl->angle);
@@ -122,28 +122,35 @@ static void draw_3d_wall_slice(t_data *d, int x, float distance, float ray_angle
     int wall_top = (WIN_HEIGHT / 2) - (lineH / 2);
     int wall_bottom = (WIN_HEIGHT / 2) + (lineH / 2);
     
-    // Clamp(constrain) to screen bounds:
+    // Clamp to screen bounds
     if (wall_top < 0) wall_top = 0;
     if (wall_bottom >= WIN_HEIGHT) wall_bottom = WIN_HEIGHT - 1;
     
-    // Get wall color based on direction
-    uint32_t wall_color;
+    // Choose texture based on wall direction
+    t_texture *wall_texture;
     if (hit_vertical) {
-        // East/West walls
         if (ray_angle > M_PI/2 && ray_angle < 3*M_PI/2)
-            wall_color = WEST_COLOR; 
+            wall_texture = &d->west_tex;
         else
-            wall_color = EAST_COLOR; 
+            wall_texture = &d->east_tex;
     }
     else {
-        // North/South walls  
         if (ray_angle > M_PI)
-            wall_color = NORTH_COLOR;
+            wall_texture = &d->north_tex;
         else
-            wall_color = SOUTH_COLOR;
+            wall_texture = &d->south_tex;
     }
+    
+    // Calculate texture X coordinate based on wall hit position
+    float wall_offset;
+    if (hit_vertical)
+        wall_offset = fmod(hit_y, TILE_SIZE);  // Use Y coordinate for vertical walls
+    else
+        wall_offset = fmod(hit_x, TILE_SIZE);  // Use X coordinate for horizontal walls
+    
+    int tex_x = (int)((wall_offset / TILE_SIZE) * wall_texture->width);
    
-    // Draw vertical line (ceiling, wall, floor)
+    // Draw ceiling, textured wall, and floor
     for (int y = 0; y < WIN_HEIGHT; y++)
     {
         uint32_t color;
@@ -151,9 +158,12 @@ static void draw_3d_wall_slice(t_data *d, int x, float distance, float ray_angle
         if (y < wall_top)
             color = CEILING_COLOR;
         else if (y > wall_bottom)
-            color = FLOOR_COLOR;  
+            color = FLOOR_COLOR;
         else
-            color = wall_color;       // Directional wall color
+        {
+            int tex_y = ((y - wall_top) * wall_texture->height) / (wall_bottom - wall_top);
+            color = get_texture_pixel(wall_texture, tex_x, tex_y);
+        }
             
         set_px(d, x, y, color);
     }
@@ -198,8 +208,7 @@ static void draw_3d_map(t_data *d, t_ray *ray)
             hit_vertical = 1; 
         }        
         
-        draw_3d_wall_slice(d, x, distance, ray->angle, hit_vertical);
-        // draw_3d_wall_slice(d, x, distance, ray->x, ray->y, ray->angle, hit_vertical);
+        draw_3d_wall_slice(d, x, distance, ray->angle, hit_vertical, ray->x, ray->y);
 
         ray->angle += (60.0 * DEG_RAD) / WIN_WIDTH;
         

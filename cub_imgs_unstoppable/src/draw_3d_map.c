@@ -26,7 +26,7 @@ void horizontal_check(t_ray *ray, t_data *d, float *hx, float *hy)
 {
     float aTan = -1/tan(ray->angle);
     int dof = 0;
-    float xo, yo; // step offsets
+    float xo, yo; // STEP_SIZE offsets
     
     if (ray->angle > M_PI) { // looking up
         *hy = (((int)d->pl->y>>6)<<6) - 0.0001;
@@ -46,7 +46,7 @@ void horizontal_check(t_ray *ray, t_data *d, float *hx, float *hy)
         dof = COLS; // skip loop
     }
     
-    // Step through horizontal grid lines
+    // STEP_SIZE through horizontal grid lines
     while (dof < COLS)
     {
         int map_x = (int)(*hx / TILE_SIZE); 
@@ -60,7 +60,7 @@ void horizontal_check(t_ray *ray, t_data *d, float *hx, float *hy)
             break; // hit wall - STOP HERE
         }
         else {
-            *hx += xo; // step to next grid line
+            *hx += xo; // STEP_SIZE to next grid line
             *hy += yo;
             dof++;
         }
@@ -71,7 +71,7 @@ void vertical_check(t_ray *ray, t_data *d, float *vx, float *vy)
 {
     float nTan = -tan(ray->angle);
     int dof = 0;
-    float xo, yo; // step offsets
+    float xo, yo; // STEP_SIZE offsets
     
     if (ray->angle > M_PI/2 && ray->angle < 3*M_PI/2) { // looking left
         *vx = (((int)d->pl->x>>6)<<6) - 0.0001;
@@ -91,7 +91,7 @@ void vertical_check(t_ray *ray, t_data *d, float *vx, float *vy)
         dof = COLS; // skip loop
     }
     
-    // Step through vertical grid lines
+    // STEP_SIZE through vertical grid lines
     while (dof < COLS)
     {
         int map_x = (int)floor(*vx / TILE_SIZE);
@@ -103,7 +103,7 @@ void vertical_check(t_ray *ray, t_data *d, float *vx, float *vy)
             break; // hit wall - STOP HERE
         }
         else {
-            *vx += xo; // step to next grid line
+            *vx += xo; // STEP_SIZE to next grid line
             *vy += yo;
             dof++;
         }

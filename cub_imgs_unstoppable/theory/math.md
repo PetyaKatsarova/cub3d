@@ -10,30 +10,30 @@ Since cos(45°) = sin(45°) (equal sides):
 cos²(45°) = 0.5
 cos(45°) = √0.5 = 0.707
 
-Step 1:
+STEP_SIZE 1:
 
 cos(45°) = 0.707
-step_size = 2 pixels
+STEP_SIZE_size = 2 pixels
 X movement = 0.707 × 2 = 1.414
 Y movement = 0.707 × 2 = 1.414
 Why multiply by 2?
 
-0.707 = direction (how much of each step goes X vs Y)
-2 = how big each step is (in pixels)
+0.707 = direction (how much of each STEP_SIZE goes X vs Y)
+2 = how big each STEP_SIZE is (in pixels)
 0.707 × 2 = 1.414 = actual pixels moved
 =======================================
 CALC WALLS SIZE
 =======================================
 
-Step 1: Cast rays
+STEP_SIZE 1: Cast rays
 Player shoots rays left-to-right across screen
 Each ray = 1 pixel column on screen
 
-Step 2: Find wall distance
+STEP_SIZE 2: Find wall distance
 Ray travels until it hits wall
 Measure distance from player to wall
 
-Step 3: Calculate wall height
+STEP_SIZE 3: Calculate wall height
 RULE: Closer walls = taller on screen
       Further walls = shorter on screen
 wall_height = SCREEN_HEIGHT / distance
@@ -41,7 +41,7 @@ Example:
 Wall 10 pixels away → height = 800/10 = 80 pixels tall
 Wall 20 pixels away → height = 800/20 = 40 pixels tall
 
-Step 4: Draw the column
+STEP_SIZE 4: Draw the column
 Screen center = 400 pixels
 Wall height = 80 pixels
 Top of wall = 400 - 80/2 = 360
@@ -86,8 +86,8 @@ Direction vector = (delta_x, delta_y)
 =================================================
 RAY CASTING
 -------------------------------------------------
-ray_x = player_x + step × cos(ray_angle)
-ray_y = player_y + step × sin(ray_angle)
+ray_x = player_x + STEP_SIZE × cos(ray_angle)
+ray_y = player_y + STEP_SIZE × sin(ray_angle)
  Vector = arrow pointing somewhere. Matrix = tool to rotate/transform arrows.
  =============================
  RADIANS

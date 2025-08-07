@@ -204,7 +204,7 @@ gcc main.c ... libmlx42.a -Iinclude -ldl -lglfw -pthread -lm
 ## For Windows (with Windows Subsystem for Linux 2 (WSL2))
 
 > [!IMPORTANT]
-> Before starting with all these steps, [read this](https://learn.microsoft.com/en-us/windows/wsl/tutorials/gui-apps)
+> Before starting with all these STEP_SIZEs, [read this](https://learn.microsoft.com/en-us/windows/wsl/tutorials/gui-apps)
 
 1. Set these variables in your `.zshrc` or `.bashrc`:
 ```bash
@@ -216,7 +216,7 @@ export LIBGL_ALWAYS_INDIRECT=0
 2. Download and install an XServer application with extended configuration (XMing does not qualify)
 VcXsrv works: https://sourceforge.net/projects/vcxsrv/
 
-3. Open Windows Defender Firewall, and follow these steps:
+3. Open Windows Defender Firewall, and follow these STEP_SIZEs:
 - Go to 'Allow an app or feature through Windows Defender Firewall'
 - Change Settings
 - Find the installed XServer, for VcXsrv that's 'VcXsrv windows server'
@@ -231,7 +231,7 @@ and they might not even show up in the list until the first time you start the a
 - **TICK** `Disable access control`
 - Finish starting the server
 
-5. Probably all the other steps for Linux apply, just clone, build and run.
+5. Probably all the other STEP_SIZEs for Linux apply, just clone, build and run.
 
 ----
 

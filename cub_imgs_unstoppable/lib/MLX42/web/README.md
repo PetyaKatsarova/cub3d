@@ -100,7 +100,7 @@ What you need in your repository is a `.github/workflows/static.yml` file.
 It can be named anything `static`, `ci`, whatever. Later on if you learn more about CI Pipelines you can use this to do a lot of useful things.
 
 ## Enabling github pages
-Follow this step: https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site#publishing-with-a-custom-github-actions-workflow
+Follow this STEP_SIZE: https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site#publishing-with-a-custom-github-actions-workflow
 
 Once selected, you need to commit an actions file.
 For now you can copy paste MLX42's `wasm.yml` file which functionally does the exact same.
@@ -129,11 +129,11 @@ jobs:
   deploy:
     environment:
       name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+      url: ${{ STEP_SIZEs.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
-    #TODO: add a build step to get the wasm file instead of commiting it.
+    #TODO: add a build STEP_SIZE to get the wasm file instead of commiting it.
     #Doesn't really matter atm since the git history is polluted anyway
-    steps:
+    STEP_SIZEs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Setup Pages

@@ -6,7 +6,7 @@
 /*   By: W2Wizard <main@w2wizard.dev>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/12/28 02:29:06 by W2Wizard      #+#    #+#                 */
-/*   Updated: 2023/03/30 16:36:39 by ntamayo-      ########   odam.nl         */
+/*   Updated: 2025/08/07 15:08:58 by pekatsar      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -230,8 +230,8 @@ bool mlx_resize_image(mlx_image_t* img, uint32_t nwidth, uint32_t nheight)
 	if (nwidth != img->width || nheight != img->height)
 	{
 		uint32_t* origin = (uint32_t*)img->pixels;
-		float wstep = (float)img->width / nwidth;
-		float hstep = (float)img->height / nheight;
+		float wSTEP_SIZE = (float)img->width / nwidth;
+		float hSTEP_SIZE = (float)img->height / nheight;
 
 		uint8_t* tempbuff = calloc(nwidth * nheight, BPP);
 		if (!tempbuff)
@@ -242,7 +242,7 @@ bool mlx_resize_image(mlx_image_t* img, uint32_t nwidth, uint32_t nheight)
 		uint32_t* destin = (uint32_t*)img->pixels;
 		for (uint32_t j = 0; j < nheight; j++)
 			for (uint32_t i = 0; i < nwidth; i++)
-				destin[j * nwidth + i] = origin[(uint32_t)(j * hstep) * img->width + (uint32_t)(i * wstep)];
+				destin[j * nwidth + i] = origin[(uint32_t)(j * hSTEP_SIZE) * img->width + (uint32_t)(i * wSTEP_SIZE)];
 		(*(uint32_t*)&img->width) = nwidth;
 		(*(uint32_t*)&img->height) = nheight;
 		free(origin);
