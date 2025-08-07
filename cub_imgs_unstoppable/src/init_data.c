@@ -6,7 +6,7 @@
 /*   By: petya <petya@student.42.fr>                  +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/07/23 15:21:24 by pekatsar      #+#    #+#                 */
-/*   Updated: 2025/08/07 14:43:30 by pekatsar      ########   odam.nl         */
+/*   Updated: 2025/08/07 14:28:56 by pekatsar      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,5 +133,6 @@ int	init_data(t_data *d, t_pl *pl)
 	if (place_pl(d))
 		return (1);
 	init_btns(&d->btns);
+	init_textures(d);
 	return (0);
 }
