@@ -7,7 +7,7 @@ $@          → expands to current *target*
 $<          → expands to first *prerequisite*
 $^          → expands to all *prerequisites*
 --------------------------------
-SRCS = $(wildcard src/*.c)
+src = $(wildcard src/*.c)
 Means: “give me all .c files in the src/ folder”.
 -------------------------------
 

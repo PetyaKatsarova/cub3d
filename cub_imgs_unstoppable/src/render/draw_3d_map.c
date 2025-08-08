@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3D.h"
+#include "../../include/cub3D.h"
 
 void set_px(t_data *d, int x, int y, uint32_t color)
 {
@@ -208,7 +208,7 @@ static void draw_3d_map(t_data *d, t_ray *ray)
         // Replace the function call with:
 		t_wall_info wall;
 		wall.distance = distance;
-		//wall.raw_dist = distance;
+		wall.raw_dist = distance;
 		wall.ray_angle = ray->angle;
 		wall.hit_vertical = hit_vertical;
 		wall.hit_x = ray->x;

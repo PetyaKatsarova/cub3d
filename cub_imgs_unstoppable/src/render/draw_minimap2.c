@@ -6,11 +6,11 @@
 /*   By: pekatsar <pekatsar@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/08/06 16:56:33 by pekatsar      #+#    #+#                 */
-/*   Updated: 2025/08/06 18:33:19 by pekatsar      ########   odam.nl         */
+/*   Updated: 2025/08/08 12:26:47 by pekatsar      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3D.h"
+#include "../../include/cub3D.h"
 
 /* make pl_x,pl_y center fo the player 5px dot diameter dot */
 static void	draw_player_dot(t_data *d, int player_x, int player_y, t_minimap_params *params)

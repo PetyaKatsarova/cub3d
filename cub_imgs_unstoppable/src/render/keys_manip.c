@@ -6,11 +6,11 @@
 /*   By: pekatsar <pekatsar@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/08/06 13:05:26 by pekatsar      #+#    #+#                 */
-/*   Updated: 2025/08/06 14:45:21 by pekatsar      ########   odam.nl         */
+/*   Updated: 2025/08/08 12:27:42 by pekatsar      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3D.h"
+#include "../../include/cub3D.h"
 
 
 /* sets button state to pressed */

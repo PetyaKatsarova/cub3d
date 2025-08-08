@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3D.h"
+#include "../../include/cub3D.h"
 
 int check_collision(t_data *d, double new_x, double new_y)
 {

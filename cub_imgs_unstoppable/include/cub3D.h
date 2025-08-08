@@ -1,7 +1,7 @@
 #ifndef cub3D_H
 # define cub3D_H
 
-# include <../lib/minilibx_linux/mlx.h>
+# include "../lib/minilibx_linux/mlx.h"
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdint.h> // for uint32_t

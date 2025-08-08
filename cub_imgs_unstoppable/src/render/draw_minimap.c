@@ -6,11 +6,11 @@
 /*   By: pekatsar <pekatsar@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/08/01 14:51:30 by pekatsar      #+#    #+#                 */
-/*   Updated: 2025/08/07 15:08:58 by pekatsar      ########   odam.nl         */
+/*   Updated: 2025/08/08 12:26:35 by pekatsar      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3D.h"
+#include "../../include/cub3D.h"
 
 /**
  * Connects two points with a straight line made of pxs

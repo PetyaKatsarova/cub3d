@@ -6,11 +6,11 @@
 /*   By: petya <petya@student.42.fr>                  +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/07/23 15:21:24 by pekatsar      #+#    #+#                 */
-/*   Updated: 2025/08/07 14:28:56 by pekatsar      ########   odam.nl         */
+/*   Updated: 2025/08/08 12:26:53 by pekatsar      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3D.h"
+#include "../../include/cub3D.h"
 #include <string.h> // todo: remove for strdup
 
 static char *maze_map[] = {

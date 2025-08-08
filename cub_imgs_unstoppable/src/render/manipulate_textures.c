@@ -10,7 +10,7 @@
 ///*                                                                            */
 ///* ************************************************************************** */
 
-#include "../include/cub3D.h"
+#include "../../include/cub3D.h"
 
 /*
 Reads the XMP file from disk
