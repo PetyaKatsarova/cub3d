@@ -11,7 +11,7 @@ t_game_configs	*get_input(int argc, char **argv)
 	parse_scene(&parsing);
 	//print_parsing(&parsing);
 	game_configs = make_game_configs(&parsing);
-	//print_game_configs(&parsing, game_configs);
+	// print_game_configs(&parsing, game_configs);
 	free_parsing(&parsing);
 	return (game_configs);
 }

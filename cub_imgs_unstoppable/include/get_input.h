@@ -55,6 +55,7 @@ typedef struct	s_parsing
 	int		test_columns;
 }	t_parsing;
 
+// if in main: get_input/assets/texture/my.xpm
 typedef struct	s_game_configs
 {
 	char	*no;

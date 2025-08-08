@@ -15,8 +15,8 @@
 // int x,y, char dir=pl.angle
 int init_pl (t_pl *pl, t_game_configs *game_configs)
 {
-	pl->x = game_configs->player_start_col;
-	pl->y = game_configs->player_start_row;
+	pl->x = game_configs->player_start_col * TILE_SIZE;
+	pl->y = game_configs->player_start_row * TILE_SIZE;
 	char dir = game_configs->player_start_orientation;
 	if ( dir== 'N') // cause screen is inverted, on paper is pi/2: 90 deg
 		pl->angle = 3 * M_PI / 2;
