@@ -7,16 +7,44 @@ HEADERS  := -I./include -I$(LIBMLX)/include
 LIBS     := -L$(LIBMLX) -lmlx -lX11 -lXext -lm
 
 SRC      := src/main.c \
-		   src/render/init_data.c \
-		   src/render/init_player_btns.c \
-		   src/render/init_ray.c \
-		   src/render/draw_maze.c \
-		   src/render/draw_minimap.c \
-		   src/render/draw_minimap2.c \
-		   src/render/player_control.c \
-		   src/render/draw_3d_map.c \
-		   src/render/manipulate_textures.c \
-		   src/render/keys_manip.c \
+		   	src/render/init_data.c \
+		   	src/render/init_player_btns.c \
+		  	src/render/init_ray.c \
+		   	src/render/draw_maze.c \
+		   	src/render/draw_minimap.c \
+		   	src/render/draw_minimap2.c \
+		   	src/render/player_control.c \
+		  	src/render/draw_3d_map.c \
+		   	src/render/manipulate_textures.c \
+		   	src/render/keys_manip.c \
+			srcs/get_input/handle_file/validate_file.c \
+			srcs/get_input/get_input.c \
+			srcs/get_input/handle_file/read_file.c \
+			srcs/get_input/parse_scene/parse_scene.c \
+			srcs/get_input/parse_scene/parse_texture/parse_texture.c \
+			srcs/get_input/parse_scene/parse_floor_ceiling/parse_floor_ceiling.c \
+			srcs/get_input/parse_scene/parse_map/parse_map.c \
+			srcs/get_input/parse_scene/parse_map/all_chars_legal.c \
+			srcs/get_input/parse_scene/parse_map/check_map_enclosed.c \
+			srcs/get_input/parse_scene/parse_map/count_players.c \
+			srcs/get_input/parse_scene/parse_map/illegal_empty_lines.c \
+			srcs/get_input/parse_scene/parse_map/map_enclosed.c \
+			srcs/get_input/parse_scene/parse_map/measure_map.c \
+			srcs/get_input/initialize_parsing_data.c \
+			srcs/get_input/make_game_configs.c \
+			srcs/get_input/initialize_game_configs.c \
+			srcs/get_input/utils/get_next_line.c \
+			srcs/get_input/utils/get_next_line_utils.c \
+			srcs/get_input/utils/exit_error_parsing.c \
+			srcs/get_input/utils/free_parsing.c \
+			srcs/get_input/utils/validate_path.c \
+			srcs/get_input/utils/ft_strncmp.c \
+			srcs/get_input/utils/free_game_configs.c \
+			srcs/get_input/utils/ft_strlen.c \
+			srcs/get_input/utils/traverse_space.c \
+			srcs/get_input/utils/is_space.c \
+			srcs/get_input/test/print_parsing.c \
+			srcs/get_input/test/print_game_configs.c
 
 OBJDIR   := obj
 OBJ      := $(SRC:%.c=%.o)
@@ -27,7 +55,9 @@ GREEN    := \033[0;32m
 RESET    := \033[0m
 
 # Header files for dependency tracking
-HEADER_FILES := include/cub3D.h
+HEADER_FILES := include/cub3D.h \
+				includes/get_input.h \
+				includes/get_next_line.h
 
 all: $(NAME)
 
