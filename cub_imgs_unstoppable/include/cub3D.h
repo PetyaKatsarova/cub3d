@@ -48,7 +48,7 @@ typedef struct  s_btns
 
 typedef struct s_wall_info {
     float   distance; // corrected to compensate fish eye
-	//float	raw_dist; // b4 calc for fish eye effect
+	float	raw_dist; // b4 calc for fish eye effect
     float   ray_angle;
     int     hit_vertical;
     float   hit_x;
