@@ -1,4 +1,4 @@
-#include "../../../includes/get_input.h"
+#include "../../../include/get_input.h"
 
 static void	validate_num_args(int argc)
 {

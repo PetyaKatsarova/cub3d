@@ -1,4 +1,4 @@
-#include "../../../../includes/get_input.h"
+#include "../../../../include/get_input.h"
 
 static bool	floor_or_player(char c)
 {

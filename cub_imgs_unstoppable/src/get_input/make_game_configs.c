@@ -1,4 +1,4 @@
-#include "../../includes/get_input.h"
+#include "../../include/get_input.h"
 
 static void	copy_textures(t_parsing *parsing, t_game_configs *game_configs)
 {

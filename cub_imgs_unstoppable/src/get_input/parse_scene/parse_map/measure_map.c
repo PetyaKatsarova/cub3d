@@ -1,4 +1,4 @@
-#include "../../../../includes/get_input.h"
+#include "../../../../include/get_input.h"
 
 static bool	has_line_only_spaces(char *line)
 {

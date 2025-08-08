@@ -1,4 +1,4 @@
-#include "../../includes/get_input.h"
+#include "../../../include/get_input.h"
 
 void	exit_error_parsing(char *message, t_parsing *parsing)
 {

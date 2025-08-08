@@ -1,5 +1,5 @@
-#include "../../../includes/get_input.h"
-#include "../../../includes/get_next_line.h"
+#include "../../../include/get_input.h"
+#include "../../../include/get_next_line.h"
 
 static int	get_num_lines(char *filepath)
 {

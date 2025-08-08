@@ -1,4 +1,4 @@
-#include "../../includes/get_input.h"
+#include "../../include/get_input.h"
 
 void	initialize_parsing_data(t_parsing *parsing)
 {

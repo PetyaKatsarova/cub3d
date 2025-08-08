@@ -1,4 +1,4 @@
-#include "../../../../includes/get_input.h"
+#include "../../../../include/get_input.h"
 
 static int	parse_rgb(t_parsing *parsing, int i, int j, int *rgb)
 {

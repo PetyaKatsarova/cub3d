@@ -1,4 +1,4 @@
-#include "../../includes/get_input.h"
+#include "../../include/get_input.h"
 
 t_game_configs	*get_input(int argc, char **argv)
 {

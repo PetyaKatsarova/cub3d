@@ -1,4 +1,4 @@
-#include "../../../../includes/get_input.h"
+#include "../../../../include/get_input.h"
 
 static int	get_len_path(t_parsing *parsing, int i, int j)
 {

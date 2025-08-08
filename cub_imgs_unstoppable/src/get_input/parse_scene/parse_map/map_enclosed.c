@@ -1,4 +1,4 @@
-#include "../../../../includes/get_input.h"
+#include "../../../../include/get_input.h"
 
 static void	alloc_test_map(t_parsing *parsing)
 {

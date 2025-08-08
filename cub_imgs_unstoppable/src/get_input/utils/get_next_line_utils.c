@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/get_next_line.h"
+#include "../../../include/get_next_line.h"
 
 char	*realloc_line(char *old_line, size_t *line_len)
 {

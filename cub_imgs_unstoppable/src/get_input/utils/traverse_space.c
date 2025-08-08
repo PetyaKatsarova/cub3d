@@ -1,4 +1,4 @@
-#include "../../includes/get_input.h"
+#include "../../../include/get_input.h"
 
 int	traverse_space(t_parsing *parsing, int i, int j)
 {

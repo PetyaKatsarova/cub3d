@@ -1,4 +1,4 @@
-#include "../../includes/get_input.h"
+#include "../../../include/get_input.h"
 
 void	validate_path(char *path, t_parsing *parsing, char *message)
 {

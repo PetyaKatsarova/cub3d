@@ -1,4 +1,4 @@
-#include "../../../../includes/get_input.h"
+#include "../../../../include/get_input.h"
 
 void	illegal_empty_lines(t_parsing *parsing, int i)
 {

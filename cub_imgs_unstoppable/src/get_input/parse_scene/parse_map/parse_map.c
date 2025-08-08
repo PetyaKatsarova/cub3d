@@ -1,4 +1,4 @@
-#include "../../../../includes/get_input.h"
+#include "../../../../include/get_input.h"
 
 void	parse_map(t_parsing *parsing, int i)
 {

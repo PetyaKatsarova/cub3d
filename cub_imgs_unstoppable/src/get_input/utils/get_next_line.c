@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/get_next_line.h"
+#include "../../../include/get_next_line.h"
 
 static char	*return_line_or_null(	t_buffer_data *data,
 									size_t line_index,

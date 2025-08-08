@@ -1,4 +1,4 @@
-#include "../../includes/get_input.h"
+#include "../../include/get_input.h"
 
 void	initialize_game_configs(t_game_configs *game_configs)
 {

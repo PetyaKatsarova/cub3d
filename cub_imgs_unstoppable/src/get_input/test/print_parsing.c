@@ -1,4 +1,4 @@
-#include "../../includes/get_input.h"
+#include "../../../include/get_input.h"
 
 static void	print_scene(t_parsing *parsing)
 {

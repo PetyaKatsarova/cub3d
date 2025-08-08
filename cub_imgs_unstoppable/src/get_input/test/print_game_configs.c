@@ -1,4 +1,4 @@
-#include "../../includes/get_input.h"
+#include "../../../include/get_input.h"
 
 static void	print_textures(t_game_configs *game_configs)
 {

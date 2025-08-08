@@ -1,4 +1,4 @@
-#include "../../includes/get_input.h"
+#include "../../../include/get_input.h"
 
 int	ft_strncmp(char *s1, char *s2, int n)
 {
