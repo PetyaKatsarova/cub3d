@@ -14,8 +14,8 @@
 // rows and columns, will be taken from the map
 # define WIN_WIDTH      	1600 //800
 # define WIN_HEIGHT     	1000 // 600
-# define COLS				8 // map with: hardcoded, todo: use form parser!!
-# define ROWS				8 // map height
+//# define COLS				8 // map with: hardcoded, todo: use form parser!!
+//# define ROWS				8 // map height
 # define TILE_SIZE  		64 // px width and height: balanced performance, fixed
 # define MINIMAP_SIZE		350
 # define PL_SIZE 			7 // ? i draw it 5px diameter....
@@ -113,6 +113,8 @@ typedef struct s_data {
 	int			bpp; // bits per pixel
 	int			line_length;
 	int			endian;
+	int			map_cols;
+	int			map_rows;
 	// int			needs_redraw;
 	char		**map; // or int?
 	t_pl 		*pl;

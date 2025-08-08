@@ -43,18 +43,18 @@ void horizontal_check(t_ray *ray, t_data *d, float *hx, float *hy)
     if (ray->angle == 0 || ray->angle == M_PI ){ // looking straight left/right
         *hx = d->pl->x;
         *hy = d->pl->y;
-        dof = COLS; // skip loop
+        dof = d->map_cols; // skip loop
     }
     
     // STEP_SIZE through horizontal grid lines
-    while (dof < COLS)
+    while (dof < d->map_cols)
     {
         int map_x = (int)(*hx / TILE_SIZE); 
         int map_y = (int)(*hy / TILE_SIZE);
 		//int map_x = (int)ray->x>>6;
 		//int map_y = (int)ray->y>>6;
         
-        if (map_x >= 0 && map_x < COLS && map_y >= 0 && map_y < ROWS && 
+        if (map_x >= 0 && map_x < d->map_cols && map_y >= 0 && map_y < d->map_rows && 
             d->map[map_y][map_x] == '1')
         {
             break; // hit wall - STOP HERE
@@ -88,16 +88,16 @@ void vertical_check(t_ray *ray, t_data *d, float *vx, float *vy)
     else { // looking straight up/down
         *vx = d->pl->x;
         *vy = d->pl->y;
-        dof = COLS; // skip loop
+        dof = d->map_cols; // skip loop
     }
     
     // STEP_SIZE through vertical grid lines
-    while (dof < COLS)
+    while (dof < d->map_cols)
     {
         int map_x = (int)floor(*vx / TILE_SIZE);
         int map_y = (int)floor(*vy / TILE_SIZE);
         
-        if (map_x >= 0 && map_x < COLS && map_y >= 0 && map_y < ROWS && 
+        if (map_x >= 0 && map_x < d->map_cols && map_y >= 0 && map_y < d->map_rows && 
             d->map[map_y][map_x] == '1')
         {
             break; // hit wall - STOP HERE

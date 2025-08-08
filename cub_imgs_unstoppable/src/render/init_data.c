@@ -1,59 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   init_data.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: petya <petya@student.42.fr>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/23 15:21:24 by pekatsar          #+#    #+#             */
-/*   Updated: 2025/08/08 14:47:21 by petya            ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   init_data.c                                        :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: petya <petya@student.42.fr>                  +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2025/07/23 15:21:24 by pekatsar      #+#    #+#                 */
+/*   Updated: 2025/08/08 16:07:33 by pekatsar      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3D.h"
 #include <string.h> // todo: remove for strdup
-
-// static int place_pl(t_data *d, t_game_configs *s_game_configs)
-// {
-// 	int x = 0;
-// 	int y = 0;
-
-// 	while (d->map[y]) // cols
-// 	{
-// 		x = 0;
-// 		while (d->map[y][x]) // rows
-// 		{
-// 			if (d->map[y][x] == 'N') // hard coded: TODO from parser
-// 			{
-// 				if (init_pl(d->pl, x * TILE_SIZE, y * TILE_SIZE, 'N'))
-// 					return (write(2, "Failed to initialize pl\n", 28), 1);
-// 				return (d->map[y][x] = '0', 0); // Clear the pl position in the map
-// 			}
-// 			else if (d->map[y][x] == 'E')
-// 			{
-// 				if (init_pl(d->pl, x * TILE_SIZE, y * TILE_SIZE, 'E'))
-// 					return (write(2, "Failed to initialize pl\n", 28), 1);
-// 				return (d->map[y][x] = '0', 0); // Clear the pl position in the map
-// 			}
-// 			else if (d->map[y][x] == 'W')
-// 			{
-// 				if (init_pl(d->pl, x * TILE_SIZE, y * TILE_SIZE, 'W'))
-// 					return (write(2, "Failed to initialize pl\n", 28), 1);
-// 				return (d->map[y][x] = '0', 0); // Clear the pl position in the map
-// 			}
-// 			else if (d->map[y][x] == 'S')
-// 			{
-// 				if (init_pl(d->pl, x * TILE_SIZE, y * TILE_SIZE, 'S'))
-// 					return (write(2, "Failed to initialize pl\n", 28), 1);
-// 				return (d->map[y][x] = '0', 0); // Clear the pl position in the map
-// 			}
-				
-// 			x++;
-// 		}
-// 		y++;
-// 	}
-// 	return (write(2, "No pl start (N) found in map\n", 33), 1); // pl not found
-// }
 
 int init_btns(t_btns *btns)
 {
@@ -87,10 +45,9 @@ int	init_data(t_data *d, t_pl *pl, t_game_configs *game_configs)
 		write(2, "Map initialization failed\n", 26);
 		return (1);
 	}
-	// d->needs_redraw = 0;
 	d->pl = pl;
-	// if (place_pl(d))
-	// 	return (1);
+	d->map_cols = game_configs->map_cols;
+	d->map_rows = game_configs->map_rows;
 	init_btns(&d->btns);
 	init_textures(d, game_configs);
 	return (0);

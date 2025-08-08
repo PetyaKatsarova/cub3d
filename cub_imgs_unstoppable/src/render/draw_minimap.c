@@ -6,7 +6,7 @@
 /*   By: pekatsar <pekatsar@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/08/01 14:51:30 by pekatsar      #+#    #+#                 */
-/*   Updated: 2025/08/08 12:26:35 by pekatsar      ########   odam.nl         */
+/*   Updated: 2025/08/08 16:12:39 by pekatsar      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,10 +118,10 @@ void	draw_minimap_walls(t_data *d, int offset_x, int offset_y, float scale)
 	t_minimap_params	params;
 
 	map_y = 0;
-	while (map_y < ROWS)
+	while (map_y < d->map_rows)
 	{
 		map_x = 0;
-		while (map_x < COLS)
+		while (map_x < d->map_cols)
 		{
 			if (d->map[map_y][map_x] == '1')
 			{
