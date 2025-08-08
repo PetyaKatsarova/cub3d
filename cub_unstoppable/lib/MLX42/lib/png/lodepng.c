@@ -778,7 +778,7 @@ static unsigned HuffmanTree_makeTable(HuffmanTree* tree) {
 }
 
 /*
-Second step for the ...makeFromLengths and ...makeFromFrequencies functions.
+Second STEP_SIZE for the ...makeFromLengths and ...makeFromFrequencies functions.
 numcodes, lengths and maxbitlen must already be filled in correctly. return
 value is error.
 */
@@ -795,13 +795,13 @@ static unsigned HuffmanTree_makeFromLengths2(HuffmanTree* tree) {
 
   if(!error) {
     for(n = 0; n != tree->maxbitlen + 1; n++) blcount[n] = nextcode[n] = 0;
-    /*step 1: count number of instances of each code length*/
+    /*STEP_SIZE 1: count number of instances of each code length*/
     for(bits = 0; bits != tree->numcodes; ++bits) ++blcount[tree->lengths[bits]];
-    /*step 2: generate the nextcode values*/
+    /*STEP_SIZE 2: generate the nextcode values*/
     for(bits = 1; bits <= tree->maxbitlen; ++bits) {
       nextcode[bits] = (nextcode[bits - 1] + blcount[bits - 1]) << 1u;
     }
-    /*step 3: generate all the codes*/
+    /*STEP_SIZE 3: generate all the codes*/
     for(n = 0; n != tree->numcodes; ++n) {
       if(tree->lengths[n] != 0) {
         tree->codes[n] = nextcode[tree->lengths[n]]++;
@@ -913,7 +913,7 @@ static void bpmnode_sort(BPMNode* leaves, size_t num) {
   lodepng_free(mem);
 }
 
-/*Boundary Package Merge step, numpresent is the amount of leaves, and c is the current chain.*/
+/*Boundary Package Merge STEP_SIZE, numpresent is the amount of leaves, and c is the current chain.*/
 static void boundaryPM(BPMLists* lists, BPMNode* leaves, size_t numpresent, int c, int num) {
   unsigned lastindex = lists->chains1[c]->index;
 
@@ -4671,7 +4671,7 @@ static unsigned postProcessScanlines(unsigned char* out, unsigned char* in,
                                      unsigned w, unsigned h, const LodePNGInfo* info_png) {
   /*
   This function converts the filtered-padded-interlaced data into pure 2D image buffer with the PNG's colortype.
-  Steps:
+  STEP_SIZEs:
   *) if no Adam7: 1) unfilter 2) remove padding bits (= possible extra bits per scanline if bpp < 8)
   *) if adam7: 1) 7x unfilter 2) 7x remove padding bits 3) Adam7_deinterlace
   NOTE: the in buffer will be overwritten with intermediate data!
@@ -4684,7 +4684,7 @@ static unsigned postProcessScanlines(unsigned char* out, unsigned char* in,
       CERROR_TRY_RETURN(unfilter(in, in, w, h, bpp));
       removePaddingBits(out, in, w * bpp, ((w * bpp + 7u) / 8u) * 8u, h);
     }
-    /*we can immediately filter into the out buffer, no other steps needed*/
+    /*we can immediately filter into the out buffer, no other STEP_SIZEs needed*/
     else CERROR_TRY_RETURN(unfilter(out, in, w, h, bpp));
   } else /*interlace_method is 1 (Adam7)*/ {
     unsigned passw[7], passh[7]; size_t filter_passstart[8], padded_passstart[8], passstart[8];
@@ -6161,7 +6161,7 @@ static unsigned preProcessScanlines(unsigned char** out, size_t* outsize, const 
                                     unsigned w, unsigned h,
                                     const LodePNGInfo* info_png, const LodePNGEncoderSettings* settings) {
   /*
-  This function converts the pure 2D image with the PNG's colortype, into filtered-padded-interlaced data. Steps:
+  This function converts the pure 2D image with the PNG's colortype, into filtered-padded-interlaced data. STEP_SIZEs:
   *) if no Adam7: 1) add padding bits (= possible extra bits per scanline if bpp < 8) 2) filter
   *) if adam7: 1) Adam7_interlace 2) 7x add padding bits 3) 7x filter
   */
@@ -6184,7 +6184,7 @@ static unsigned preProcessScanlines(unsigned char** out, size_t* outsize, const 
         }
         lodepng_free(padded);
       } else {
-        /*we can immediately filter into the out buffer, no other steps needed*/
+        /*we can immediately filter into the out buffer, no other STEP_SIZEs needed*/
         error = filter(*out, in, w, h, &info_png->color, settings);
       }
     }

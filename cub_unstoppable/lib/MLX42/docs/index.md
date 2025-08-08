@@ -52,7 +52,7 @@ Currently supported operating systems:
 
 ## Initialization
 
-The very first step for initialization is to execute the mlx_init function.
+The very first STEP_SIZE for initialization is to execute the mlx_init function.
 It is responsible for setting up the GLFW windowing library which 
 creates a connection between your software and the display. It also loads the 
 OpenGL function pointers, compiling the shaders and more.

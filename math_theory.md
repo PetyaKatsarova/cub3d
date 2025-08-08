@@ -120,7 +120,7 @@ The other gives distance between horizontal hits.
 Super Simple Rule:
 If your laser points more left–right, it’ll hit vertical lines more often.
 If it points more up–down, it’ll hit horizontal lines more often.
-So each step in the raycasting loop does:
+So each STEP_SIZE in the raycasting loop does:
 Compare:
 Will the laser hit a vertical line first?
 Or a horizontal line?
@@ -164,8 +164,8 @@ plane = how wide your eyes can see
 Together = calculate every ray direction for screen pixels
 
 ======================================
-Step 2: Calculating the Delta Distance
-The next step in the raycasting algorithm is to calculate the delta distance between two consecutive x or y intersections with a grid line. This is done by determining the distance the ray must travel to reach the next grid line in the x or y direction.
+STEP_SIZE 2: Calculating the Delta Distance
+The next STEP_SIZE in the raycasting algorithm is to calculate the delta distance between two consecutive x or y intersections with a grid line. This is done by determining the distance the ray must travel to reach the next grid line in the x or y direction.
 
 Example of delta dist x and y
 
@@ -180,8 +180,8 @@ Example of delta dist x and y
 	// ...
 This gives us the distance the ray must travel to reach the next grid line in each direction. Note here that the pos_x and pos_y both refer to the pl’s position.
 
-Step 3: Calculating the Step and Initial Side Distances
-Now we need to calculate the step_x, step_y and the initial side distances for the ray. The step_x and step_y variables determine the direction in which the ray moves through the grid.
+STEP_SIZE 3: Calculating the STEP_SIZE and Initial Side Distances
+Now we need to calculate the STEP_SIZE_x, STEP_SIZE_y and the initial side distances for the ray. The STEP_SIZE_x and STEP_SIZE_y variables determine the direction in which the ray moves through the grid.
 
 The side_dist_x and side_dist_y variables represent initially the distance the ray must travel from its current position to the next grid line in the x or y direction. Later these variables will be updated with the delta distance as the ray moves through the grid.
 
@@ -191,7 +191,7 @@ A frame in a game or graphical application is a single iteration of drawing and 
 
 In MiniLibX, the function that handles rendering a frame is mlx_loop_hook, which repeatedly calls a function to update and render the screen.
 
-Steps for Frames:
+STEP_SIZEs for Frames:
 mlx_loop_hook: Registers a function to be called every frame.
 
 mlx_loop: Starts the MLX event loop to repeatedly call the frame function.

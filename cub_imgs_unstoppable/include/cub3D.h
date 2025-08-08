@@ -16,19 +16,16 @@
 # define ROWS				8 // map height
 # define TILE_SIZE  		64 // px width and height: balanced performance, fixed
 # define MINIMAP_SIZE		350
-# define PL_SIZE 			7
-# define STEP_SIZE 				5
-# define SLOW_MOVE			0.2
-#define	 ANGLE_ROT			0.1
+# define PL_SIZE 			7 // ? i draw it 5px diameter....
+# define STEP_SIZE 			5 //Controls: How far player moves per frame with WASD; Effect: Player moves 5 pixels per keypress
+//Usage: pl->x += STEP_SIZE when moving
+# define SLOW_MOVE			1 //0.1
+#define	 ANGLE_ROT			0.2
 # define RAYS_NUM			30
 # define DEG_RAD			0.0174533 // one degree in radians
 
 # define WALL_COLOR 		0x800080 // purple 0xBFFF55  // lime
 # define EAST_COLOR			0xFFFF00 // yellow 
-# define WEST_COLOR			0x0000FF  // blue
-# define NORTH_COLOR		0x00FF00  // green
-# define SOUTH_COLOR		0xFF0000  // red
-# define FLOOR_COLOR 		0xB48E8E // favorite
 # define CEILING_COLOR  	0x87CEEB // sky blue
 # define PL_COLOR    		0x0d0832ff // dark blue
 # define BACKGROUND_COLOR 	0xD3D3D3

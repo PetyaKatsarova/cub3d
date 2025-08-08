@@ -32,8 +32,8 @@ int init_pl (t_pl *pl, int x, int y, char dir)
 		pl->angle = M_PI;
 	else
 		return (1);
-	pl->delta_x = cos(pl->angle) * 5;
-	pl->delta_y = sin(pl->angle) * 5;
+	pl->delta_x = cos(pl->angle) * MOIVE_SPEED;
+	pl->delta_y = sin(pl->angle) * MOIVE_SPEED;
 	//pl.fov = 0; //field of view
 	pl->fov = 60 * DEG_RAD;  // Set the FOV to 60 degrees
 	return (0);

@@ -17,8 +17,9 @@
 # define TILE_SIZE  		64 // px width and height: balanced performance, fixed
 # define MINIMAP_SIZE		350
 # define PL_SIZE 			7
-# define STEP 				5
-# define SLOW_MOVE			0.2
+# define STEP_SIZE 			5
+# define MOIVE_SPEED		10
+# define SLOW_MOVE			0.1
 #define	 ANGLE_ROT			0.1
 # define RAYS_NUM			30
 # define DEG_RAD			0.0174533 // one degree in radians

@@ -1018,7 +1018,7 @@ part of zlib that is required for PNG, it does not support dictionaries.
 */
 
 #ifdef LODEPNG_COMPILE_DECODER
-/*Inflate a buffer. Inflate is the decompression step of deflate. Out buffer must be freed after use.*/
+/*Inflate a buffer. Inflate is the decompression STEP_SIZE of deflate. Out buffer must be freed after use.*/
 unsigned lodepng_inflate(unsigned char** out, size_t* outsize,
                          const unsigned char* in, size_t insize,
                          const LodePNGDecompressSettings* settings);
