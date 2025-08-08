@@ -2,6 +2,8 @@
 # define cub3D_H
 
 # include "../lib/minilibx_linux/mlx.h"
+# include "get_input.h"
+# include "get_next_line.h"
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdint.h> // for uint32_t
@@ -111,7 +113,7 @@ typedef struct s_data {
 	int			bpp; // bits per pixel
 	int			line_length;
 	int			endian;
-	int			needs_redraw;
+	// int			needs_redraw;
 	char		**map; // or int?
 	t_pl 		*pl;
 	t_btns		btns;
@@ -122,8 +124,8 @@ typedef struct s_data {
 }	t_data;
 
 
-int 		init_pl (t_pl *pl, int x, int y, char dir);
-int			init_data(t_data *d, t_pl *pl);
+int 		init_pl (t_pl *pl, t_game_configs *game_configs);
+int			init_data(t_data *d, t_pl *pl, t_game_configs *game_configs);
 void 		set_px(t_data *d, int x, int y, uint32_t color);
 void 		horizontal_check(t_ray *ray, t_data *d, float *hx, float *hy);
 void 		vertical_check(t_ray *ray, t_data *d, float *vx, float *vy);
@@ -140,7 +142,7 @@ void    	pl_control(t_data *d);  // Changed signature - no keycode parameter
 void    	handle_arrow_keys(t_data *d, int keycode);
 // src/manipulate_textures.c
 int         load_texture(t_data *d, t_texture *tex, char *path);
-void        init_textures(t_data *d);
+void 		init_textures(t_data *d, t_game_configs *game_configs);
 uint32_t    get_texture_pixel(t_texture *tex, int x, int y);
 void        draw_textured_wall(t_data *d, int screen_x, int wall_height, t_texture *tex);
 

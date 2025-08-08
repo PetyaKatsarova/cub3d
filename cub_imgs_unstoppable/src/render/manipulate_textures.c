@@ -28,15 +28,15 @@ int load_texture(t_data *d, t_texture *tex, char *path)
     return (0);
 }
 
-void init_textures(t_data *d)
+void init_textures(t_data *d, t_game_configs *game_configs)
 {
-    if (load_texture(d, &d->north_tex, "textures/north_wall.xpm"))
+    if (load_texture(d, &d->north_tex, game_configs->no))
         printf("Warning: Failed to load north texture\n");
-    if (load_texture(d, &d->south_tex, "textures/south_wall.xpm"))
+    if (load_texture(d, &d->south_tex, game_configs->so))
         printf("Warning: Failed to load south texture\n");
-    if (load_texture(d, &d->east_tex, "textures/east_wall.xpm"))
+    if (load_texture(d, &d->east_tex, game_configs->ea))
         printf("Warning: Failed to load east texture\n");
-    if (load_texture(d, &d->west_tex, "textures/west_wall.xpm"))
+    if (load_texture(d, &d->west_tex, game_configs->we))
         printf("Warning: Failed to load west texture\n");
 }
 

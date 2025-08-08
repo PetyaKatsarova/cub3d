@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   keys_manip.c                                       :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: pekatsar <pekatsar@student.codam.nl>         +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2025/08/06 13:05:26 by pekatsar      #+#    #+#                 */
-/*   Updated: 2025/08/08 12:27:42 by pekatsar      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   keys_manip.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: petya <petya@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/08/06 13:05:26 by pekatsar          #+#    #+#             */
+/*   Updated: 2025/08/08 14:35:07 by petya            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ int key_press(int keycode, t_data *d)
         d->btns.left_arrow = 1;
     else if (keycode == KEY_RIGHT)
         d->btns.right_arrow = 1;
-	d->needs_redraw = 1;
     handle_arrow_keys(d, keycode); 
     return (0);
 }
@@ -51,6 +50,5 @@ int key_release(int keycode, t_data *d)
         d->btns.left_arrow = 0;
     else if (keycode == KEY_RIGHT)
         d->btns.right_arrow = 0;
-    d->needs_redraw = 1;
     return (0);
 }

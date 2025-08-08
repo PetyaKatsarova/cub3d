@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   main.c                                             :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: petya <petya@student.42.fr>                  +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2025/07/23 15:13:27 by pekatsar      #+#    #+#                 */
-/*   Updated: 2025/08/07 13:50:46 by pekatsar      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: petya <petya@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/23 15:13:27 by pekatsar          #+#    #+#             */
+/*   Updated: 2025/08/08 14:17:35 by petya            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,12 +75,14 @@ Real-time - Immediate response to input
 
 Frame = one complete 2000x1200 image of the 3D world.
  */
-int main(void)
+int main(int argc, char **argv)
 {
     t_data data;
     t_pl    pl;
+    t_game_configs *game_configs;
 
-    if (init_data(&data, &pl)) 
+    game_configs = get_input(argc, argv);
+    if (init_data(&data, &pl, game_configs)) 
         return (1);
     mlx_loop_hook(data.mlx, render_frame, &data);
     mlx_hook(data.win, 2, 1, key_press, &data); // 
@@ -88,5 +90,6 @@ int main(void)
     mlx_hook(data.win, 17, 0, close_window, &data);
     
     mlx_loop(data.mlx);
+    free_game_configs(game_configs);
     return (0);
 }

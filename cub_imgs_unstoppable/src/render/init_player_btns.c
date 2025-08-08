@@ -12,17 +12,13 @@
 
 #include "../../include/cub3D.h"
 
-int init_pl (t_pl *pl, int x, int y, char dir)
+// int x,y, char dir=pl.angle
+int init_pl (t_pl *pl, t_game_configs *game_configs)
 {
-	// todo: take from map
-	if (x < 0 || y < 0 || x >= (COLS * TILE_SIZE) || y >= (ROWS * TILE_SIZE))
-	{
-		write(2, "Invalid pl position\n", 24);
-		return (1);
-	}
-	pl->x = x;
-	pl->y = y;
-	if (dir == 'N') // cause screen is inverted, on paper is pi/2: 90 deg
+	pl->x = game_configs->player_start_col;
+	pl->y = game_configs->player_start_row;
+	char dir = game_configs->player_start_orientation;
+	if ( dir== 'N') // cause screen is inverted, on paper is pi/2: 90 deg
 		pl->angle = 3 * M_PI / 2;
 	else if (dir == 'S')
 		pl->angle = M_PI / 2;
@@ -32,12 +28,12 @@ int init_pl (t_pl *pl, int x, int y, char dir)
 		pl->angle = M_PI;
 	else
 		return (1);
-	pl->delta_x = cos(pl->angle) * 5;
+	pl->delta_x = cos(pl->angle) * 5; // todo: no magic nums
 	pl->delta_y = sin(pl->angle) * 5;
-	//pl.fov = 0; //field of view
 	pl->fov = 60 * DEG_RAD;  // Set the FOV to 60 degrees
 	return (0);
 }
+
 
 
 
