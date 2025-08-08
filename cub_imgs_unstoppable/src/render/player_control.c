@@ -43,23 +43,23 @@ void pl_control(t_data *d)
 
     if (d->btns.w) // Move forward
     {
-        move_x = d->pl->delta_x * 0.07;
-        move_y = d->pl->delta_y * 0.07;
+        move_x = d->pl->delta_x * SLOW_MOVE;
+        move_y = d->pl->delta_y * SLOW_MOVE;
     }
     if (d->btns.s) // Move backward
     {
-        move_x = -d->pl->delta_x * 0.07;
-        move_y = -d->pl->delta_y * 0.07;
+        move_x = -d->pl->delta_x * SLOW_MOVE;
+        move_y = -d->pl->delta_y * SLOW_MOVE;
     }
     if (d->btns.a) // Strafe left
     {
-        move_x = d->pl->delta_y * 0.07;
-        move_y = -d->pl->delta_x * 0.07;
+        move_x = d->pl->delta_y * SLOW_MOVE;
+        move_y = -d->pl->delta_x * SLOW_MOVE;
     }
     if (d->btns.d) // Strafe right
     {
-        move_x = -d->pl->delta_y * 0.07;
-        move_y = d->pl->delta_x * 0.07;
+        move_x = -d->pl->delta_y * SLOW_MOVE;
+        move_y = d->pl->delta_x * SLOW_MOVE;
     }
 
     if (!check_collision(d, d->pl->x + move_x, d->pl->y + move_y))
@@ -93,7 +93,7 @@ void handle_arrow_keys(t_data *d, int keycode)
 {
     if (keycode == KEY_LEFT) // LEFT ARROW - rotate left
     {
-        d->pl->angle -= 0.1;
+        d->pl->angle -= SLOW_MOVE;
         if (d->pl->angle < 0)
             d->pl->angle += 2 * M_PI;
         d->pl->delta_x = cos(d->pl->angle) * 5;
@@ -101,7 +101,7 @@ void handle_arrow_keys(t_data *d, int keycode)
     }
     else if (keycode == KEY_RIGHT) // RIGHT ARROW - rotate right
     {
-        d->pl->angle += 0.1;
+        d->pl->angle += SLOW_MOVE;
         if (d->pl->angle > 2 * M_PI)
             d->pl->angle -= 2 * M_PI;
         d->pl->delta_x = cos(d->pl->angle) * 5;

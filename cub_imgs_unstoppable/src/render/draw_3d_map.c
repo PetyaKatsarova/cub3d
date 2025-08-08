@@ -26,14 +26,15 @@ void horizontal_check(t_ray *ray, t_data *d, float *hx, float *hy)
 {
     float aTan = -1/tan(ray->angle);
     int dof = 0;
-    float xo, yo; // STEP_SIZE offsets
+    float xo;
+	float yo; // STEP_SIZE offsets
     
     if (ray->angle > M_PI) { // looking up
         *hy = (((int)d->pl->y>>6)<<6) - 0.0001;
         *hx = (d->pl->y - *hy) * aTan + d->pl->x;
         yo = -TILE_SIZE;
         xo = -yo * aTan;
-    } // OR ADD ELSE: ODNT SEE DIFF??
+    }
     if (ray->angle < M_PI) { // looking down
         *hy = (((int)d->pl->y>>6)<<6) + TILE_SIZE;
         *hx = (d->pl->y - *hy) * aTan + d->pl->x;
@@ -51,13 +52,11 @@ void horizontal_check(t_ray *ray, t_data *d, float *hx, float *hy)
     {
         int map_x = (int)(*hx / TILE_SIZE); 
         int map_y = (int)(*hy / TILE_SIZE);
-		//int map_x = (int)ray->x>>6;
-		//int map_y = (int)ray->y>>6;
         
         if (map_x >= 0 && map_x < COLS && map_y >= 0 && map_y < ROWS && 
             d->map[map_y][map_x] == '1')
         {
-            break; // hit wall - STOP HERE
+            break; // hit wall
         }
         else {
             *hx += xo; // STEP_SIZE to next grid line
@@ -100,7 +99,7 @@ void vertical_check(t_ray *ray, t_data *d, float *vx, float *vy)
         if (map_x >= 0 && map_x < COLS && map_y >= 0 && map_y < ROWS && 
             d->map[map_y][map_x] == '1')
         {
-            break; // hit wall - STOP HERE
+            break;
         }
         else {
             *vx += xo; // STEP_SIZE to next grid line
@@ -208,7 +207,7 @@ static void draw_3d_map(t_data *d, t_ray *ray)
         // Replace the function call with:
 		t_wall_info wall;
 		wall.distance = distance;
-		//wall.raw_dist = distance;
+		wall.raw_dist = distance;
 		wall.ray_angle = ray->angle;
 		wall.hit_vertical = hit_vertical;
 		wall.hit_x = ray->x;
@@ -227,20 +226,15 @@ static void draw_3d_map(t_data *d, t_ray *ray)
 
 int render_frame(t_data *d)
 {
-    //if (d->needs_redraw) slows down start
-	//{
 		pl_control(d);
     // Clear screen to black
     for (int i = 0; i < WIN_WIDTH * WIN_HEIGHT; i++)
         ((uint32_t*)d->addr)[i] = 0x000000;
 
-    t_ray ray;
-    ray.angle = d->pl->angle;
-    draw_3d_map(d, &ray);
-    draw_minimap(d);
-    mlx_put_image_to_window(d->mlx, d->win, d->img, 0, 0);
-	//}
-	//d->needs_redraw = 0;
-    
+	t_ray ray;
+	ray.angle = d->pl->angle;
+	draw_3d_map(d, &ray);
+	draw_minimap(d);
+	mlx_put_image_to_window(d->mlx, d->win, d->img, 0, 0);    
     return (0);
 }

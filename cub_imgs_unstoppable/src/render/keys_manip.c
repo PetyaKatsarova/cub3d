@@ -6,7 +6,7 @@
 /*   By: pekatsar <pekatsar@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/08/06 13:05:26 by pekatsar      #+#    #+#                 */
-/*   Updated: 2025/08/06 14:45:21 by pekatsar      ########   odam.nl         */
+/*   Updated: 2025/08/08 13:32:14 by pekatsar      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int key_press(int keycode, t_data *d)
         d->btns.left_arrow = 1;
     else if (keycode == KEY_RIGHT)
         d->btns.right_arrow = 1;
-	d->needs_redraw = 1;
+	//d->needs_redraw = 1;
     handle_arrow_keys(d, keycode); 
     return (0);
 }
@@ -51,6 +51,6 @@ int key_release(int keycode, t_data *d)
         d->btns.left_arrow = 0;
     else if (keycode == KEY_RIGHT)
         d->btns.right_arrow = 0;
-    d->needs_redraw = 1;
+    //d->needs_redraw = 1;
     return (0);
 }

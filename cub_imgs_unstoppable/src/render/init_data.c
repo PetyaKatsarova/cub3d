@@ -6,7 +6,7 @@
 /*   By: petya <petya@student.42.fr>                  +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/07/23 15:21:24 by pekatsar      #+#    #+#                 */
-/*   Updated: 2025/08/07 14:28:56 by pekatsar      ########   odam.nl         */
+/*   Updated: 2025/08/08 13:30:34 by pekatsar      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,7 @@ int	init_data(t_data *d, t_pl *pl)
 		write(2, "Map initialization failed\n", 26);
 		return (1);
 	}
-	d->needs_redraw = 0;
+	//d->needs_redraw = 0;
 	d->pl = pl;
 	if (place_pl(d))
 		return (1);

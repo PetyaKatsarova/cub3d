@@ -19,7 +19,7 @@
 # define PL_SIZE 			7 // ? i draw it 5px diameter....
 # define STEP_SIZE 			5 //Controls: How far player moves per frame with WASD; Effect: Player moves 5 pixels per keypress
 //Usage: pl->x += STEP_SIZE when moving
-# define SLOW_MOVE			1 //0.1
+# define SLOW_MOVE			0.3
 #define	 ANGLE_ROT			0.2
 # define RAYS_NUM			30
 # define DEG_RAD			0.0174533 // one degree in radians
@@ -111,7 +111,6 @@ typedef struct s_data {
 	int			bpp; // bits per pixel
 	int			line_length;
 	int			endian;
-	int			needs_redraw;
 	char		**map; // or int?
 	t_pl 		*pl;
 	t_btns		btns;
