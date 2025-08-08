@@ -6,7 +6,7 @@
 /*   By: petya <petya@student.42.fr>                  +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/07/23 15:21:24 by pekatsar      #+#    #+#                 */
-/*   Updated: 2025/08/08 16:07:33 by pekatsar      ########   odam.nl         */
+/*   Updated: 2025/08/08 16:51:24 by pekatsar      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ int	init_data(t_data *d, t_pl *pl, t_game_configs *game_configs)
 	d->pl = pl;
 	d->map_cols = game_configs->map_cols;
 	d->map_rows = game_configs->map_rows;
+	init_pl(pl, game_configs);
 	init_btns(&d->btns);
 	init_textures(d, game_configs);
 	return (0);

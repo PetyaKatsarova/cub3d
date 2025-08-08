@@ -69,5 +69,6 @@
     "cub3d.h": "c",
     "mlx.h": "c"
   },
-"cmake.sourceDirectory": "/home/pekatsar/sgoinfre/cub3d/cub3/lib/MLX42"
+"cmake.sourceDirectory": "/home/pekatsar/sgoinfre/cub3d/cub3/lib/MLX42",
+"cmake.ignoreCMakeListsMissing": true
 }

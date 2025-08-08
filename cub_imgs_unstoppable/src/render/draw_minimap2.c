@@ -6,7 +6,7 @@
 /*   By: pekatsar <pekatsar@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/08/06 16:56:33 by pekatsar      #+#    #+#                 */
-/*   Updated: 2025/08/08 16:05:19 by pekatsar      ########   odam.nl         */
+/*   Updated: 2025/08/08 17:23:27 by pekatsar      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ void	draw_minimap(t_data *d)
 	params.offset_x = WIN_WIDTH - MINIMAP_SIZE - 10;
 	params.offset_y = 10;
 	params.scale = (float)MINIMAP_SIZE / (d->map_cols * TILE_SIZE);
-	draw_minimap_background(d, params.offset_x, params.offset_y);
+	draw_minimap_background(d, params.offset_x, params.offset_y, &params);
 	draw_minimap_walls(d, params.offset_x, params.offset_y, params.scale);
 	player_x = params.offset_x + (d->pl->x * params.scale);
 	player_y = params.offset_y + (d->pl->y * params.scale);

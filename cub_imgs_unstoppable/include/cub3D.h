@@ -14,14 +14,13 @@
 // rows and columns, will be taken from the map
 # define WIN_WIDTH      	1600 //800
 # define WIN_HEIGHT     	1000 // 600
-//# define COLS				8 // map with: hardcoded, todo: use form parser!!
-//# define ROWS				8 // map height
+# define SLOW_MOVEMENT		08
 # define TILE_SIZE  		64 // px width and height: balanced performance, fixed
 # define MINIMAP_SIZE		350
 # define PL_SIZE 			7 // ? i draw it 5px diameter....
 # define STEP_SIZE 			5 //Controls: How far player moves per frame with WASD; Effect: Player moves 5 pixels per keypress
 //Usage: pl->x += STEP_SIZE when moving
-# define SLOW_MOVE			1 //0.1
+# define SLOW_MOVE			0.7 //0.1
 #define	 ANGLE_ROT			0.2
 # define RAYS_NUM			30
 # define DEG_RAD			0.0174533 // one degree in radians
@@ -33,6 +32,7 @@
 # define BACKGROUND_COLOR 	0xD3D3D3
 # define PURPLE_RAY			0x800080
 # define LIME_YELLOW   		0xBFFF00 
+# define BLACK				0x000000
 
 # define KEY_LEFT   		65361
 # define KEY_RIGHT  		65363
@@ -115,7 +115,6 @@ typedef struct s_data {
 	int			endian;
 	int			map_cols;
 	int			map_rows;
-	// int			needs_redraw;
 	char		**map; // or int?
 	t_pl 		*pl;
 	t_btns		btns;
@@ -134,7 +133,7 @@ void 		vertical_check(t_ray *ray, t_data *d, float *vx, float *vy);
 void		draw_maze(t_data *d);
 void		draw_line(t_data *data, t_line_info *line_info);
 double 		normalize_angle(double angle);
-void		draw_minimap_background(t_data *d, int offset_x, int offset_y);
+void		draw_minimap_background(t_data *d, int offset_x, int offset_y, t_minimap_params *params);
 void		draw_minimap_walls(t_data *d, int offset_x, int offset_y, float scale);
 void 		draw_minimap(t_data *d);
 int			render_frame(t_data *data);

@@ -6,7 +6,7 @@
 /*   By: pekatsar <pekatsar@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/08/01 14:51:30 by pekatsar      #+#    #+#                 */
-/*   Updated: 2025/08/08 16:12:39 by pekatsar      ########   odam.nl         */
+/*   Updated: 2025/08/08 17:21:22 by pekatsar      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,16 +71,21 @@ double normalize_angle(double angle)
 	Positioned at top-right corner: offset_x, offset_y
 	Fills every pixel with BACKGROUND_COLOR (gray)
 */
-void	draw_minimap_background(t_data *d, int offset_x, int offset_y)
+void	draw_minimap_background(t_data *d, int offset_x, int offset_y, t_minimap_params *params)
 {
 	int	x;
 	int	y;
 
 	y = 0;
-	while (y < MINIMAP_SIZE)
+	//while (y < MINIMAP_SIZE)
+	//{
+	//	x = 0;
+	//	while (x < MINIMAP_SIZE)
+	// TODO; NEED A CAP IF SUPER BIG MAP: 350???
+	while (y < d->map_rows * TILE_SIZE * params->scale)
 	{
 		x = 0;
-		while (x < MINIMAP_SIZE)
+		while (x < d->map_cols * TILE_SIZE * params->scale)
 		{
 			set_px(d, offset_x + x, offset_y + y, BACKGROUND_COLOR);
 			x++;
@@ -98,10 +103,10 @@ static void	draw_wall_block(t_data *d, t_minimap_params *params)
 	int	y;
 
 	y = params->start_y;
-	while (y < params->end_y && y < params->offset_y + MINIMAP_SIZE)
+	while (y < params->end_y && y < params->offset_y + d->map_rows * TILE_SIZE)
 	{
 		x = params->start_x;
-		while (x < params->end_x && x < params->offset_x + MINIMAP_SIZE)
+		while (x < params->end_x && x < params->offset_x + d->map_cols * TILE_SIZE)
 		{
 			if (x >= params->offset_x && y >= params->offset_y)
 				set_px(d, x, y, WALL_COLOR);
