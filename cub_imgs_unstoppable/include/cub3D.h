@@ -25,7 +25,7 @@
 # define DEG_RAD			0.0174533 // one degree in radians
 
 # define WALL_COLOR 		0x800080 // purple 0xBFFF55  // lime
-# define EAST_COLOR			0xFFFF00 // yellow 
+# define FLOOR_COLOR 		0xB48E8E // favorite
 # define CEILING_COLOR  	0x87CEEB // sky blue
 # define PL_COLOR    		0x0d0832ff // dark blue
 # define BACKGROUND_COLOR 	0xD3D3D3
@@ -47,7 +47,8 @@ typedef struct  s_btns
 } t_btns;
 
 typedef struct s_wall_info {
-    float   distance;
+    float   distance; // corrected to compensate fish eye
+	//float	raw_dist; // b4 calc for fish eye effect
     float   ray_angle;
     int     hit_vertical;
     float   hit_x;

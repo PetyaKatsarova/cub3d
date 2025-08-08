@@ -122,6 +122,7 @@ static void draw_3d_wall_slice(t_data *d, int x, t_wall_info *wall)
     int			tex_x;
     int			tex_y;
 
+	// fish eye
     wall->distance = wall->distance * cos(wall->ray_angle - d->pl->angle);
     lineH = (TILE_SIZE * WIN_HEIGHT / 2) / wall->distance;
     wall_top = (WIN_HEIGHT / 2) - (lineH / 2);
@@ -168,12 +169,11 @@ static void draw_3d_wall_slice(t_data *d, int x, t_wall_info *wall)
 
 static void draw_3d_map(t_data *d, t_ray *ray) 
 {
-    //ray->angle = d->pl->angle - (30.0 * DEG_RAD);
 	ray->angle = d->pl->angle - (30.0 * DEG_RAD);
     
     if (ray->angle < 0)
         ray->angle += 2 * M_PI;
-    else if (ray->angle > 2 * M_PI) // wiht or witout else?
+    else if (ray->angle > 2 * M_PI)
         ray->angle -= 2 * M_PI;
 
     for (int x = 0; x < WIN_WIDTH; x++)
@@ -208,6 +208,7 @@ static void draw_3d_map(t_data *d, t_ray *ray)
         // Replace the function call with:
 		t_wall_info wall;
 		wall.distance = distance;
+		//wall.raw_dist = distance;
 		wall.ray_angle = ray->angle;
 		wall.hit_vertical = hit_vertical;
 		wall.hit_x = ray->x;

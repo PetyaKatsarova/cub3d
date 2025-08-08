@@ -7,19 +7,19 @@ HEADERS  := -I./include -I$(LIBMLX)/include
 LIBS     := -L$(LIBMLX) -lmlx -lX11 -lXext -lm
 
 SRC      := src/main.c \
-		   src/init_data.c \
-		   src/init_player_btns.c \
-		   src/init_ray.c \
-		   src/draw_maze.c \
-		   src/draw_minimap.c \
-		   src/draw_minimap2.c \
-		   src/player_control.c \
-		   src/draw_3d_map.c \
-		   src/manipulate_textures.c \
-		   src/keys_manip.c \
+		   src/render/init_data.c \
+		   src/render/init_player_btns.c \
+		   src/render/init_ray.c \
+		   src/render/draw_maze.c \
+		   src/render/draw_minimap.c \
+		   src/render/draw_minimap2.c \
+		   src/render/player_control.c \
+		   src/render/draw_3d_map.c \
+		   src/render/manipulate_textures.c \
+		   src/render/keys_manip.c \
 
 OBJDIR   := obj
-OBJ      := $(SRC:src/%.c=$(OBJDIR)/%.o)
+OBJ      := $(SRC:%.c=%.o)
 
 
 # Colors
@@ -37,7 +37,7 @@ $(LIBMLX)/libmlx.a:
 	@make -C $(LIBMLX)
 
 # Compile with dependency on header files and Makefile
-$(OBJDIR)/%.o: src/%.c $(HEADER_FILES) Makefile | $(OBJDIR)
+%.o: %.c $(HEADER_FILES) Makefile
 	@$(CC) $(CFLAGS) -I/usr/include -Imlx_linux -O3 -c $< -o $@ $(HEADERS)
 	@echo "$(GREEN)Compiled$(RESET) $<"
 
@@ -50,11 +50,9 @@ $(NAME): $(LIBMLX)/libmlx.a $(OBJ) Makefile
 	@echo "$(GREEN)Build successful!$(RESET)"
 
 clean:
-	@if [ -d "$(OBJDIR)" ]; then \
-		rm -rf $(OBJDIR) && echo "$(GREEN)Object files cleaned$(RESET)"; \
-	else \
-		echo "$(GREEN)Object files already clean$(RESET)"; \
-	fi
+
+		rm -rf $(OBJ) && echo "$(GREEN)Object files cleaned$(RESET)"; \
+
 	@make -C $(LIBMLX) clean > /dev/null 2>&1 || true
 	@echo "$(GREEN)MLX library cleaned$(RESET)"
 
