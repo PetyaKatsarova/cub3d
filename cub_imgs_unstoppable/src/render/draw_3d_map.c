@@ -140,7 +140,7 @@ static void draw_3d_wall_slice(t_data *d, int x, t_wall_info *wall)
             wall_texture = &d->south_tex;
     }
     y = 0;
-    // while (y < WIN_HEIGHT)
+    while (y < WIN_HEIGHT)
     {
         if (y < wall_top)
             color = CEILING_COLOR;
