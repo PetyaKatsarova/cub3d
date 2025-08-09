@@ -14,22 +14,20 @@
 
 int check_collision(t_data *d, double new_x, double new_y)
 {
-    float buffer = 4.0; // Stop 4 pixels before wall: hardcoded: todo: in header
+    float buffer = 10.0; // hardcoded: todo: in header
     
-    // Check multiple points around the player position with buffer
-    int STEP_SIZE_x1 = (int)((new_x - buffer) / TILE_SIZE);
-    int STEP_SIZE_y1 = (int)((new_y - buffer) / TILE_SIZE);
-    int STEP_SIZE_x2 = (int)((new_x + buffer) / TILE_SIZE);
-    int STEP_SIZE_y2 = (int)((new_y + buffer) / TILE_SIZE);
+    int step_x_left = (int)((new_x - buffer) / TILE_SIZE);
+    int step_y_up = (int)((new_y - buffer) / TILE_SIZE); // start from 0,0: top left
+    int step_x_right = (int)((new_x + buffer) / TILE_SIZE);
+    int step_y_down = (int)((new_y + buffer) / TILE_SIZE);
 
-    // Check bounds with buffer
-    if (STEP_SIZE_x1 < 0 || STEP_SIZE_x2 >= d->map_cols || STEP_SIZE_y1 < 0 || STEP_SIZE_y2 >= d->map_rows)
-        return 1; // Out of bounds
+    if (step_x_left < 0 || step_x_right >= d->map_cols || step_y_up < 0 || step_y_down >= d->map_rows)
+        return 1;
 
-    if (d->map[STEP_SIZE_y1][STEP_SIZE_x1] == '1' || 
-        d->map[STEP_SIZE_y1][STEP_SIZE_x2] == '1' ||
-        d->map[STEP_SIZE_y2][STEP_SIZE_x1] == '1' ||
-        d->map[STEP_SIZE_y2][STEP_SIZE_x2] == '1')
+    if (d->map[step_y_up][step_x_left] == '1' || 
+        d->map[step_y_up][step_x_right] == '1' ||
+        d->map[step_y_down][step_x_left] == '1' ||
+        d->map[step_y_down][step_x_right] == '1')
         return 1;
 
     return 0;

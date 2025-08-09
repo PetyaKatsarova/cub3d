@@ -230,13 +230,10 @@ static void draw_3d_map(t_data *d, t_ray *ray)
 
 int render_frame(t_data *d)
 {
-	pl_control(d);
-    //// Clear screen
-    //for (int i = 0; i < WIN_WIDTH * WIN_HEIGHT; i++)
-    //    ((uint32_t*)d->addr)[i] = BLACK;
-
     t_ray ray;
+
     ray.angle = d->pl->angle;
+    pl_control(d);
     draw_3d_map(d, &ray);
     draw_minimap(d);
     mlx_put_image_to_window(d->mlx, d->win, d->img, 0, 0);   

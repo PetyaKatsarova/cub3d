@@ -1,24 +1,14 @@
 ====================================================
-b4 starting, do:
+b4 starting, do: this is for minilibx library
 sudo apt install cmake libglfw3-dev libgl1-mesa-dev xorg build-essential
 Install X server (VcXsrv for Windows) and set $DISPLAY.
-
--- now using minilibx_linux ----
-b4 make command need to compile the mlx(minilibx) library:
-cd lib/minilibx_linux
-cmake -B build
-cmake --build build
-
-;; b4 make command need to compile the mlx42 library:
-;; cd lib/MLX42
-;; cmake -B build
-;; cmake --build build
-===================================================
+for display:
+export DISPLAY=:0
+==============================
 mxl42:
 https://github.com/codam-coding-college/MLX42/wiki
 
 ===================================================
-
 
 Program name cub3D
 Turn in files All your files
