@@ -1,6 +1,6 @@
-NO ./assets/textures/no_texture
-WE ./assets/textures/we_texture
-EA ./assets/textures/ea_texture
+NO ./assets/textures/north_wall.xpm
+WE ./assets/textures/west_wall.xpm
+EA ./assets/textures/east_wall.xpm
 
 
 F 220,100,0

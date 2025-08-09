@@ -1,19 +1,19 @@
  F	220, 100,	0
 
-	NO													./assets/textures/no_texture                               
+	NO													./assets/textures/north_wall.xpm                               
 
-                                                    SO	./assets/textures/so_texture								
-
-
-WE 	 	 	 	 	 	 assets/textures/we_texture 
+                                                    SO	assets/textures/south_wall.xpm								
 
 
-
-EA    assets/textures/ea_texture 	 	 	 	 	 	 	 	 	 	 	
+WE 	 	 	 	 	 	 assets/textures/west_wall.xpm 
 
 
 
-					  C 225, 30,                   0								
+EA    ./assets/textures/east_wall.xpm 	 	 	 	 	 	 	 	 	 	 	
+
+
+
+					  C 225, 30,                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     0								
 
         1111111111111111111111111
         1000000000110000000000001
