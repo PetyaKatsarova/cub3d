@@ -11,18 +11,17 @@
 # include <math.h>
 # include <stdio.h> // printf
 
-// rows and columns, will be taken from the map
-# define WIN_WIDTH      	1600 //800
-# define WIN_HEIGHT     	1000 // 600
-# define SLOW_MOVEMENT		08
+# define WIN_WIDTH      	1600
+# define WIN_HEIGHT     	1000
 # define TILE_SIZE  		64 // px width and height: balanced performance, fixed
 # define MINIMAP_SIZE		350
 # define PL_SIZE 			7 // ? i draw it 5px diameter....
 # define STEP_SIZE 			5 //Controls: How far player moves per frame with WASD; Effect: Player moves 5 pixels per keypress
 //Usage: pl->x += STEP_SIZE when moving
-# define SLOW_MOVE			0.7 //0.1
-#define	 ANGLE_ROT			0.2
+# define SLOW_MOVE			0.2
+#define	 ANGLE_ROT			0.1
 # define RAYS_NUM			30
+# define STOP_B4_WALL		10 // px to stop away from wall
 # define DEG_RAD			0.0174533 // one degree in radians
 
 # define WALL_COLOR 		0x800080 // purple 0xBFFF55  // lime

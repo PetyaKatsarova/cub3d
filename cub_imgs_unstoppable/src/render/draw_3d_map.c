@@ -33,7 +33,7 @@ void horizontal_check(t_ray *ray, t_data *d, float *hx, float *hy)
         *hx = (d->pl->y - *hy) * aTan + d->pl->x;
         yo = -TILE_SIZE;
         xo = -yo * aTan;
-    } // OR ADD ELSE: ODNT SEE DIFF??
+    }
     if (ray->angle < M_PI) { // looking down
         *hy = (((int)d->pl->y>>6)<<6) + TILE_SIZE;
         *hx = (d->pl->y - *hy) * aTan + d->pl->x;
@@ -51,14 +51,10 @@ void horizontal_check(t_ray *ray, t_data *d, float *hx, float *hy)
     {
         int map_x = (int)(*hx / TILE_SIZE); 
         int map_y = (int)(*hy / TILE_SIZE);
-		//int map_x = (int)ray->x>>6;
-		//int map_y = (int)ray->y>>6;
         
         if (map_x >= 0 && map_x < d->map_cols && map_y >= 0 && map_y < d->map_rows && 
             d->map[map_y][map_x] == '1')
-        {
-            break; // hit wall - STOP HERE
-        }
+            break;
         else {
             *hx += xo; // STEP_SIZE to next grid line
             *hy += yo;
@@ -99,9 +95,7 @@ void vertical_check(t_ray *ray, t_data *d, float *vx, float *vy)
         
         if (map_x >= 0 && map_x < d->map_cols && map_y >= 0 && map_y < d->map_rows && 
             d->map[map_y][map_x] == '1')
-        {
-            break; // hit wall - STOP HERE
-        }
+            break;
         else {
             *vx += xo; // STEP_SIZE to next grid line
             *vy += yo;
@@ -146,7 +140,7 @@ static void draw_3d_wall_slice(t_data *d, int x, t_wall_info *wall)
             wall_texture = &d->south_tex;
     }
     y = 0;
-    while (y < WIN_HEIGHT)
+    // while (y < WIN_HEIGHT)
     {
         if (y < wall_top)
             color = CEILING_COLOR;
@@ -154,7 +148,18 @@ static void draw_3d_wall_slice(t_data *d, int x, t_wall_info *wall)
             color = FLOOR_COLOR;
         else
         {
+            // gives you the position within the current tile 
             if (wall->hit_vertical)
+            // fmod() is the floating-point modulo operation. It returns the remainder after division.
+            /*
+            A clock has 12 hours, then it starts over at 1.
+            fmod(15, 12) = 3 (because 15 o'clock = 3 o'clock)
+            Each tile is TILE_SIZE pixels wide (64).
+            When you hit a wall at position 150, you need to know:
+            "Which tile am I in?" (tile 2)
+            "How far into that tile?" (22 pixels in)
+            150 ÷ 64 = 2 remainder 22
+            */
                 wall_offset = fmod(wall->hit_y, TILE_SIZE);
             else
                 wall_offset = fmod(wall->hit_x, TILE_SIZE);
@@ -205,7 +210,6 @@ static void draw_3d_map(t_data *d, t_ray *ray)
             hit_vertical = 1; 
         }        
         
-        // Replace the function call with:
 		t_wall_info wall;
 		wall.distance = distance;
 		wall.raw_dist = distance;

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   draw_minimap.c                                     :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: pekatsar <pekatsar@student.codam.nl>         +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2025/08/01 14:51:30 by pekatsar      #+#    #+#                 */
-/*   Updated: 2025/08/08 17:21:22 by pekatsar      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   draw_minimap.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: petya <petya@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/08/01 14:51:30 by pekatsar          #+#    #+#             */
+/*   Updated: 2025/08/09 09:11:15 by petya            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ double normalize_angle(double angle)
 }
 
 /*
-	Creates a MINMAP_SIZE×MINMAP_SIZE pixel rectangle
+	Creates a MINMAP_SIZE×MINMAP_SIZE max or d->map_rows and cols pixel rectangle
 	Positioned at top-right corner: offset_x, offset_y
 	Fills every pixel with BACKGROUND_COLOR (gray)
 */
@@ -77,10 +77,6 @@ void	draw_minimap_background(t_data *d, int offset_x, int offset_y, t_minimap_pa
 	int	y;
 
 	y = 0;
-	//while (y < MINIMAP_SIZE)
-	//{
-	//	x = 0;
-	//	while (x < MINIMAP_SIZE)
 	// TODO; NEED A CAP IF SUPER BIG MAP: 350???
 	while (y < d->map_rows * TILE_SIZE * params->scale)
 	{
