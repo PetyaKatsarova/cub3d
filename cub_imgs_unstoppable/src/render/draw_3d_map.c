@@ -121,10 +121,6 @@ static void draw_3d_wall_slice(t_data *d, int x, t_wall_info *wall)
     lineH = (TILE_SIZE * WIN_HEIGHT / 2) / wall->distance;
     wall_top = (WIN_HEIGHT / 2) - (lineH / 2);
     wall_bottom = (WIN_HEIGHT / 2) + (lineH / 2);
-    if (wall_top < 0)
-        wall_top = 0;
-    if (wall_bottom >= WIN_HEIGHT)
-        wall_bottom = WIN_HEIGHT - 1;
     if (wall->hit_vertical)
     {
         if (wall->ray_angle > M_PI/2 && wall->ray_angle < 3*M_PI/2)
@@ -151,15 +147,6 @@ static void draw_3d_wall_slice(t_data *d, int x, t_wall_info *wall)
             // gives you the position within the current tile 
             if (wall->hit_vertical)
             // fmod() is the floating-point modulo operation. It returns the remainder after division.
-            /*
-            A clock has 12 hours, then it starts over at 1.
-            fmod(15, 12) = 3 (because 15 o'clock = 3 o'clock)
-            Each tile is TILE_SIZE pixels wide (64).
-            When you hit a wall at position 150, you need to know:
-            "Which tile am I in?" (tile 2)
-            "How far into that tile?" (22 pixels in)
-            150 ÷ 64 = 2 remainder 22
-            */
                 wall_offset = fmod(wall->hit_y, TILE_SIZE);
             else
                 wall_offset = fmod(wall->hit_x, TILE_SIZE);

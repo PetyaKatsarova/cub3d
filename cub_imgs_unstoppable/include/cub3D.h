@@ -15,11 +15,11 @@
 # define WIN_HEIGHT     	1000
 # define TILE_SIZE  		64 // px width and height: balanced performance, fixed
 # define MINIMAP_SIZE		350
-# define PL_SIZE 			7 // ? i draw it 5px diameter....
+# define PL_SIZE 			7
 # define STEP_SIZE 			5 //Controls: How far player moves per frame with WASD; Effect: Player moves 5 pixels per keypress
-//Usage: pl->x += STEP_SIZE when moving
-# define SLOW_MOVE			0.3
-#define	 ANGLE_ROT			0.1
+//pl->x += STEP_SIZE when moving
+# define SLOW_MOVE			0.4
+#define	 ANGLE_ROT			0.02 // 0.1
 # define RAYS_NUM			30
 # define STOP_B4_WALL		10 // px to stop away from wall
 # define DEG_RAD			0.0174533 // one degree in radians
@@ -32,6 +32,7 @@
 # define PURPLE_RAY			0x800080
 # define LIME_YELLOW   		0xBFFF00 
 # define BLACK				0x000000
+# define WALL_BUFFER		2.0f // was 10
 
 # define KEY_LEFT   		65361
 # define KEY_RIGHT  		65363
@@ -105,22 +106,23 @@ typedef struct s_minimap_params {
 } t_minimap_params;
 
 typedef struct s_data {
-	void		*mlx;
-	void		*win;
-	void		*img;
-	char		*addr;
-	int			bpp; // bits per pixel
-	int			line_length;
-	int			endian;
-	int			map_cols;
-	int			map_rows;
-	char		**map; // or int?
-	t_pl 		*pl;
-	t_btns		btns;
-	t_texture 	north_tex;
-    t_texture 	south_tex;
-    t_texture 	east_tex;
-	t_texture   west_tex;
+	void			*mlx;
+	void			*win;
+	void			*img;
+	char			*addr;
+	int				bpp; // bits per pixel
+	int				line_length;
+	int				endian;
+	int				map_cols;
+	int				map_rows;
+	char			**map; // or int?
+	t_pl 			*pl;
+	t_game_configs *game_configs;
+	t_btns			btns;
+	t_texture 		north_tex;
+    t_texture 		south_tex;
+    t_texture 		east_tex;
+	t_texture   	west_tex;
 }	t_data;
 
 
@@ -129,7 +131,6 @@ int			init_data(t_data *d, t_pl *pl, t_game_configs *game_configs);
 void 		set_px(t_data *d, int x, int y, uint32_t color);
 void 		horizontal_check(t_ray *ray, t_data *d, float *hx, float *hy);
 void 		vertical_check(t_ray *ray, t_data *d, float *vx, float *vy);
-void		draw_maze(t_data *d);
 void		draw_line(t_data *data, t_line_info *line_info);
 double 		normalize_angle(double angle);
 void		draw_minimap_background(t_data *d, int offset_x, int offset_y, t_minimap_params *params);
@@ -145,5 +146,6 @@ int         load_texture(t_data *d, t_texture *tex, char *path);
 void 		init_textures(t_data *d, t_game_configs *game_configs);
 uint32_t    get_texture_pixel(t_texture *tex, int x, int y);
 void        draw_textured_wall(t_data *d, int screen_x, int wall_height, t_texture *tex);
+int 		clean_mlx(t_data *d);
 
 #endif

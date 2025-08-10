@@ -1,17 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   init_data.c                                        :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: petya <petya@student.42.fr>                  +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2025/07/23 15:21:24 by pekatsar      #+#    #+#                 */
-/*   Updated: 2025/08/08 16:51:24 by pekatsar      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   init_data.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: petya <petya@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/23 15:21:24 by pekatsar          #+#    #+#             */
+/*   Updated: 2025/08/10 16:23:24 by petya            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3D.h"
-#include <string.h> // todo: remove for strdup
 
 int init_btns(t_btns *btns)
 {
@@ -38,13 +37,12 @@ int	init_data(t_data *d, t_pl *pl, t_game_configs *game_configs)
 	d->addr = mlx_get_data_addr(d->img, &d->bpp, &d->line_length, &d->endian);
 	if (!d->addr)
 		return (1);
-		// 
 	d->map = game_configs->map;
 	if (!d->map)
-	{
-		write(2, "Map initialization failed\n", 26);
-		return (1);
-	}
+		return (write(2, "Map initialization failed\n", 26), 1);
+	d->game_configs = game_configs;
+	if (!d->game_configs)
+		return (write(2, "parse initialization failed\n", 28), 1);
 	d->pl = pl;
 	d->map_cols = game_configs->map_cols;
 	d->map_rows = game_configs->map_rows;
@@ -52,4 +50,26 @@ int	init_data(t_data *d, t_pl *pl, t_game_configs *game_configs)
 	init_btns(&d->btns);
 	init_textures(d, game_configs);
 	return (0);
+}
+
+/*
+On Linux, MLX uses X11 (the display server). When you call mlx_init(), it:
+Opens a connection to the X11 display server:d->mlx = mlx_init(); opens X11 display connection on Linux, Allocates display resources
+mlx_destroy_display() closes that X11 connection and frees the display resources.
+*/
+int clean_mlx(t_data *d)
+{
+    if (!d)
+        return (1);
+    if (d->img && d->mlx)
+        mlx_destroy_image(d->mlx, d->img);
+    if (d->win && d->mlx)
+        mlx_destroy_window(d->mlx, d->win);
+    if (d->mlx)
+    {
+        mlx_destroy_display(d->mlx);
+        free(d->mlx);
+        d->mlx = NULL;
+    }
+    return (0);
 }

@@ -8,9 +8,7 @@ LIBS     := -L$(LIBMLX) -lmlx -lX11 -lXext -lm
 
 SRC      := src/main.c \
 		   	src/render/init_data.c \
-		   	src/render/init_player_btns.c \
-		  	src/render/init_ray.c \
-		   	src/render/draw_maze.c \
+		   	src/render/init_pl.c \
 		   	src/render/draw_minimap.c \
 		   	src/render/draw_minimap2.c \
 		   	src/render/player_control.c \

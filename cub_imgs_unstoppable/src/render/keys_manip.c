@@ -6,7 +6,7 @@
 /*   By: petya <petya@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/06 13:05:26 by pekatsar          #+#    #+#             */
-/*   Updated: 2025/08/08 14:35:07 by petya            ###   ########.fr       */
+/*   Updated: 2025/08/10 16:19:00 by petya            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,12 @@
 /* sets button state to pressed */
 int key_press(int keycode, t_data *d)
 {
-    if (keycode == 'q' || keycode == ESC) // ESC or Q
+    if (keycode == 'q' || keycode == ESC)
+    { 
+        clean_mlx(d);
+        free_game_configs(d->game_configs);
         exit(0);
-    
+    }
     if (keycode == 'w')
         d->btns.w = 1;
     else if (keycode == 'a')
