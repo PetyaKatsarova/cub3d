@@ -18,6 +18,7 @@
 # define PL_SIZE 			7
 # define STEP_SIZE 			5 //Controls: How far player moves per frame with WASD; Effect: Player moves 5 pixels per keypress
 //pl->x += STEP_SIZE when moving
+# define VECTOR_LEN			20 // px
 # define SLOW_MOVE			0.4
 #define	 ANGLE_ROT			0.02 // 0.1
 # define RAYS_NUM			30
@@ -140,9 +141,8 @@ typedef struct s_data {
 
 int 		init_pl (t_pl *pl, t_game_configs *game_configs);
 int			init_data(t_data *d, t_pl *pl, t_game_configs *game_configs);
+void		init_ray_params(t_ray_params params);
 void 		set_px(t_data *d, int x, int y, uint32_t color);
-// void 		horizontal_check(t_ray *ray, t_data *d, float *hx, float *hy);
-// void 		vertical_check(t_ray *ray, t_data *d, float *vx, float *vy);
 void 		horizontal_check(t_ray *ray, t_data *d, t_ray_params *ray_params);
 void 		vertical_check(t_ray *ray, t_data *d, t_ray_params *ray_params);
 void		draw_line(t_data *data, t_line_info *line_info);

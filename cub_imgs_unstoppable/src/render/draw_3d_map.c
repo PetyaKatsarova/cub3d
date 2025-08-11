@@ -105,7 +105,7 @@ static void	draw_3d_map(t_data *d, t_ray *ray)
     x = 0;
     while (x < WIN_WIDTH)
     {
-        init_ray_params(&params);
+        init_ray_params(params);
         horizontal_check(ray, d, &params);
         vertical_check(ray, d, &params);
         calculate_distances(d, &params, &hdist, &vdist);

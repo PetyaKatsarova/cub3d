@@ -2,6 +2,11 @@
 
 static void	init_v_ray_left(t_data *d, t_ray *ray, t_ray_params *params)
 {
+    /*
+    When casting rays, if you land exactly on a grid line (e.g., x = 64.0), floating-point rounding can cause the ray to sometimes "see" the wrong tile (the one to the right instead of the one to the left).
+    By subtracting a tiny value (0.0001), you make sure the ray is just inside the tile on the left, so your wall detection is accurate.
+    (d->pl->x / TILE_SIZE) convert from px to tile index and back to px * tilesize
+    */
     params->vx = floor(d->pl->x / TILE_SIZE) * TILE_SIZE - 0.0001;
     params->vy = (d->pl->x - params->vx) * params->v_tan + d->pl->y;
     params->xo = -TILE_SIZE;

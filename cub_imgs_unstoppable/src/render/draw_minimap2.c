@@ -6,7 +6,7 @@
 /*   By: petya <petya@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/06 16:56:33 by pekatsar          #+#    #+#             */
-/*   Updated: 2025/08/11 16:11:31 by petya            ###   ########.fr       */
+/*   Updated: 2025/08/11 18:05:51 by petya            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,15 +32,15 @@ static void	draw_player_dot(t_data *d, int player_x, int player_y, t_minimap_par
 		y++;
 	}
 }
-/* could be refactored, still neat enough, t_line_info struct is needed to pass coding norms(max 4 args in func draw_line) */
+
 static void	draw_player_direction(t_data *d, int player_x, int player_y)
 {
 	t_line_info	line;
 
 	line.x0 = player_x;
 	line.y0 = player_y;
-	line.x1 = player_x + (cos(d->pl->angle) * 20);
-	line.y1 = player_y + (sin(d->pl->angle) * 20);
+	line.x1 = player_x + (cos(d->pl->angle) * VECTOR_LEN);
+	line.y1 = player_y + (sin(d->pl->angle) * VECTOR_LEN);
 	line.color = PURPLE_RAY;
 	draw_line(d, &line);
 }
@@ -55,18 +55,7 @@ static void	draw_single_ray(t_data *d, float ray_angle, t_minimap_params *params
     t_line_info		line;
 
     ray.angle = ray_angle;
-
-    // Initialize ray_params (C89 style)
-    ray_params.h_tan = 0.0;
-    ray_params.v_tan = 0.0;
-    ray_params.dof = 0;
-    ray_params.xo = 0.0;
-    ray_params.yo = 0.0;
-    ray_params.hx = 0.0;
-    ray_params.hy = 0.0;
-    ray_params.vx = 0.0;
-    ray_params.vy = 0.0;
-
+	init_ray_params(ray_params);
     horizontal_check(&ray, d, &ray_params);
     vertical_check(&ray, d, &ray_params);
 

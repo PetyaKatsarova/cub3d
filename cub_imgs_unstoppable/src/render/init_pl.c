@@ -35,15 +35,15 @@ int init_pl (t_pl *pl, t_game_configs *game_configs)
 	return (0);
 }
 
-void	init_ray_params(t_ray_params *params)
+void	init_ray_params(t_ray_params params)
 {
-    params->h_tan = 0.0;
-    params->v_tan = 0.0;
-    params->dof = 0;
-    params->xo = 0.0;
-    params->yo = 0.0;
-    params->hx = 0.0;
-    params->hy = 0.0;
-    params->vx = 0.0;
-    params->vy = 0.0;
+    params.h_tan = 0.0;
+    params.v_tan = 0.0;
+    params.dof = 0;
+    params.xo = 0.0;
+    params.yo = 0.0;
+    params.hx = 0.0;
+    params.hy = 0.0;
+    params.vx = 0.0;
+    params.vy = 0.0;
 }
