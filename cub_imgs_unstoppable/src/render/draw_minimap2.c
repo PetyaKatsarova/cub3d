@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   draw_minimap2.c                                    :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: pekatsar <pekatsar@student.codam.nl>         +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2025/08/06 16:56:33 by pekatsar      #+#    #+#                 */
-/*   Updated: 2025/08/08 17:23:27 by pekatsar      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   draw_minimap2.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: petya <petya@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/08/06 16:56:33 by pekatsar          #+#    #+#             */
+/*   Updated: 2025/08/11 16:11:31 by petya            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,40 +47,56 @@ static void	draw_player_direction(t_data *d, int player_x, int player_y)
 
 static void	draw_single_ray(t_data *d, float ray_angle, t_minimap_params *params, int player_x, int player_y)
 {
-	t_ray		ray;
-	float		hx, hy, vx, vy;
-	float		hdist, vdist;
-	float		hit_x, hit_y;
-	int			ray_end_x, ray_end_y;
-	t_line_info	line;
+    t_ray			ray;
+    t_ray_params	ray_params;
+    float			hdist, vdist;
+    float			hit_x, hit_y;
+    int				ray_end_x, ray_end_y;
+    t_line_info		line;
 
-	ray.angle = ray_angle;
-	horizontal_check(&ray, d, &hx, &hy);
-	vertical_check(&ray, d, &vx, &vy);
-	hdist = sqrt((hx - d->pl->x) * (hx - d->pl->x) + (hy - d->pl->y) * (hy - d->pl->y));
-	vdist = sqrt((vx - d->pl->x) * (vx - d->pl->x) + (vy - d->pl->y) * (vy - d->pl->y));
-	if (hdist < vdist)
-	{
-		hit_x = hx;
-		hit_y = hy;
-	}
-	else
-	{
-		hit_x = vx;
-		hit_y = vy;
-	}
-	ray_end_x = params->offset_x + (hit_x * params->scale);
-	ray_end_y = params->offset_y + (hit_y * params->scale);
-	if (ray_end_x >= params->offset_x && ray_end_x < params->offset_x + MINIMAP_SIZE &&
-		ray_end_y >= params->offset_y && ray_end_y < params->offset_y + MINIMAP_SIZE)
-	{
-		line.x0 = player_x;
-		line.y0 = player_y;
-		line.x1 = ray_end_x;
-		line.y1 = ray_end_y;
-		line.color = PL_COLOR;
-		draw_line(d, &line);
-	}
+    ray.angle = ray_angle;
+
+    // Initialize ray_params (C89 style)
+    ray_params.h_tan = 0.0;
+    ray_params.v_tan = 0.0;
+    ray_params.dof = 0;
+    ray_params.xo = 0.0;
+    ray_params.yo = 0.0;
+    ray_params.hx = 0.0;
+    ray_params.hy = 0.0;
+    ray_params.vx = 0.0;
+    ray_params.vy = 0.0;
+
+    horizontal_check(&ray, d, &ray_params);
+    vertical_check(&ray, d, &ray_params);
+
+    hdist = sqrt((ray_params.hx - d->pl->x) * (ray_params.hx - d->pl->x) +
+                 (ray_params.hy - d->pl->y) * (ray_params.hy - d->pl->y));
+    vdist = sqrt((ray_params.vx - d->pl->x) * (ray_params.vx - d->pl->x) +
+                 (ray_params.vy - d->pl->y) * (ray_params.vy - d->pl->y));
+
+    if (hdist < vdist)
+    {
+        hit_x = ray_params.hx;
+        hit_y = ray_params.hy;
+    }
+    else
+    {
+        hit_x = ray_params.vx;
+        hit_y = ray_params.vy;
+    }
+    ray_end_x = params->offset_x + (hit_x * params->scale);
+    ray_end_y = params->offset_y + (hit_y * params->scale);
+    if (ray_end_x >= params->offset_x && ray_end_x < params->offset_x + MINIMAP_SIZE &&
+        ray_end_y >= params->offset_y && ray_end_y < params->offset_y + MINIMAP_SIZE)
+    {
+        line.x0 = player_x;
+        line.y0 = player_y;
+        line.x1 = ray_end_x;
+        line.y1 = ray_end_y;
+        line.color = PL_COLOR;
+        draw_line(d, &line);
+    }
 }
 
 static void	draw_minimap_rays(t_data *d, t_minimap_params *params, int player_x, int player_y)

@@ -22,86 +22,18 @@ void set_px(t_data *d, int x, int y, uint32_t color)
 	}
 }
 
-void horizontal_check(t_ray *ray, t_data *d, float *hx, float *hy)
+static void	calculate_distances(t_data *d, t_ray_params *params, float *hdist, float *vdist)
 {
-    float aTan = -1/tan(ray->angle);
-    int dof = 0;
-    float xo, yo; // STEP_SIZE offsets
+    *hdist = sqrt((params->hx - d->pl->x) * (params->hx - d->pl->x) 
+        + (params->hy - d->pl->y) * (params->hy - d->pl->y));
+    *vdist = sqrt((params->vx - d->pl->x) * (params->vx - d->pl->x) 
+        + (params->vy - d->pl->y) * (params->vy - d->pl->y));
     
-    if (ray->angle > M_PI) { // looking up
-        *hy = (((int)d->pl->y>>6)<<6) - 0.0001;
-        *hx = (d->pl->y - *hy) * aTan + d->pl->x;
-        yo = -TILE_SIZE;
-        xo = -yo * aTan;
-    }
-    if (ray->angle < M_PI) { // looking down
-        *hy = (((int)d->pl->y>>6)<<6) + TILE_SIZE;
-        *hx = (d->pl->y - *hy) * aTan + d->pl->x;
-        yo = TILE_SIZE;
-        xo = -yo * aTan;
-    }
-    if (ray->angle == 0 || ray->angle == M_PI ){ // looking straight left/right
-        *hx = d->pl->x;
-        *hy = d->pl->y;
-        dof = d->map_cols; // skip loop
-    }
-    
-    // STEP_SIZE through horizontal grid lines
-    while (dof < d->map_cols)
-    {
-        int map_x = (int)(*hx / TILE_SIZE); 
-        int map_y = (int)(*hy / TILE_SIZE);
-        
-        if (map_x >= 0 && map_x < d->map_cols && map_y >= 0 && map_y < d->map_rows && 
-            d->map[map_y][map_x] == '1')
-            break;
-        else {
-            *hx += xo; // STEP_SIZE to next grid line
-            *hy += yo;
-            dof++;
-        }
-    }
-}
-
-void vertical_check(t_ray *ray, t_data *d, float *vx, float *vy)
-{
-    float nTan = -tan(ray->angle);
-    int dof = 0;
-    float xo, yo; // STEP_SIZE offsets
-    
-    if (ray->angle > M_PI/2 && ray->angle < 3*M_PI/2) { // looking left
-        *vx = (((int)d->pl->x>>6)<<6) - 0.0001;
-        *vy = (d->pl->x - *vx) * nTan + d->pl->y;
-        xo = -TILE_SIZE;
-        yo = -xo * nTan;
-    }
-    else if (ray->angle < M_PI/2 || ray->angle > 3*M_PI/2) { // looking right
-        *vx = (((int)d->pl->x>>6)<<6) + TILE_SIZE;
-        *vy = (d->pl->x - *vx) * nTan + d->pl->y;
-        xo = TILE_SIZE;
-        yo = -xo * nTan;
-    }
-    else { // looking straight up/down
-        *vx = d->pl->x;
-        *vy = d->pl->y;
-        dof = d->map_cols; // skip loop
-    }
-    
-    // STEP_SIZE through vertical grid lines
-    while (dof < d->map_cols)
-    {
-        int map_x = (int)floor(*vx / TILE_SIZE);
-        int map_y = (int)floor(*vy / TILE_SIZE);
-        
-        if (map_x >= 0 && map_x < d->map_cols && map_y >= 0 && map_y < d->map_rows && 
-            d->map[map_y][map_x] == '1')
-            break;
-        else {
-            *vx += xo; // STEP_SIZE to next grid line
-            *vy += yo;
-            dof++;
-        }
-    }
+    // Safety checks for invalid distances
+    if (*hdist <= 1.0 || *hdist > 10000)
+        *hdist = 10000;
+    if (*vdist <= 1.0 || *vdist > 10000)
+        *vdist = 10000;
 }
 
 static void draw_3d_wall_slice(t_data *d, int x, t_wall_info *wall)
@@ -116,7 +48,7 @@ static void draw_3d_wall_slice(t_data *d, int x, t_wall_info *wall)
     int			tex_x;
     int			tex_y;
 
-	// fish eye
+    // fish eye correction
     wall->distance = wall->distance * cos(wall->ray_angle - d->pl->angle);
     lineH = (TILE_SIZE * WIN_HEIGHT / 2) / wall->distance;
     wall_top = (WIN_HEIGHT / 2) - (lineH / 2);
@@ -144,9 +76,7 @@ static void draw_3d_wall_slice(t_data *d, int x, t_wall_info *wall)
             color = FLOOR_COLOR;
         else
         {
-            // gives you the position within the current tile 
             if (wall->hit_vertical)
-            // fmod() is the floating-point modulo operation. It returns the remainder after division.
                 wall_offset = fmod(wall->hit_y, TILE_SIZE);
             else
                 wall_offset = fmod(wall->hit_x, TILE_SIZE);
@@ -159,59 +89,51 @@ static void draw_3d_wall_slice(t_data *d, int x, t_wall_info *wall)
     }
 }
 
-static void draw_3d_map(t_data *d, t_ray *ray) 
+static void	draw_3d_map(t_data *d, t_ray *ray)
 {
-	ray->angle = d->pl->angle - (30.0 * DEG_RAD);
-    
+    t_ray_params	params;
+    float			hdist, vdist;
+    t_wall_info		wall;
+    int				x;
+
+    ray->angle = d->pl->angle - (30.0 * DEG_RAD);
     if (ray->angle < 0)
         ray->angle += 2 * M_PI;
     else if (ray->angle > 2 * M_PI)
         ray->angle -= 2 * M_PI;
-
-    for (int x = 0; x < WIN_WIDTH; x++)
+    
+    x = 0;
+    while (x < WIN_WIDTH)
     {
-        float hx, hy;
-        float vx, vy;
-        
-        horizontal_check(ray, d, &hx, &hy);
-        vertical_check(ray, d, &vx, &vy);
-        
-        float hdist = sqrt((hx - d->pl->x) * (hx - d->pl->x) + (hy - d->pl->y) * (hy - d->pl->y));
-        float vdist = sqrt((vx - d->pl->x) * (vx - d->pl->x) + (vy - d->pl->y) * (vy - d->pl->y));
-        
-        float distance;
-        int hit_vertical;
+        init_ray_params(&params);
+        horizontal_check(ray, d, &params);
+        vertical_check(ray, d, &params);
+        calculate_distances(d, &params, &hdist, &vdist);
         
         if (hdist < vdist)
         {
-            ray->x = hx;
-            ray->y = hy;
-            distance = hdist;
-            hit_vertical = 0;
+            wall.distance = hdist;
+            wall.hit_x = params.hx;
+            wall.hit_y = params.hy;
+            wall.hit_vertical = 0;
         }
         else
         {
-            ray->x = vx;
-            ray->y = vy;
-            distance = vdist;
-            hit_vertical = 1; 
-        }        
+            wall.distance = vdist;
+            wall.hit_x = params.vx;
+            wall.hit_y = params.vy;
+            wall.hit_vertical = 1;
+        }
+        wall.raw_dist = wall.distance;
+        wall.ray_angle = ray->angle;
+        draw_3d_wall_slice(d, x, &wall);
         
-		t_wall_info wall;
-		wall.distance = distance;
-		wall.raw_dist = distance;
-		wall.ray_angle = ray->angle;
-		wall.hit_vertical = hit_vertical;
-		wall.hit_x = ray->x;
-		wall.hit_y = ray->y;
-		draw_3d_wall_slice(d, x, &wall);
-
         ray->angle += (60.0 * DEG_RAD) / WIN_WIDTH;
-        
         if (ray->angle < 0)
             ray->angle += 2 * M_PI;
         if (ray->angle > 2 * M_PI)
             ray->angle -= 2 * M_PI;
+        x++;
     }
 }
 
