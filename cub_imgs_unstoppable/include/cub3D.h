@@ -161,5 +161,8 @@ void 		init_textures(t_data *d, t_game_configs *game_configs);
 uint32_t    get_texture_pixel(t_texture *tex, int x, int y);
 void        draw_textured_wall(t_data *d, int screen_x, int wall_height, t_texture *tex);
 int 		clean_mlx(t_data *d);
-
+// src/render/draw_minimap2.c && 3
+void		draw_single_ray(t_data *d, float ray_angle, t_minimap_params *params, int player_x, int player_y);
+void		draw_player_dot(t_data *d, int player_x, int player_y, t_minimap_params *params);
+void		draw_player_direction(t_data *d, int player_x, int player_y);
 #endif
