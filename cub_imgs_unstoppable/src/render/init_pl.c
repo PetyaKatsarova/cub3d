@@ -14,8 +14,6 @@
 
 int init_pl (t_pl *pl, t_game_configs *game_configs)
 {
-	// pl->x = game_configs->player_start_col * TILE_SIZE;
-	// pl->y = game_configs->player_start_row * TILE_SIZE;
 	pl->x = game_configs->player_start_col * TILE_SIZE + (TILE_SIZE / 2);
     pl->y = game_configs->player_start_row * TILE_SIZE + (TILE_SIZE / 2);
 	char dir = game_configs->player_start_orientation;

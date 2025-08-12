@@ -12,16 +12,6 @@
 
 #include "../../include/cub3D.h"
 
-void set_px(t_data *d, int x, int y, uint32_t color)
-{
-	if (x >= 0 && x < WIN_WIDTH && y >= 0 && y < WIN_HEIGHT)
-	{
-		uint32_t *pixels = (uint32_t *)d->addr;
-		int index = y * (d->line_length / 4) + x;
-		pixels[index] = color;
-	}
-}
-
 void	calculate_distances(t_data *d, t_ray_params *params, float *hdist, float *vdist)
 {
     *hdist = sqrt((params->hx - d->pl->x) * (params->hx - d->pl->x) 
@@ -62,11 +52,18 @@ static t_texture *set_texture(t_wall_info *wall, t_data *d)
     }
 }
 
+static float set_wall_offset(t_wall_info *wall)
+{
+    if (wall->hit_vertical)
+        return fmod(wall->hit_y, TILE_SIZE);
+    else
+        return fmod(wall->hit_x, TILE_SIZE);
+}
+
 void draw_3d_wall_slice(t_data *d, int x, t_wall_info *wall)
 {
     t_texture	*wall_texture;
     int			y;
-    float		wall_offset;
     int			tex_x;
     int			tex_y;
 
@@ -81,11 +78,8 @@ void draw_3d_wall_slice(t_data *d, int x, t_wall_info *wall)
             wall->color = FLOOR_COLOR;
         else
         {
-            if (wall->hit_vertical)
-                wall_offset = fmod(wall->hit_y, TILE_SIZE);
-            else
-                wall_offset = fmod(wall->hit_x, TILE_SIZE);
-            tex_x = (int)((wall_offset / TILE_SIZE) * wall_texture->width);
+            wall->wall_offset = set_wall_offset(wall);
+            tex_x = (int)((wall->wall_offset / TILE_SIZE) * wall_texture->width);
             tex_y = ((y - wall->wall_top) * wall_texture->height) / (wall->wall_bottom - wall->wall_top);
             wall->color = get_texture_pixel(wall_texture, tex_x, tex_y);
         }

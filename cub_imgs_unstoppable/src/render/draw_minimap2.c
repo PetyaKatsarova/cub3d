@@ -6,7 +6,7 @@
 /*   By: petya <petya@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/06 16:56:33 by pekatsar          #+#    #+#             */
-/*   Updated: 2025/08/11 18:23:58 by petya            ###   ########.fr       */
+/*   Updated: 2025/08/12 17:26:03 by petya            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	draw_player_dot(t_data *d, int player_x, int player_y, t_minimap_params *pa
 		{
 			if (player_x + x >= params->offset_x && player_x + x < params->offset_x + MINIMAP_SIZE &&
 				player_y + y >= params->offset_y && player_y + y < params->offset_y + MINIMAP_SIZE)
-				set_px(d, player_x + x, player_y + y, LIME_YELLOW);
+				set_px(d, player_x + x, player_y + y, PL_COLOR);
 			x++;
 		}
 		y++;

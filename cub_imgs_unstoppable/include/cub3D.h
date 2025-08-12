@@ -20,7 +20,7 @@
 //pl->x += STEP_SIZE when moving
 # define VECTOR_LEN			20 // px
 # define SLOW_MOVE			0.4
-#define	 ANGLE_ROT			0.02 // 0.1
+#define	 ANGLE_ROT			0.1 // 0.1
 # define RAYS_NUM			30
 # define STOP_B4_WALL		10 // px to stop away from wall
 # define DEG_RAD			0.0174533 // one degree in radians
@@ -31,7 +31,7 @@
 # define PL_COLOR    		0x0d0832ff // dark blue
 # define BACKGROUND_COLOR 	0xD3D3D3
 # define PURPLE_RAY			0x800080
-# define LIME_YELLOW   		0xBFFF00 
+// # define LIME_YELLOW   		0xBFFF00 
 # define BLACK				0x000000
 # define WALL_BUFFER		10
 
@@ -56,6 +56,7 @@ typedef struct s_wall_info {
     float   	hit_x;
     float   	hit_y;
 	float		line_h;
+	float		wall_offset;
 	int			wall_top;
 	int			wall_bottom;
 	uint32_t	color;
