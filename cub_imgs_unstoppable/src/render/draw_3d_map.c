@@ -22,7 +22,7 @@ void set_px(t_data *d, int x, int y, uint32_t color)
 	}
 }
 
-static void	calculate_distances(t_data *d, t_ray_params *params, float *hdist, float *vdist)
+void	calculate_distances(t_data *d, t_ray_params *params, float *hdist, float *vdist)
 {
     *hdist = sqrt((params->hx - d->pl->x) * (params->hx - d->pl->x) 
         + (params->hy - d->pl->y) * (params->hy - d->pl->y));
@@ -36,44 +36,49 @@ static void	calculate_distances(t_data *d, t_ray_params *params, float *hdist, f
         *vdist = 10000;
 }
 
-static void draw_3d_wall_slice(t_data *d, int x, t_wall_info *wall)
+static void setup_wall_info(t_wall_info *wall, t_data *d)
 {
-    float		lineH;
-    int			wall_top;
-    int			wall_bottom;
-    t_texture	*wall_texture;
-    int			y;
-    uint32_t	color;
-    float		wall_offset;
-    int			tex_x;
-    int			tex_y;
-
-    // fish eye correction
     wall->distance = wall->distance * cos(wall->ray_angle - d->pl->angle);
-    lineH = (TILE_SIZE * WIN_HEIGHT / 2) / wall->distance;
-    wall_top = (WIN_HEIGHT / 2) - (lineH / 2);
-    wall_bottom = (WIN_HEIGHT / 2) + (lineH / 2);
+    wall->line_h = (TILE_SIZE * WIN_HEIGHT / 2) / wall->distance;
+    wall->wall_top = (WIN_HEIGHT / 2) - (wall->line_h / 2);
+    wall->wall_bottom = (WIN_HEIGHT / 2) + (wall->line_h / 2);
+}
+
+static t_texture *set_texture(t_wall_info *wall, t_data *d)
+{
     if (wall->hit_vertical)
     {
         if (wall->ray_angle > M_PI/2 && wall->ray_angle < 3*M_PI/2)
-            wall_texture = &d->west_tex;
+            return (&d->west_tex);
         else
-            wall_texture = &d->east_tex;
+            return (&d->east_tex);
     }
     else
     {
         if (wall->ray_angle > M_PI)
-            wall_texture = &d->north_tex;
+            return (&d->north_tex);
         else
-            wall_texture = &d->south_tex;
+            return (&d->south_tex);
     }
+}
+
+void draw_3d_wall_slice(t_data *d, int x, t_wall_info *wall)
+{
+    t_texture	*wall_texture;
+    int			y;
+    float		wall_offset;
+    int			tex_x;
+    int			tex_y;
+
+    setup_wall_info(wall, d);
+    wall_texture = set_texture(wall, d);
     y = 0;
     while (y < WIN_HEIGHT)
     {
-        if (y < wall_top)
-            color = CEILING_COLOR;
-        else if (y > wall_bottom)
-            color = FLOOR_COLOR;
+        if (y < wall->wall_top)
+            wall->color = CEILING_COLOR;
+        else if (y > wall->wall_bottom)
+            wall->color = FLOOR_COLOR;
         else
         {
             if (wall->hit_vertical)
@@ -81,70 +86,10 @@ static void draw_3d_wall_slice(t_data *d, int x, t_wall_info *wall)
             else
                 wall_offset = fmod(wall->hit_x, TILE_SIZE);
             tex_x = (int)((wall_offset / TILE_SIZE) * wall_texture->width);
-            tex_y = ((y - wall_top) * wall_texture->height) / (wall_bottom - wall_top);
-            color = get_texture_pixel(wall_texture, tex_x, tex_y);
+            tex_y = ((y - wall->wall_top) * wall_texture->height) / (wall->wall_bottom - wall->wall_top);
+            wall->color = get_texture_pixel(wall_texture, tex_x, tex_y);
         }
-        set_px(d, x, y, color);
+        set_px(d, x, y, wall->color);
         y++;
     }
-}
-
-static void	draw_3d_map(t_data *d, t_ray *ray)
-{
-    t_ray_params	params;
-    float			hdist, vdist;
-    t_wall_info		wall;
-    int				x;
-
-    ray->angle = d->pl->angle - (30.0 * DEG_RAD);
-    if (ray->angle < 0)
-        ray->angle += 2 * M_PI;
-    else if (ray->angle > 2 * M_PI)
-        ray->angle -= 2 * M_PI;
-    
-    x = 0;
-    while (x < WIN_WIDTH)
-    {
-        init_ray_params(params);
-        horizontal_check(ray, d, &params);
-        vertical_check(ray, d, &params);
-        calculate_distances(d, &params, &hdist, &vdist);
-        
-        if (hdist < vdist)
-        {
-            wall.distance = hdist;
-            wall.hit_x = params.hx;
-            wall.hit_y = params.hy;
-            wall.hit_vertical = 0;
-        }
-        else
-        {
-            wall.distance = vdist;
-            wall.hit_x = params.vx;
-            wall.hit_y = params.vy;
-            wall.hit_vertical = 1;
-        }
-        wall.raw_dist = wall.distance;
-        wall.ray_angle = ray->angle;
-        draw_3d_wall_slice(d, x, &wall);
-        
-        ray->angle += (60.0 * DEG_RAD) / WIN_WIDTH;
-        if (ray->angle < 0)
-            ray->angle += 2 * M_PI;
-        if (ray->angle > 2 * M_PI)
-            ray->angle -= 2 * M_PI;
-        x++;
-    }
-}
-
-int render_frame(t_data *d)
-{
-    t_ray ray;
-
-    ray.angle = d->pl->angle;
-    pl_control(d);
-    draw_3d_map(d, &ray);
-    draw_minimap(d);
-    mlx_put_image_to_window(d->mlx, d->win, d->img, 0, 0);   
-    return (0);
 }

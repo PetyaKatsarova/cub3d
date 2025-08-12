@@ -50,12 +50,15 @@ typedef struct  s_btns
 } t_btns;
 
 typedef struct s_wall_info {
-    float   distance; // corrected to compensate fish eye
-	float	raw_dist; // b4 calc for fish eye effect
-    float   ray_angle;
-    int     hit_vertical;
-    float   hit_x;
-    float   hit_y;
+    float   	distance; // corrected to compensate fish eye
+    float   	ray_angle;
+    int     	hit_vertical;
+    float   	hit_x;
+    float   	hit_y;
+	float		line_h;
+	int			wall_top;
+	int			wall_bottom;
+	uint32_t	color;
 } t_wall_info;
 
 typedef struct s_pl {
@@ -165,4 +168,7 @@ int 		clean_mlx(t_data *d);
 void		draw_single_ray(t_data *d, float ray_angle, t_minimap_params *params, int player_x, int player_y);
 void		draw_player_dot(t_data *d, int player_x, int player_y, t_minimap_params *params);
 void		draw_player_direction(t_data *d, int player_x, int player_y);
+// src/render draw_3dmap and 2.c
+void		calculate_distances(t_data *d, t_ray_params *params, float *hdist, float *vdist);
+void		draw_3d_wall_slice(t_data *d, int x, t_wall_info *wall);
 #endif

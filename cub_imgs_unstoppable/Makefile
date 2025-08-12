@@ -16,6 +16,7 @@ SRC      := src/main.c \
 			src/render/draw_minimap3.c \
 		   	src/render/player_control.c \
 		  	src/render/draw_3d_map.c \
+			src/render/draw_3d_map2.c \
 		   	src/render/manipulate_textures.c \
 		   	src/render/keys_manip.c \
 			src/get_input/handle_file/validate_file.c \
