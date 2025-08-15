@@ -1,6 +1,6 @@
 NAME     := cub3D
 CC       := cc
-CFLAGS   := -Wall
+CFLAGS   := -Wall -Wextra -Werror
 
 LIBMLX   := lib/minilibx_linux
 HEADERS  := -I./include -I$(LIBMLX)/include
@@ -14,7 +14,6 @@ SRC      := src/main.c \
 		   	src/render/draw_minimap.c \
 		   	src/render/draw_minimap2.c \
 			src/render/draw_minimap3.c \
-			src/render/draw_minimap4.c \
 		   	src/render/player_control.c \
 		  	src/render/draw_3d_map.c \
 			src/render/draw_3d_map2.c \

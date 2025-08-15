@@ -144,7 +144,7 @@ typedef struct s_data {
 
 int 		init_pl (t_pl *pl, t_game_configs *game_configs);
 int			init_data(t_data *d, t_pl *pl, t_game_configs *game_configs);
-void		init_ray_params(t_ray_params params);
+void		init_ray_params(t_ray_params *params);
 void 		set_px(t_data *d, int x, int y, uint32_t color);
 void 		horizontal_check(t_ray *ray, t_data *d, t_ray_params *ray_params);
 void 		vertical_check(t_ray *ray, t_data *d, t_ray_params *ray_params);

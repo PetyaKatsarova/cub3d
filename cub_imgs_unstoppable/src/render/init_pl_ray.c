@@ -1,23 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   init_pl.c                                      :+:    :+:            */
+/*   init_pl_ray.c                                      :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: pekatsar <pekatsar@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/07/25 16:26:59 by pekatsar      #+#    #+#                 */
-/*   Updated: 2025/07/25 17:33:33 by pekatsar      ########   odam.nl         */
+/*   Updated: 2025/08/15 19:58:04 by pekatsar      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3D.h"
 
-int init_pl (t_pl *pl, t_game_configs *game_configs)
+int	init_pl(t_pl *pl, t_game_configs *game_configs)
 {
+	char	dir;
+
 	pl->x = game_configs->player_start_col * TILE_SIZE + (TILE_SIZE / 2);
-    pl->y = game_configs->player_start_row * TILE_SIZE + (TILE_SIZE / 2);
-	char dir = game_configs->player_start_orientation;
-	if ( dir== 'N') // cause screen is inverted, on paper is pi/2: 90 deg
+	pl->y = game_configs->player_start_row * TILE_SIZE + (TILE_SIZE / 2);
+	dir = game_configs->player_start_orientation;
+	if (dir == 'N')
 		pl->angle = 3 * M_PI / 2;
 	else if (dir == 'S')
 		pl->angle = M_PI / 2;
@@ -33,15 +35,15 @@ int init_pl (t_pl *pl, t_game_configs *game_configs)
 	return (0);
 }
 
-void	init_ray_params(t_ray_params params)
+void	init_ray_params(t_ray_params *params)
 {
-    params.h_tan = 0.0;
-    params.v_tan = 0.0;
-    params.dof = 0;
-    params.xo = 0.0;
-    params.yo = 0.0;
-    params.hx = 0.0;
-    params.hy = 0.0;
-    params.vx = 0.0;
-    params.vy = 0.0;
+	params->h_tan = 0.0;
+	params->v_tan = 0.0;
+	params->dof = 0;
+	params->xo = 0.0;
+	params->yo = 0.0;
+	params->hx = 0.0;
+	params->hy = 0.0;
+	params->vx = 0.0;
+	params->vy = 0.0;
 }

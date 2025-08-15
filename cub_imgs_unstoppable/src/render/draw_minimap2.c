@@ -1,19 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   draw_minimap2.c                                    :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: petya <petya@student.42.fr>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
+/*                                                        ::::::::            */
+/*   draw_minimap2.c                                    :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: petya <petya@student.42.fr>                +#+                     */
+/*                                                   +#+                      */
 /*   Created: 2025/08/06 16:56:33 by pekatsar          #+#    #+#             */
-/*   Updated: 2025/08/12 17:26:03 by petya            ###   ########.fr       */
+/*   Updated: 2025/08/15 19:46:16 by pekatsar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3D.h"
 
-/* make pl_x,pl_y center fo the player 5px dot diameter dot */
-void	draw_player_dot(t_data *d, int player_x, int player_y, t_minimap_params *params)
+/* make pl_x, pl_y center of the player 5px diameter dot */
+void	draw_player_dot(t_data *d, int player_x,
+			int player_y, t_minimap_params *params)
 {
 	int	x;
 	int	y;
@@ -24,8 +25,10 @@ void	draw_player_dot(t_data *d, int player_x, int player_y, t_minimap_params *pa
 		x = -2;
 		while (x <= 2)
 		{
-			if (player_x + x >= params->offset_x && player_x + x < params->offset_x + MINIMAP_SIZE &&
-				player_y + y >= params->offset_y && player_y + y < params->offset_y + MINIMAP_SIZE)
+			if (player_x + x >= params->offset_x
+				&& player_x + x < params->offset_x + MINIMAP_SIZE
+				&& player_y + y >= params->offset_y
+				&& player_y + y < params->offset_y + MINIMAP_SIZE)
 				set_px(d, player_x + x, player_y + y, PL_COLOR);
 			x++;
 		}
@@ -44,5 +47,3 @@ void	draw_player_direction(t_data *d, int player_x, int player_y)
 	line.color = PURPLE_RAY;
 	draw_line(d, &line);
 }
-
-
