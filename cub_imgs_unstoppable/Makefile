@@ -8,12 +8,13 @@ LIBS     := -L$(LIBMLX) -lmlx -lX11 -lXext -lm
 
 SRC      := src/main.c \
 		   	src/render/init_data.c \
-		   	src/render/init_pl.c \
+		   	src/render/init_pl_ray.c \
 			src/render/horizontal_check.c \
 			src/render/vertical_check.c \
 		   	src/render/draw_minimap.c \
 		   	src/render/draw_minimap2.c \
 			src/render/draw_minimap3.c \
+			src/render/draw_minimap4.c \
 		   	src/render/player_control.c \
 		  	src/render/draw_3d_map.c \
 			src/render/draw_3d_map2.c \

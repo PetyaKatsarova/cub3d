@@ -13,16 +13,16 @@
 
 # define WIN_WIDTH      	1600
 # define WIN_HEIGHT     	1000
-# define TILE_SIZE  		64 // px width and height: balanced performance, fixed
+# define TILE_SIZE  		64 // px width and height
+# define MINIMAP_TILES 12  // Show 12x12 tile area
 # define MINIMAP_SIZE		350
 # define PL_SIZE 			7
 # define STEP_SIZE 			5 //Controls: How far player moves per frame with WASD; Effect: Player moves 5 pixels per keypress
 //pl->x += STEP_SIZE when moving
 # define VECTOR_LEN			20 // px
-# define SLOW_MOVE			0.4
+# define SLOW_MOVE			1 //0.4
 #define	 ANGLE_ROT			0.1 // 0.1
 # define RAYS_NUM			30
-# define STOP_B4_WALL		10 // px to stop away from wall
 # define DEG_RAD			0.0174533 // one degree in radians
 
 # define WALL_COLOR 		0x800080 // purple 0xBFFF55  // lime
@@ -31,9 +31,8 @@
 # define PL_COLOR    		0x0d0832ff // dark blue
 # define BACKGROUND_COLOR 	0xD3D3D3
 # define PURPLE_RAY			0x800080
-// # define LIME_YELLOW   		0xBFFF00 
 # define BLACK				0x000000
-# define WALL_BUFFER		10
+# define WALL_BUFFER		1
 
 # define KEY_LEFT   		65361
 # define KEY_RIGHT  		65363
@@ -49,29 +48,29 @@ typedef struct  s_btns
 	int	right_arrow;
 } t_btns;
 
-typedef struct s_wall_info {
-    float   	distance; // corrected to compensate fish eye
-    float   	ray_angle;
-    int     	hit_vertical;
-    float   	hit_x;
-    float   	hit_y;
-	float		line_h;
-	float		wall_offset;
-	int			wall_top;
-	int			wall_bottom;
-	uint32_t	color;
+typedef struct s_wall_info { // for visible wall
+	float distance;    // How far away is the wall from pl (in pixels)
+	float ray_angle;   // What direction are we looking at (in radians - like degrees but different
+	int hit_vertical;  // Is this a vertical wall (1=yes, 0=horizontal wall)
+	float hit_x;       // X coordinate where ray hit the wall
+	float hit_y;       // Y coordinate where ray hit the wall
+	float line_h;      // How tall should we draw this wall on screen?
+	float wall_offset; // Which part of the texture to use? (0-64 pixels)
+	int wall_top;      // Top pixel of wall on screen
+	int wall_bottom;   // Bottom pixel of wall on screen
+	uint32_t color;    // What color/texture pixel to draw
 } t_wall_info;
 
 typedef struct s_pl {
 	double x;
 	double y;
-	double angle; // pl viewing angle in radians
-	double delta_x; // x component of direction vector
-	double delta_y;
-	double fov; // field of view
+	double angle;    // Which direction is player facing? (0 = east, π/2 = north)
+	double delta_x;  // How much X changes when moving forward
+	double delta_y;  // How much Y changes when moving forward
+	double fov;      // How wide can player see? (field of view)
 } t_pl;
 
-typedef struct s_ray {
+typedef struct s_ray { // vision ray from pl eye
 	double 	angle; // ray angle
 	double 	distance; // distance to wall
 	int		hit_vertical; // 1 if hit vertical wall
@@ -80,16 +79,16 @@ typedef struct s_ray {
 	double	y;
 } t_ray;
 
-typedef struct s_ray_params {
-    float   h_tan;    // -1/tan(angle) for horizontal rays
-    float   v_tan;    // -tan(angle) for vertical rays
-    int     dof;      // depth of field counter
-    float   xo;       // x offset for stepping
-    float   yo;       // y offset for stepping
-    float   hx;       // horizontal intersection x
-    float   hy;       // horizontal intersection y
-    float   vx;       // vertical intersection x
-    float   vy;       // vertical intersection y
+typedef struct s_ray_params { // math helper for calc rays
+	float h_tan;  // Math value for horizontal calculations (-1/tan)
+	float v_tan;  // Math value for vertical calculations (-tan)
+	int dof;      // "Depth of field" - how many steps ray took
+	float xo;     // How much X changes each step
+	float yo;     // How much Y changes each step
+	float hx;     // X where ray hit horizontal grid line
+	float hy;     // Y where ray hit horizontal grid line
+	float vx;     // X where ray hit vertical grid line
+	float vy;     // Y where ray hit vertical grid line
 } t_ray_params;
 
 typedef struct s_texture {
@@ -97,9 +96,9 @@ typedef struct s_texture {
     char    *addr;
     int     width;
     int     height;
-    int     bpp;
+    int     bpp;  // "Bits per pixel" - how much data per pixel
     int     line_length;
-    int     endian;
+    int     endian; // Byte order
 } t_texture;
 
 typedef struct s_line_info {
@@ -111,15 +110,15 @@ typedef struct s_line_info {
 } t_line_info;
 
 typedef struct s_minimap_params {
-    int     offset_x; // position on screen
-    int     offset_y;
-    float   scale; // shrinking factor from 3d map
-    int     start_x;
-    int     start_y;
-    int     end_x;
-    int     end_y;
-	int		player_x;
-	int		player_y;
+	int offset_x;   // X position where minimap starts on screen
+	int offset_y;   // Y position where minimap starts on screen
+	float scale;    // How much to shrink the big map (0.1 = 10x smaller)
+	int start_x;    // Left edge of minimap area
+	int start_y;    // Top edge of minimap area
+	int end_x;      // Right edge of minimap area
+	int end_y;      // Bottom edge of minimap area
+	int player_x;
+	int player_y;
 } t_minimap_params;
 
 typedef struct s_data {
@@ -132,7 +131,7 @@ typedef struct s_data {
 	int				endian;
 	int				map_cols;
 	int				map_rows;
-	char			**map; // or int?
+	char			**map;
 	t_pl 			*pl;
 	t_game_configs *game_configs;
 	t_btns			btns;
@@ -170,6 +169,8 @@ void		draw_single_ray(t_data *d, float ray_angle, t_minimap_params *params, int 
 void		draw_player_dot(t_data *d, int player_x, int player_y, t_minimap_params *params);
 void		draw_player_direction(t_data *d, int player_x, int player_y);
 // src/render draw_3dmap and 2.c
-void		calculate_distances(t_data *d, t_ray_params *params, float *hdist, float *vdist);
+void		calculate_distances(t_data *d, t_ray_params *params, double *hdist, double *vdist);
 void		draw_3d_wall_slice(t_data *d, int x, t_wall_info *wall);
+void		setup_viewport_minimap(t_data *d, t_minimap_params *params);
+
 #endif

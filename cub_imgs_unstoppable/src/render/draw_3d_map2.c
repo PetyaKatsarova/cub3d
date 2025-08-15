@@ -19,29 +19,29 @@ static void setup_rayangle(t_data *d, t_ray *ray)
         ray->angle -= 2 * M_PI;
 }
 
-static void setup_wall(t_wall_info *wall, t_ray_params *params, float hdist, float vdist)
+static void setup_wall(t_wall_info *wall, t_ray_params *params, double hdist, double vdist)
 {
-            if (hdist < vdist)
-        {
-            wall->distance = hdist;
-            wall->hit_x = params->hx;
-            wall->hit_y = params->hy;
-            wall->hit_vertical = 0;
-        }
-        else
-        {
-            wall->distance = vdist;
-            wall->hit_x = params->vx;
-            wall->hit_y = params->vy;
-            wall->hit_vertical = 1;
-        }
+    if (hdist < vdist)
+    {
+        wall->distance = (float) hdist;
+        wall->hit_x = params->hx;
+        wall->hit_y = params->hy;
+        wall->hit_vertical = 0;
+    }
+    else
+    {
+        wall->distance = (float) vdist;
+        wall->hit_x = params->vx;
+        wall->hit_y = params->vy;
+        wall->hit_vertical = 1;
+    }
 }
 
 static void	draw_3d_map(t_data *d, t_ray *ray)
 {
     t_ray_params	params;
-    float			hdist;
-    float           vdist;
+    double			hdist;
+    double           vdist;
     t_wall_info		wall;
     int				x;
 

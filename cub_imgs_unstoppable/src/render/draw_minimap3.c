@@ -71,8 +71,8 @@ void	draw_minimap(t_data *d)
 	int					player_x;
 	int					player_y;
 
-	params.offset_x = WIN_WIDTH - MINIMAP_SIZE - STOP_B4_WALL;
-	params.offset_y = STOP_B4_WALL;
+	params.offset_x = WIN_WIDTH - MINIMAP_SIZE;
+	params.offset_y = 0;
 	params.scale = (float)MINIMAP_SIZE / (d->map_cols * TILE_SIZE);
 	draw_minimap_background(d, params.offset_x, params.offset_y, &params);
 	draw_minimap_walls(d, params.offset_x, params.offset_y, params.scale);

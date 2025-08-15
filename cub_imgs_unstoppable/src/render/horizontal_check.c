@@ -25,7 +25,7 @@ static void h_check_helper(t_data *d, t_ray_params *ray_params)
     map_y = 0;
     ray_params->dof = 0;
     // STEP_SIZE through horizontal grid lines
-    while (ray_params->dof < d->map_cols)
+    while (ray_params->dof < d->map_rows)
     {
        map_x = (int)(ray_params->hx / TILE_SIZE); 
        map_y = (int)(ray_params->hy / TILE_SIZE);
