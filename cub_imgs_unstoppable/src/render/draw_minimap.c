@@ -119,8 +119,8 @@ void	draw_minimap_walls(t_data *d, int offset_x, int offset_y, float scale)
 	int					map_x;
 	int					map_y;
 	t_minimap_params	params;
-	printf("scale: %f\n", scale);
-	printf("map_cols: %d, map_rows: %d\n", d->map_cols, d->map_rows);
+	//printf("scale: %f\n", scale);
+	//printf("map_cols: %d, map_rows: %d\n", d->map_cols, d->map_rows);
 	map_y = 0;
 	while (map_y < d->map_rows)
 	{
