@@ -98,14 +98,14 @@ static void	draw_wall_block(t_data *d, t_minimap_params *params)
 	int	x;
 	int	y;
 
+	
 	y = params->start_y;
-	while (y < params->end_y && y < params->offset_y + d->map_rows * TILE_SIZE)
+	while (y < params->end_y)
 	{
 		x = params->start_x;
-		while (x < params->end_x && x < params->offset_x + d->map_cols * TILE_SIZE)
+		while (x < params->end_x)
 		{
-			if (x >= params->offset_x && y >= params->offset_y)
-				set_px(d, x, y, WALL_COLOR);
+			set_px(d, x, y, WALL_COLOR);
 			x++;
 		}
 		y++;
@@ -119,8 +119,7 @@ void	draw_minimap_walls(t_data *d, int offset_x, int offset_y, float scale)
 	int					map_x;
 	int					map_y;
 	t_minimap_params	params;
-	//printf("scale: %f\n", scale);
-	//printf("map_cols: %d, map_rows: %d\n", d->map_cols, d->map_rows);
+	
 	map_y = 0;
 	while (map_y < d->map_rows)
 	{
