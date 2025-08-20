@@ -19,6 +19,7 @@ SRC      := src/main.c \
 			src/render/draw_3d_map2.c \
 		   	src/render/manipulate_textures.c \
 		   	src/render/keys_manip.c \
+		   	src/render/mouse_handler.c \
 			src/get_input/handle_file/validate_file.c \
 			src/get_input/get_input.c \
 			src/get_input/handle_file/read_file.c \

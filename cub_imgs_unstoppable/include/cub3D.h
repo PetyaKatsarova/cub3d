@@ -156,6 +156,7 @@ void 		draw_minimap(t_data *d);
 int			render_frame(t_data *data);
 int     	key_press(int keycode, t_data *d);
 int     	key_release(int keycode, t_data *d);
+int			mouse_handler(t_data *d);
 void    	pl_control(t_data *d);  // Changed signature - no keycode parameter
 // src/manipulate_textures.c
 int         load_texture(t_data *d, t_texture *tex, char *path);
