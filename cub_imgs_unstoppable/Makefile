@@ -45,8 +45,11 @@ SRC      := src/main.c \
 			src/get_input/utils/ft_strlen.c \
 			src/get_input/utils/traverse_space.c \
 			src/get_input/utils/is_space.c \
+			src/get_input/utils/get_rgb_vals.c \
+			src/get_input/utils/copy_map.c \
 			src/get_input/test/print_parsing.c \
-			src/get_input/test/print_game_configs.c
+			src/get_input/test/print_game_configs.c \
+			src/get_input/test/print_game_configs_utils.c
 
 OBJDIR   := obj
 OBJ      := $(SRC:%.c=%.o)

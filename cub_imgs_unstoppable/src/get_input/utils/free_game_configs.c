@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                         ::::::::           */
+/*   free_game_configs.c                                 :+:    :+:           */
+/*                                                      +:+                   */
+/*   By: jstuhrin <marvin@42.fr>                       +#+                    */
+/*                                                    +#+                     */
+/*   Created: 2025/08/20 12:49:08 by jstuhrin       #+#    #+#                */
+/*   Updated: 2025/08/20 12:49:10 by jstuhrin       ########   odam.nl        */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../../include/get_input.h"
 
 void	free_game_configs(t_game_configs *game_configs)
@@ -7,7 +19,7 @@ void	free_game_configs(t_game_configs *game_configs)
 	if (game_configs->map != NULL)
 	{
 		i = 0;
-		while(game_configs->map[i] != NULL)
+		while (game_configs->map[i] != NULL)
 		{
 			free(game_configs->map[i]);
 			i++;
