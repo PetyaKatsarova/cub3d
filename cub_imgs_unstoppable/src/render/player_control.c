@@ -65,16 +65,18 @@ static int calc_arrow_btns(t_data *d)
 {
     if (d->btns.left_arrow) // Rotate left continuously
     {
-        d->pl->angle -= 0.01;  //slower rotation
+        d->pl->angle -= 0.05;  //slower rotation
         if (d->pl->angle < 0)
             d->pl->angle += 2 * M_PI;
     }
     if (d->btns.right_arrow) // Rotate right continuously
     {
-        d->pl->angle += 0.01;
+        d->pl->angle += 0.05;
         if (d->pl->angle > 2 * M_PI)
             d->pl->angle -= 2 * M_PI;
     }
+    d->pl->delta_x = cos(d->pl->angle) * 5; // Update player movement vectors after rotation
+    d->pl->delta_y = sin(d->pl->angle) * 5;
     return (0);
 }
 
@@ -93,26 +95,4 @@ void pl_control(t_data *d)
         d->pl->y += move_y;
     }
     calc_arrow_btns(d);
-    d->pl->delta_x = cos(d->pl->angle) * 5; // Update player movement vectors after rotation
-    d->pl->delta_y = sin(d->pl->angle) * 5;
-}
-
-void handle_arrow_keys(t_data *d, int keycode)
-{
-    if (keycode == KEY_LEFT) // LEFT ARROW - rotate left
-    {
-        d->pl->angle -= 0.1;
-        if (d->pl->angle < 0)
-            d->pl->angle += 2 * M_PI;
-        d->pl->delta_x = cos(d->pl->angle) * 5;
-        d->pl->delta_y = sin(d->pl->angle) * 5;
-    }
-    else if (keycode == KEY_RIGHT) // RIGHT ARROW - rotate right
-    {
-        d->pl->angle += 0.1;
-        if (d->pl->angle > 2 * M_PI)
-            d->pl->angle -= 2 * M_PI;
-        d->pl->delta_x = cos(d->pl->angle) * 5;
-        d->pl->delta_y = sin(d->pl->angle) * 5;
-    }
 }
