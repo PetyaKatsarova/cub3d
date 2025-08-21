@@ -6,33 +6,33 @@
 /*   By: jstuhrin <marvin@42.fr>                       +#+                    */
 /*                                                    +#+                     */
 /*   Created: 2025/08/20 15:44:11 by jstuhrin       #+#    #+#                */
-/*   Updated: 2025/08/20 15:44:13 by jstuhrin       ########   odam.nl        */
+/*   Updated: 2025/08/21 11:47:13 by jstuhrin       ########   odam.nl        */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3D.h"
 
-int	mouse_handler(t_data *d)
+int	mouse_handler(int x, int y, t_data *d)
 {
-	static int	last_x = -1;
-	static int	last_y = -1;
-	int			curr_x = 0;
-	int			curr_y = 0;
-	float		delta_x;
+	static int	last_x = 0;
+	int			delta_x;
 
-	printf("entered mouse handler\n");
-	if (d == NULL)
-		printf("d == NULL");
-	if (d->mlx == NULL)
-		printf("d->mlx == NULL\n");
-	if (d->win == NULL)
-		printf("d->win == NULL\n");
-	if (mlx_mouse_get_pos(d->mlx, d->win, &curr_x, &curr_y) == 1)
+	(void)y;
+	delta_x = x - last_x;
+	if (delta_x < -1)
 	{
-		printf("last_x: %d, curr_x: %d\n", last_x, curr_x);
-		printf("last_y: %d, curr_y: %d\n", last_y, curr_y);
-		last_x = curr_x;
-		last_y = curr_y;
+		d->pl->angle -= 0.03;
+		if (d->pl->angle < 0)
+			d->pl->angle += 2 * M_PI;
 	}
+	if (delta_x > 1)
+	{
+		d->pl->angle += 0.03;
+		if (d->pl->angle > 2 * M_PI)
+			d->pl->angle -= 2 * M_PI;
+	}
+	d->pl->delta_x = cos(d->pl->angle) * 5;
+	d->pl->delta_y = sin(d->pl->angle) * 5;
+	last_x = x;
 	return (0);
 }
