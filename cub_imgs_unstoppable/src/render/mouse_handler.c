@@ -12,11 +12,28 @@
 
 #include "../../include/cub3D.h"
 
+int	focus_in(t_data *d)
+{
+	d->focus = true;
+	return (0);
+}
+
+int	focus_out(t_data *d)
+{
+	d->focus = false;
+	return (0);
+}
+
 int	mouse_handler(int curr_x, int curr_y, t_data *d)
 {
 	static int	last_x = 0;
 	int			delta_x;
 
+	if (d->focus == false)
+	{
+		mlx_mouse_show(d->mlx, d->win);
+		return (0);
+	}
 	mlx_mouse_hide(d->mlx, d->win);
 	delta_x = curr_x - last_x;
 	if (delta_x < -1)

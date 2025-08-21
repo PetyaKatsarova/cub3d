@@ -61,6 +61,7 @@ int render_frame(t_data *d)
     draw_3d_map(d, &ray);
     draw_minimap(d);
     mlx_put_image_to_window(d->mlx, d->win, d->img, 0, 0);
-    mlx_mouse_move(d->mlx, d->win, WIN_WIDTH / 2, WIN_HEIGHT / 2); 
+    if (d->focus == true)
+        mlx_mouse_move(d->mlx, d->win, WIN_WIDTH / 2, WIN_HEIGHT / 2); 
     return (0);
 }
