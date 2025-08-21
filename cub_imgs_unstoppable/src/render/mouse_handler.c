@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                         ::::::::           */
-/*   mouse_handler.c                                        :+:    :+:           */
+/*   mouse_handler.c                                        :+:    :+:        */
 /*                                                      +:+                   */
 /*   By: jstuhrin <marvin@42.fr>                       +#+                    */
 /*                                                    +#+                     */
@@ -17,17 +17,17 @@ int	mouse_handler(int curr_x, int curr_y, t_data *d)
 	static int	last_x = 0;
 	int			delta_x;
 
-	(void)curr_y;
+	mlx_mouse_hide(d->mlx, d->win);
 	delta_x = curr_x - last_x;
 	if (delta_x < -1)
 	{
-		d->pl->angle -= 0.03;
+		d->pl->angle -= 0.02;
 		if (d->pl->angle < 0)
 			d->pl->angle += 2 * M_PI;
 	}
 	if (delta_x > 1)
 	{
-		d->pl->angle += 0.03;
+		d->pl->angle += 0.02;
 		if (d->pl->angle > 2 * M_PI)
 			d->pl->angle -= 2 * M_PI;
 	}
