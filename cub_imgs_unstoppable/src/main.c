@@ -29,8 +29,11 @@ int main(int argc, char **argv)
     t_game_configs *game_configs;
 
     game_configs = get_input(argc, argv);
-    if (init_data(&data, &pl, game_configs)) 
-        return (1); // todo: did we free all here??
+    if (init_data(&data, &pl, game_configs))
+    {
+        free_game_configs(game_configs);
+        return (1);
+    }
     mlx_loop_hook(data.mlx, render_frame, &data);
     mlx_hook(data.win, 2, 1L<<0, key_press, &data); // 
     mlx_hook(data.win, 3, 1L<<1, key_release, &data); 
