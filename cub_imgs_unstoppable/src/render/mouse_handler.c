@@ -12,13 +12,13 @@
 
 #include "../../include/cub3D.h"
 
-int	mouse_handler(int x, int y, t_data *d)
+int	mouse_handler(int curr_x, int curr_y, t_data *d)
 {
 	static int	last_x = 0;
 	int			delta_x;
 
-	(void)y;
-	delta_x = x - last_x;
+	(void)curr_y;
+	delta_x = curr_x - last_x;
 	if (delta_x < -1)
 	{
 		d->pl->angle -= 0.03;
@@ -33,6 +33,6 @@ int	mouse_handler(int x, int y, t_data *d)
 	}
 	d->pl->delta_x = cos(d->pl->angle) * 5;
 	d->pl->delta_y = sin(d->pl->angle) * 5;
-	last_x = x;
+	last_x = curr_x;
 	return (0);
 }
