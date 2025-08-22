@@ -17,7 +17,7 @@ static int close_window(void *param)
     t_data *d;
 
     d = (t_data *)param;
-    int clean_mlx(d);
+    clean_mlx(d);
     free_game_configs(d->game_configs);
     exit(0);
 }

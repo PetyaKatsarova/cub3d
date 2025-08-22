@@ -1,4 +1,4 @@
-NO ./assets/textures
+NO ./assets/textures/jk
 SO ./assets/textures/south_wall.xpm
 WE ./assets/textures/west_wall.xpm
 EA ./assets/textures/east_wall.xpm
