@@ -6,7 +6,7 @@
 /*   By: petya <petya@student.42.fr>                  +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/07/23 15:21:24 by pekatsar      #+#    #+#                 */
-/*   Updated: 2025/08/15 19:54:12 by pekatsar      ########   odam.nl         */
+/*   Updated: 2025/08/22 14:32:47 by pekatsar      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	init_btns(t_btns *btns)
 	return (0);
 }
 
-int	init_data(t_data *d, t_pl *pl, t_game_configs *game_configs)
+static	int	init_mlx_data(t_data	*d)
 {
 	d->mlx = mlx_init();
 	if (!d->mlx)
@@ -37,6 +37,13 @@ int	init_data(t_data *d, t_pl *pl, t_game_configs *game_configs)
 	d->addr = mlx_get_data_addr(d->img, &d->bpp,
 			&d->line_length, &d->endian);
 	if (!d->addr)
+		return (1);
+	return (0);
+}
+
+int	init_data(t_data *d, t_pl *pl, t_game_configs *game_configs)
+{
+	if (init_mlx_data(d) == 1)
 		return (1);
 	d->map = game_configs->map;
 	if (!d->map)

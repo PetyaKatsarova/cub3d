@@ -39,11 +39,12 @@ void	draw_player_dot(t_data *d, int player_x,
 void	draw_player_direction(t_data *d, int player_x, int player_y)
 {
 	t_line_info	line;
+	t_helper	helper;
 
 	line.x0 = player_x;
 	line.y0 = player_y;
 	line.x1 = player_x + (cos(d->pl->angle) * VECTOR_LEN);
 	line.y1 = player_y + (sin(d->pl->angle) * VECTOR_LEN);
 	line.color = PURPLE_RAY;
-	draw_line(d, &line);
+	draw_line(d, &line, &helper);
 }

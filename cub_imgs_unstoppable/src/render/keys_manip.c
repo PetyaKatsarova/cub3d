@@ -3,10 +3,10 @@
 /*                                                        ::::::::            */
 /*   keys_manip.c                                       :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: petya <petya@student.42.fr>                  +#+                     */
+/*   By: pekatsar <pekatsar@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2025/08/06 13:05:26 by pekatsar      #+#    #+#                 */
-/*   Updated: 2025/08/22 13:27:02 by pekatsar      ########   odam.nl         */
+/*   Created: 2025/08/22 14:31:58 by pekatsar      #+#    #+#                 */
+/*   Updated: 2025/08/22 14:32:01 by pekatsar      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@ int	key_press(int keycode, t_data *d)
 	else if (keycode == 'd')
 		d->btns.d = 1;
 	else if (keycode == KEY_LEFT)
-        d->btns.left_arrow = 1;
-    else if (keycode == KEY_RIGHT)
-        d->btns.right_arrow = 1; 
-    return (0);
+		d->btns.left_arrow = 1;
+	else if (keycode == KEY_RIGHT)
+		d->btns.right_arrow = 1;
+	return (0);
 }
 
 /* sets button state to released */

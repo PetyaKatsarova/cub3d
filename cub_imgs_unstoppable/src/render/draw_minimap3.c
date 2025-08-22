@@ -6,7 +6,7 @@
 /*   By: pekatsar <pekatsar@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/08/15 19:49:13 by pekatsar      #+#    #+#                 */
-/*   Updated: 2025/08/15 19:49:15 by pekatsar      ########   odam.nl         */
+/*   Updated: 2025/08/22 14:15:24 by pekatsar      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void	draw_single_ray(t_data *d, float ray_angle,
 	int				ray_end_x;
 	int				ray_end_y;
 	t_line_info		line;
+	t_helper		helper;
 
 	ray.angle = ray_angle;
 	init_ray_params(&ray_params);
@@ -66,7 +67,7 @@ void	draw_single_ray(t_data *d, float ray_angle,
 		line.x1 = ray_end_x;
 		line.y1 = ray_end_y;
 		line.color = PL_COLOR;
-		draw_line(d, &line);
+		draw_line(d, &line, &helper);
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: pekatsar <pekatsar@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/08/15 19:34:10 by pekatsar      #+#    #+#                 */
-/*   Updated: 2025/08/22 13:22:57 by pekatsar      ########   odam.nl         */
+/*   Updated: 2025/08/22 13:44:32 by pekatsar      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,12 +85,12 @@ int	render_frame(t_data *d)
 {
 	t_ray	ray;
 
-    ray.angle = d->pl->angle;
-    pl_control(d);
-    draw_3d_map(d, &ray);
-    draw_minimap(d);
-    mlx_put_image_to_window(d->mlx, d->win, d->img, 0, 0);
-    if (d->focus == true)
-        mlx_mouse_move(d->mlx, d->win, WIN_WIDTH / 2, WIN_HEIGHT / 2); 
-    return (0);
+	ray.angle = d->pl->angle;
+	pl_control(d);
+	draw_3d_map(d, &ray);
+	draw_minimap(d);
+	mlx_put_image_to_window(d->mlx, d->win, d->img, 0, 0);
+	if (d->focus == true)
+		mlx_mouse_move(d->mlx, d->win, WIN_WIDTH / 2, WIN_HEIGHT / 2);
+	return (0);
 }

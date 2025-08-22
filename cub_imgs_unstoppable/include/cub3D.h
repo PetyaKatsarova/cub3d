@@ -142,6 +142,13 @@ typedef struct s_data {
 	bool			focus;
 }	t_data;
 
+  typedef struct s_helper
+{
+	float	distance_x;
+	float	distance_y;
+	float	x_increment;
+	float	y_increment;
+} t_helper;
 
 int 		init_pl (t_pl *pl, t_game_configs *game_configs);
 int			init_data(t_data *d, t_pl *pl, t_game_configs *game_configs);
@@ -149,7 +156,7 @@ void		init_ray_params(t_ray_params *params);
 void 		set_px(t_data *d, int x, int y, uint32_t color);
 void 		horizontal_check(t_ray *ray, t_data *d, t_ray_params *ray_params);
 void 		vertical_check(t_ray *ray, t_data *d, t_ray_params *ray_params);
-void		draw_line(t_data *data, t_line_info *line_info);
+void		draw_line(t_data *data, t_line_info *line_info, t_helper *data_placeholder);
 double 		normalize_angle(double angle);
 void		draw_minimap_background(t_data *d, int offset_x, int offset_y, t_minimap_params *params);
 void		draw_minimap_walls(t_data *d, int offset_x, int offset_y, float scale);
