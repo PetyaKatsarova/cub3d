@@ -18,7 +18,8 @@
 # define PL_SIZE 			7
 # define STEP_SIZE 			5
 # define VECTOR_LEN			20 // px
-# define SLOW_MOVE			1 //0.4
+# define MOVE_FACTOR			1 //0.4
+# define ROTATION_FACTOR	0.05
 # define RAYS_NUM			1600
 # define DEG_RAD			0.0174533 // one degree in radians
 
