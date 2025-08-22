@@ -6,7 +6,7 @@
 /*   By: jstuhrin <marvin@42.fr>                      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/08/20 15:44:11 by jstuhrin      #+#    #+#                 */
-/*   Updated: 2025/08/22 14:05:24 by pekatsar      ########   odam.nl         */
+/*   Updated: 2025/08/22 14:43:19 by pekatsar      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ int	mouse_handler(int curr_x, int curr_y, t_data *d)
 {
 	static int	last_x = 0;
 	int			delta_x;
-
+	
+	(void)curr_y;
 	if (d->focus == false)
 	{
 		mlx_mouse_show(d->mlx, d->win);

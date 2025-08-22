@@ -6,7 +6,7 @@
 /*   By: petya <petya@student.42.fr>                  +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/08/01 14:51:30 by pekatsar      #+#    #+#                 */
-/*   Updated: 2025/08/22 14:31:25 by pekatsar      ########   odam.nl         */
+/*   Updated: 2025/08/22 15:25:11 by pekatsar      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,28 +69,28 @@ double	normalize_angle(double angle)
 }
 
 /*
-** Creates a MINMAP_SIZE×MINMAP_SIZE max or d->map_rows and cols pixel rect.
+** Creates a MINMAP_SIZE×MINMAP_SIZE max or d->map_rows and cols pixel rect.BACKGROUND_COL
 ** Positioned at top-right corner: offset_x, offset_y.
 ** Fills every pixel with BACKGROUND_COLOR (gray).
 */
-void	draw_minimap_background(t_data *d, int offset_x, int offset_y,
-			t_minimap_params *params)
-{
-	int	x;
-	int	y;
+//void	draw_minimap_background(t_data *d, int offset_x, int offset_y,
+//			t_minimap_params *params)
+//{
+//	int	x;
+//	int	y;
 
-	y = 0;
-	while (y < d->map_rows * TILE_SIZE * params->scale)
-	{
-		x = 0;
-		while (x < d->map_cols * TILE_SIZE * params->scale)
-		{
-			set_px(d, offset_x + x, offset_y + y, BACKGROUND_COLOR);
-			x++;
-		}
-		y++;
-	}
-}
+//	y = 0;
+//	while (y < d->map_rows * TILE_SIZE * params->scale)
+//	{
+//		x = 0;
+//		while (x < d->map_cols * TILE_SIZE * params->scale)
+//		{
+//			set_px(d, offset_x + x, offset_y + y, BACKGROUND_COLOR);
+//			x++;
+//		}
+//		y++;
+//	}
+//}
 
 /*
 ** loop through starty/endy startx/endx tile and fill each px with wall color
@@ -109,7 +109,7 @@ static void	draw_wall_block(t_data *d, t_minimap_params *params, int offset_x,
 		x = params->start_x;
 		while (x < params->end_x)
 		{
-			set_px(d, x, y, WALL_COLOR);
+			set_px(d, x, y, MINIMAP_WALL);
 			x++;
 		}
 		y++;

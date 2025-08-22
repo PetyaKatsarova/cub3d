@@ -13,23 +13,18 @@
 
 # define WIN_WIDTH      	1600
 # define WIN_HEIGHT     	1000
-# define TILE_SIZE  		64 // px width and height
-# define MINIMAP_TILES 12  // Show 12x12 tile area
+# define TILE_SIZE  		64 // px width and heightdraw_minimap_backg
 # define MINIMAP_SIZE		350
 # define PL_SIZE 			7
-# define STEP_SIZE 			5 //Controls: How far player moves per frame with WASD; Effect: Player moves 5 pixels per keypress
-//pl->x += STEP_SIZE when moving
+# define STEP_SIZE 			5
 # define VECTOR_LEN			20 // px
 # define SLOW_MOVE			1 //0.4
-#define	 ANGLE_ROT			0.1 // 0.1
-# define RAYS_NUM			30
+# define RAYS_NUM			1600
 # define DEG_RAD			0.0174533 // one degree in radians
 
-# define WALL_COLOR 		0x800080 // purple 0xBFFF55  // lime
-# define FLOOR_COLOR 		0xB48E8E // favorite
-# define CEILING_COLOR  	0x87CEEB // sky blue
-# define PL_COLOR    		0x0d0832ff // dark blue
-# define BACKGROUND_COLOR 	0xD3D3D3
+# define MINIMAP_WALL 		0x800080
+# define PL_COLOR    		0x0d0832ff
+//# define BACKGROUND_COLOR 	0xD3D3D3
 # define PURPLE_RAY			0x800080
 # define BLACK				0x000000
 # define WALL_BUFFER		1
@@ -131,6 +126,8 @@ typedef struct s_data {
 	int				endian;
 	int				map_cols;
 	int				map_rows;
+	int				floor;
+	int			    ceiling;
 	char			**map;
 	t_pl 			*pl;
 	t_game_configs *game_configs;
@@ -167,7 +164,7 @@ int     	key_release(int keycode, t_data *d);
 int			mouse_handler(int x, int y, t_data *d);
 int			focus_in(t_data *d);
 int			focus_out(t_data *d);
-void    	pl_control(t_data *d);  // Changed signature - no keycode parameter
+void    	pl_control(t_data *d);
 // src/manipulate_textures.c
 int         load_texture(t_data *d, t_texture *tex, char *path);
 void 		init_textures(t_data *d, t_game_configs *game_configs);
