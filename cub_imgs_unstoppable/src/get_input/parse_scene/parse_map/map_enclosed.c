@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                         ::::::::           */
+/*   map_enclosed.c                                      :+:    :+:           */
+/*                                                      +:+                   */
+/*   By: jstuhrin <marvin@42.fr>                       +#+                    */
+/*                                                    +#+                     */
+/*   Created: 2025/08/20 12:45:06 by jstuhrin       #+#    #+#                */
+/*   Updated: 2025/08/20 12:45:08 by jstuhrin       ########   odam.nl        */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../../../include/get_input.h"
 
 static void	alloc_test_map(t_parsing *parsing)
@@ -12,7 +24,8 @@ static void	alloc_test_map(t_parsing *parsing)
 	i = 0;
 	while (i < parsing->test_rows)
 	{
-		parsing->test_map[i] = malloc((parsing->test_columns + 1) * sizeof(char));
+		parsing->test_map[i] = malloc((parsing->test_columns + 1)
+				* sizeof(char));
 		if (parsing->test_map[i] == NULL)
 		{
 			exit_error_parsing(ALLOC_FAILED, parsing);
@@ -57,7 +70,7 @@ static void	copy_line(t_parsing *parsing, int scene_i, int test_i)
 	}
 }
 
-static void	copy_map(t_parsing *parsing)
+static void	copy_test_map(t_parsing *parsing)
 {
 	int	test_i;
 	int	scene_i;
@@ -77,6 +90,6 @@ void	map_enclosed(t_parsing *parsing, int i)
 	measure_map(parsing, i);
 	alloc_test_map(parsing);
 	initialize_test_map(parsing);
-	copy_map(parsing);
+	copy_test_map(parsing);
 	check_test_map_enclosed(parsing);
 }

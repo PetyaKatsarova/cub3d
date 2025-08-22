@@ -6,7 +6,7 @@
 /*   By: petya <petya@student.42.fr>                  +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/07/23 15:22:20 by pekatsar      #+#    #+#                 */
-/*   Updated: 2025/08/15 20:00:33 by pekatsar      ########   odam.nl         */
+/*   Updated: 2025/08/22 14:19:50 by pekatsar      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,16 +63,18 @@ static int	calc_arrow_btns(t_data *d)
 {
 	if (d->btns.left_arrow)
 	{
-		d->pl->angle -= 0.01;
+		d->pl->angle -= 0.05;
 		if (d->pl->angle < 0)
 			d->pl->angle += 2 * M_PI;
 	}
 	if (d->btns.right_arrow)
 	{
-		d->pl->angle += 0.01;
+		d->pl->angle += 0.05;
 		if (d->pl->angle > 2 * M_PI)
 			d->pl->angle -= 2 * M_PI;
 	}
+	d->pl->delta_x = cos(d->pl->angle) * 5;
+	d->pl->delta_y = sin(d->pl->angle) * 5;
 	return (0);
 }
 
@@ -90,24 +92,4 @@ void	pl_control(t_data *d)
 		d->pl->y += move_y;
 	}
 	calc_arrow_btns(d);
-	d->pl->delta_x = cos(d->pl->angle) * 5;
-	d->pl->delta_y = sin(d->pl->angle) * 5;
-}
-
-void	handle_arrow_keys(t_data *d, int keycode)
-{
-	if (keycode == KEY_LEFT)
-	{
-		d->pl->angle -= 0.1;
-		if (d->pl->angle < 0)
-			d->pl->angle += 2 * M_PI;
-	}
-	else if (keycode == KEY_RIGHT)
-	{
-		d->pl->angle += 0.1;
-		if (d->pl->angle > 2 * M_PI)
-			d->pl->angle -= 2 * M_PI;
-	}
-	d->pl->delta_x = cos(d->pl->angle) * 5;
-	d->pl->delta_y = sin(d->pl->angle) * 5;
 }

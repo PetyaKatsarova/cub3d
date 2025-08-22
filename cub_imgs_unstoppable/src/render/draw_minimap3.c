@@ -6,7 +6,7 @@
 /*   By: pekatsar <pekatsar@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/08/15 19:49:13 by pekatsar      #+#    #+#                 */
-/*   Updated: 2025/08/15 19:49:15 by pekatsar      ########   odam.nl         */
+/*   Updated: 2025/08/22 15:26:04 by pekatsar      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void	draw_single_ray(t_data *d, float ray_angle,
 	int				ray_end_x;
 	int				ray_end_y;
 	t_line_info		line;
+	t_helper		helper;
 
 	ray.angle = ray_angle;
 	init_ray_params(&ray_params);
@@ -66,7 +67,7 @@ void	draw_single_ray(t_data *d, float ray_angle,
 		line.x1 = ray_end_x;
 		line.y1 = ray_end_y;
 		line.color = PL_COLOR;
-		draw_line(d, &line);
+		draw_line(d, &line, &helper);
 	}
 }
 
@@ -96,7 +97,7 @@ void	draw_minimap(t_data *d)
 	params.offset_x = WIN_WIDTH - MINIMAP_SIZE;
 	params.offset_y = 0;
 	params.scale = (float)MINIMAP_SIZE / (d->map_cols * TILE_SIZE);
-	draw_minimap_background(d, params.offset_x, params.offset_y, &params);
+	//draw_minimap_background(d, params.offset_x, params.offset_y, &params);
 	draw_minimap_walls(d, params.offset_x, params.offset_y, params.scale);
 	player_x = params.offset_x + (d->pl->x * params.scale);
 	player_y = params.offset_y + (d->pl->y * params.scale);

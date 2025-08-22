@@ -3,10 +3,10 @@
 /*                                                        ::::::::            */
 /*   keys_manip.c                                       :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: petya <petya@student.42.fr>                  +#+                     */
+/*   By: pekatsar <pekatsar@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2025/08/06 13:05:26 by pekatsar      #+#    #+#                 */
-/*   Updated: 2025/08/15 19:58:31 by pekatsar      ########   odam.nl         */
+/*   Created: 2025/08/22 14:31:58 by pekatsar      #+#    #+#                 */
+/*   Updated: 2025/08/22 14:32:01 by pekatsar      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ int	key_press(int keycode, t_data *d)
 		d->btns.left_arrow = 1;
 	else if (keycode == KEY_RIGHT)
 		d->btns.right_arrow = 1;
-	handle_arrow_keys(d, keycode);
 	return (0);
 }
 

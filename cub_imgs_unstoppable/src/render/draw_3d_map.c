@@ -97,9 +97,9 @@ void	draw_3d_wall_slice(t_data *d, int x, t_wall_info *wall)
 	while (++y < WIN_HEIGHT)
 	{
 		if (y < wall->wall_top)
-			wall->color = CEILING_COLOR;
+			wall->color = d->ceiling;
 		else if (y > wall->wall_bottom)
-			wall->color = FLOOR_COLOR;
+			wall->color = d->floor;
 		else
 		{
 			wall->wall_offset = set_wall_offset(wall);

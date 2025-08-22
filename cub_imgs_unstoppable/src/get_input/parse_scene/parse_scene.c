@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                         ::::::::           */
+/*   parse_scene.c                                       :+:    :+:           */
+/*                                                      +:+                   */
+/*   By: jstuhrin <marvin@42.fr>                       +#+                    */
+/*                                                    +#+                     */
+/*   Created: 2025/08/20 12:46:03 by jstuhrin       #+#    #+#                */
+/*   Updated: 2025/08/20 12:46:04 by jstuhrin       ########   odam.nl        */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../../include/get_input.h"
 
 static bool	possible_texture(t_parsing *parsing, int i, int j)
@@ -41,7 +53,6 @@ static void	parse_texture_fc(t_parsing *parsing, int i)
 		exit_error_parsing(INV_CHAR_FC_TEXTURE, parsing);
 	}
 }
-
 
 static bool	all_textures_fc_found(t_parsing *parsing)
 {

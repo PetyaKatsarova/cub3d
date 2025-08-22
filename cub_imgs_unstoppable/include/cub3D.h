@@ -13,23 +13,18 @@
 
 # define WIN_WIDTH      	1600
 # define WIN_HEIGHT     	1000
-# define TILE_SIZE  		64 // px width and height
-# define MINIMAP_TILES 12  // Show 12x12 tile area
+# define TILE_SIZE  		64 // px width and heightdraw_minimap_backg
 # define MINIMAP_SIZE		350
 # define PL_SIZE 			7
-# define STEP_SIZE 			5 //Controls: How far player moves per frame with WASD; Effect: Player moves 5 pixels per keypress
-//pl->x += STEP_SIZE when moving
+# define STEP_SIZE 			5
 # define VECTOR_LEN			20 // px
 # define SLOW_MOVE			1 //0.4
-#define	 ANGLE_ROT			0.1 // 0.1
-# define RAYS_NUM			30
+# define RAYS_NUM			1600
 # define DEG_RAD			0.0174533 // one degree in radians
 
-# define WALL_COLOR 		0x800080 // purple 0xBFFF55  // lime
-# define FLOOR_COLOR 		0xB48E8E // favorite
-# define CEILING_COLOR  	0x87CEEB // sky blue
-# define PL_COLOR    		0x0d0832ff // dark blue
-# define BACKGROUND_COLOR 	0xD3D3D3
+# define MINIMAP_WALL 		0x800080
+# define PL_COLOR    		0x0d0832ff
+//# define BACKGROUND_COLOR 	0xD3D3D3
 # define PURPLE_RAY			0x800080
 # define BLACK				0x000000
 # define WALL_BUFFER		1
@@ -131,6 +126,8 @@ typedef struct s_data {
 	int				endian;
 	int				map_cols;
 	int				map_rows;
+	int				floor;
+	int			    ceiling;
 	char			**map;
 	t_pl 			*pl;
 	t_game_configs *game_configs;
@@ -139,8 +136,16 @@ typedef struct s_data {
     t_texture 		south_tex;
     t_texture 		east_tex;
 	t_texture   	west_tex;
+	bool			focus;
 }	t_data;
 
+  typedef struct s_helper
+{
+	float	distance_x;
+	float	distance_y;
+	float	x_increment;
+	float	y_increment;
+} t_helper;
 
 int 		init_pl (t_pl *pl, t_game_configs *game_configs);
 int			init_data(t_data *d, t_pl *pl, t_game_configs *game_configs);
@@ -148,7 +153,7 @@ void		init_ray_params(t_ray_params *params);
 void 		set_px(t_data *d, int x, int y, uint32_t color);
 void 		horizontal_check(t_ray *ray, t_data *d, t_ray_params *ray_params);
 void 		vertical_check(t_ray *ray, t_data *d, t_ray_params *ray_params);
-void		draw_line(t_data *data, t_line_info *line_info);
+void		draw_line(t_data *data, t_line_info *line_info, t_helper *data_placeholder);
 double 		normalize_angle(double angle);
 void		draw_minimap_background(t_data *d, int offset_x, int offset_y, t_minimap_params *params);
 void		draw_minimap_walls(t_data *d, int offset_x, int offset_y, float scale);
@@ -156,8 +161,10 @@ void 		draw_minimap(t_data *d);
 int			render_frame(t_data *data);
 int     	key_press(int keycode, t_data *d);
 int     	key_release(int keycode, t_data *d);
-void    	pl_control(t_data *d);  // Changed signature - no keycode parameter
-void    	handle_arrow_keys(t_data *d, int keycode);
+int			mouse_handler(int x, int y, t_data *d);
+int			focus_in(t_data *d);
+int			focus_out(t_data *d);
+void    	pl_control(t_data *d);
 // src/manipulate_textures.c
 int         load_texture(t_data *d, t_texture *tex, char *path);
 void 		init_textures(t_data *d, t_game_configs *game_configs);

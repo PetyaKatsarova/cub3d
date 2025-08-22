@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                         ::::::::           */
+/*   parse_floor_ceiling.c                               :+:    :+:           */
+/*                                                      +:+                   */
+/*   By: jstuhrin <marvin@42.fr>                       +#+                    */
+/*                                                    +#+                     */
+/*   Created: 2025/08/20 12:43:55 by jstuhrin       #+#    #+#                */
+/*   Updated: 2025/08/20 12:43:58 by jstuhrin       ########   odam.nl        */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../../../include/get_input.h"
 
 static int	parse_rgb(t_parsing *parsing, int i, int j, int *rgb)
@@ -44,7 +56,7 @@ static int	traverse_delim(t_parsing *parsing, int i, int j)
 	return (j);
 }
 
-static int set_up_parsing(t_parsing *parsing, int **rgb_arr, int i, int j)
+static int	set_up_parsing(t_parsing *parsing, int **rgb_arr, int i, int j)
 {
 	if (parsing->scene[i][j] == 'C')
 	{
