@@ -20,6 +20,7 @@ SRC      := src/main.c \
 			src/render/draw_3d_map2.c \
 		   	src/render/manipulate_textures.c \
 		   	src/render/keys_manip.c \
+		   	src/render/mouse_handler.c \
 			src/get_input/handle_file/validate_file.c \
 			src/get_input/get_input.c \
 			src/get_input/handle_file/read_file.c \
@@ -46,8 +47,11 @@ SRC      := src/main.c \
 			src/get_input/utils/ft_strlen.c \
 			src/get_input/utils/traverse_space.c \
 			src/get_input/utils/is_space.c \
+			src/get_input/utils/get_rgb_vals.c \
+			src/get_input/utils/copy_map.c \
 			src/get_input/test/print_parsing.c \
-			src/get_input/test/print_game_configs.c
+			src/get_input/test/print_game_configs.c \
+			src/get_input/test/print_game_configs_utils.c
 
 OBJDIR   := obj
 OBJ      := $(SRC:%.c=%.o)

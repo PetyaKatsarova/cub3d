@@ -33,8 +33,7 @@ int key_press(int keycode, t_data *d)
 	else if (keycode == KEY_LEFT)
         d->btns.left_arrow = 1;
     else if (keycode == KEY_RIGHT)
-        d->btns.right_arrow = 1;
-    handle_arrow_keys(d, keycode); 
+        d->btns.right_arrow = 1; 
     return (0);
 }
 

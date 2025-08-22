@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                         ::::::::           */
+/*   initialize_parsing_data.c                           :+:    :+:           */
+/*                                                      +:+                   */
+/*   By: jstuhrin <marvin@42.fr>                       +#+                    */
+/*                                                    +#+                     */
+/*   Created: 2025/08/20 12:42:23 by jstuhrin       #+#    #+#                */
+/*   Updated: 2025/08/20 12:42:25 by jstuhrin       ########   odam.nl        */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../include/get_input.h"
 
 void	initialize_parsing_data(t_parsing *parsing)
