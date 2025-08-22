@@ -6,7 +6,7 @@
 /*   By: petya <petya@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 14:51:30 by pekatsar          #+#    #+#             */
-/*   Updated: 2025/08/12 17:51:44 by petya            ###   ########.fr       */
+/*   Updated: 2025/08/22 11:49:05 by petya            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,13 +119,7 @@ void	draw_minimap_walls(t_data *d, int offset_x, int offset_y, float scale)
 	int					map_x;
 	int					map_y;
 	t_minimap_params	params;
-<<<<<<< HEAD
 
-	printf("map_cols: %d, map_rows: %d\n", d->map_cols, d->map_rows);
-=======
-	//printf("scale: %f\n", scale);
-	//printf("map_cols: %d, map_rows: %d\n", d->map_cols, d->map_rows);
->>>>>>> 5ef32085ba01f41614fd9de8db3421cb8f3aac97
 	map_y = 0;
 	while (map_y < d->map_rows)
 	{
