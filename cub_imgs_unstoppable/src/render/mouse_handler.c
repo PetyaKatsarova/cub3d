@@ -39,13 +39,13 @@ int	mouse_handler(int curr_x, int curr_y, t_data *d)
 	delta_x = curr_x - last_x;
 	if (delta_x < -1)
 	{
-		d->pl->angle -= 0.02;
+		d->pl->angle -= ROTATION_FACTOR;
 		if (d->pl->angle < 0)
 			d->pl->angle += 2 * M_PI;
 	}
 	if (delta_x > 1)
 	{
-		d->pl->angle += 0.02;
+		d->pl->angle += ROTATION_FACTOR;
 		if (d->pl->angle > 2 * M_PI)
 			d->pl->angle -= 2 * M_PI;
 	}

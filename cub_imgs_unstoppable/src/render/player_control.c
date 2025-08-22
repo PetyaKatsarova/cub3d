@@ -38,23 +38,23 @@ static int	calc_move(t_data *d, float *move_x, float *move_y)
 {
 	if (d->btns.w)
 	{
-		*move_x = d->pl->delta_x * SLOW_MOVE;
-		*move_y = d->pl->delta_y * SLOW_MOVE;
+		*move_x = d->pl->delta_x * MOVE_FACTOR;
+		*move_y = d->pl->delta_y * MOVE_FACTOR;
 	}
 	if (d->btns.s)
 	{
-		*move_x = -d->pl->delta_x * SLOW_MOVE;
-		*move_y = -d->pl->delta_y * SLOW_MOVE;
+		*move_x = -d->pl->delta_x * MOVE_FACTOR;
+		*move_y = -d->pl->delta_y * MOVE_FACTOR;
 	}
 	if (d->btns.a)
 	{
-		*move_x = d->pl->delta_y * SLOW_MOVE;
-		*move_y = -d->pl->delta_x * SLOW_MOVE;
+		*move_x = d->pl->delta_y * MOVE_FACTOR;
+		*move_y = -d->pl->delta_x * MOVE_FACTOR;
 	}
 	if (d->btns.d)
 	{
-		*move_x = -d->pl->delta_y * SLOW_MOVE;
-		*move_y = d->pl->delta_x * SLOW_MOVE;
+		*move_x = -d->pl->delta_y * MOVE_FACTOR;
+		*move_y = d->pl->delta_x * MOVE_FACTOR;
 	}
 	return (0);
 }
@@ -63,13 +63,13 @@ static int	calc_arrow_btns(t_data *d)
 {
 	if (d->btns.left_arrow)
 	{
-		d->pl->angle -= 0.05;
+		d->pl->angle -= ROTATION_FACTOR;
 		if (d->pl->angle < 0)
 			d->pl->angle += 2 * M_PI;
 	}
 	if (d->btns.right_arrow)
 	{
-		d->pl->angle += 0.05;
+		d->pl->angle += ROTATION_FACTOR;
 		if (d->pl->angle > 2 * M_PI)
 			d->pl->angle -= 2 * M_PI;
 	}
