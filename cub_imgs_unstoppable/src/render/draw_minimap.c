@@ -98,14 +98,14 @@ static void	draw_wall_block(t_data *d, t_minimap_params *params)
 	int	x;
 	int	y;
 
+	
 	y = params->start_y;
 	while (y < params->end_y)
 	{
 		x = params->start_x;
-		while (x < params->end_x )
+		while (x < params->end_x)
 		{
-			if (x >= params->offset_x && y >= params->offset_y)
-				set_px(d, x, y, WALL_COLOR);
+			set_px(d, x, y, WALL_COLOR);
 			x++;
 		}
 		y++;

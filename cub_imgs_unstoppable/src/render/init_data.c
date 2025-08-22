@@ -50,6 +50,7 @@ int	init_data(t_data *d, t_pl *pl, t_game_configs *game_configs)
 	init_pl(pl, game_configs);
 	init_btns(&d->btns);
 	init_textures(d, game_configs);
+	d->focus = true;
 	return (0);
 }
 

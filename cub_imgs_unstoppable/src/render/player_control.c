@@ -36,6 +36,7 @@ int	check_collision(t_data *d, double new_x, double new_y)
 
 static int	calc_move(t_data *d, float *move_x, float *move_y)
 {
+<<<<<<< HEAD
 	if (d->btns.w)
 	{
 		*move_x = d->pl->delta_x * SLOW_MOVE;
@@ -57,10 +58,28 @@ static int	calc_move(t_data *d, float *move_x, float *move_y)
 		*move_y = d->pl->delta_x * SLOW_MOVE;
 	}
 	return (0);
+=======
+    if (d->btns.left_arrow) // Rotate left continuously
+    {
+        d->pl->angle -= 0.05;  //slower rotation
+        if (d->pl->angle < 0)
+            d->pl->angle += 2 * M_PI;
+    }
+    if (d->btns.right_arrow) // Rotate right continuously
+    {
+        d->pl->angle += 0.05;
+        if (d->pl->angle > 2 * M_PI)
+            d->pl->angle -= 2 * M_PI;
+    }
+    d->pl->delta_x = cos(d->pl->angle) * 5; // Update player movement vectors after rotation
+    d->pl->delta_y = sin(d->pl->angle) * 5;
+    return (0);
+>>>>>>> cf3f927f4c3dc56d0520754e8598f31f8e771884
 }
 
 static int	calc_arrow_btns(t_data *d)
 {
+<<<<<<< HEAD
 	if (d->btns.left_arrow)
 	{
 		d->pl->angle -= 0.01;
@@ -110,4 +129,18 @@ void	handle_arrow_keys(t_data *d, int keycode)
 	}
 	d->pl->delta_x = cos(d->pl->angle) * 5;
 	d->pl->delta_y = sin(d->pl->angle) * 5;
+=======
+    float move_x;
+    float move_y;
+    
+    move_x = 0;
+    move_y = 0;
+    calc_move(d, &move_x, &move_y);
+    if (!check_collision(d, d->pl->x + move_x, d->pl->y + move_y))
+    {
+        d->pl->x += move_x;
+        d->pl->y += move_y;
+    }
+    calc_arrow_btns(d);
+>>>>>>> cf3f927f4c3dc56d0520754e8598f31f8e771884
 }

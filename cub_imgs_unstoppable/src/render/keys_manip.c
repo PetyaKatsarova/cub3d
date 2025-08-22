@@ -30,11 +30,18 @@ int	key_press(int keycode, t_data *d)
 	else if (keycode == 'd')
 		d->btns.d = 1;
 	else if (keycode == KEY_LEFT)
+<<<<<<< HEAD
 		d->btns.left_arrow = 1;
 	else if (keycode == KEY_RIGHT)
 		d->btns.right_arrow = 1;
 	handle_arrow_keys(d, keycode);
 	return (0);
+=======
+        d->btns.left_arrow = 1;
+    else if (keycode == KEY_RIGHT)
+        d->btns.right_arrow = 1; 
+    return (0);
+>>>>>>> cf3f927f4c3dc56d0520754e8598f31f8e771884
 }
 
 /* sets button state to released */

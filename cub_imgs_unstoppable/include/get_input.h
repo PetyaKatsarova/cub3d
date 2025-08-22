@@ -1,5 +1,17 @@
-#ifndef PARSE_H
-# define PARSE_H
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                         ::::::::           */
+/*   get_input.h                                         :+:    :+:           */
+/*                                                      +:+                   */
+/*   By: jstuhrin <marvin@42.fr>                       +#+                    */
+/*                                                    +#+                     */
+/*   Created: 2025/08/20 13:23:35 by jstuhrin       #+#    #+#                */
+/*   Updated: 2025/08/20 13:23:37 by jstuhrin       ########   odam.nl        */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef GET_INPUT_H
+# define GET_INPUT_H
 
 # include <stdlib.h>
 # include <stdio.h>
@@ -32,10 +44,10 @@
 # define FILE_PATH "file not found/failed to open file\n"
 # define TEXTURE_PATH "texture not found/failed to open texture\n"
 # define INV_CHAR_TEXTURE "invalid char in texture id\n"
-# define INV_CHAR_FC_TEXTURE "texture/F/C definitions: invalid char at beginning of line\n"
+# define INV_CHAR_FC_TEXTURE "texture/F/C def: invalid char at start of line\n"
 # define INV_CHAR_PATH "invalid char after texture path\n"
 
-typedef struct	s_parsing
+typedef struct s_parsing
 {
 	char	**scene;
 	char	*no;
@@ -56,7 +68,7 @@ typedef struct	s_parsing
 }	t_parsing;
 
 // if in main: get_input/assets/texture/my.xpm
-typedef struct	s_game_configs
+typedef struct s_game_configs
 {
 	char	*no;
 	char	*ea;
@@ -64,8 +76,8 @@ typedef struct	s_game_configs
 	char	*we;
 	char	floor[11];
 	char	ceiling[11];
-	int		floor_trgb;
-	int		ceiling_trgb;
+	int		floor_argb;
+	int		ceiling_argb;
 	char	**map;
 	int		map_rows;
 	int		map_cols;
@@ -100,5 +112,10 @@ void			measure_map(t_parsing *parsing, int i);
 bool			is_space(char c);
 int				traverse_space(t_parsing *parsing, int i, int j);
 void			print_parsing(t_parsing *parsing);
-void			print_game_configs(t_parsing *parsing, t_game_configs *game_configs);
+void			print_game_configs(t_parsing *parsing,
+					t_game_configs *game_configs);
+void			get_rgb_vals(t_parsing *parsing, t_game_configs *game_configs);
+void			copy_map(t_parsing *parsing, t_game_configs *game_configs);
+void			print_argb(t_game_configs *game_configs);
+void			print_fc(t_parsing *parsing, t_game_configs *game_configs);
 #endif
