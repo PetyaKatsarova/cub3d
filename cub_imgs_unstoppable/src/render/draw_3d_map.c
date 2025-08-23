@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   draw_3d_map.c                                     :+:    :+:            */
+/*   draw_3d_map.c                                      :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: pekatsar <pekatsar@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/07/30 18:34:37 by pekatsar      #+#    #+#                 */
-/*   Updated: 2025/08/01 14:58:30 by pekatsar      ########   odam.nl         */
+/*   Updated: 2025/08/23 12:10:10 by pekatsar      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,8 @@ void	draw_3d_wall_slice(t_data *d, int x, t_wall_info *wall)
 
 	setup_wall_info(wall, d);
 	wall_texture = set_texture(wall, d);
+	wall->wall_offset = set_wall_offset(wall);
+	tex_x = (int)((wall->wall_offset / TILE_SIZE) * wall_texture->width);
 	y = 0;
 	while (++y < WIN_HEIGHT)
 	{
@@ -102,9 +104,6 @@ void	draw_3d_wall_slice(t_data *d, int x, t_wall_info *wall)
 			wall->color = d->floor;
 		else
 		{
-			wall->wall_offset = set_wall_offset(wall);
-			tex_x = (int)((wall->wall_offset / TILE_SIZE)
-					* wall_texture->width);
 			tex_y = ((y - wall->wall_top) * wall_texture->height)
 				/ (wall->wall_bottom - wall->wall_top);
 			wall->color = get_texture_pixel(wall_texture, tex_x, tex_y);

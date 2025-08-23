@@ -6,20 +6,28 @@
 /*   By: pekatsar <pekatsar@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/08/15 20:01:15 by pekatsar      #+#    #+#                 */
-/*   Updated: 2025/08/15 20:01:18 by pekatsar      ########   odam.nl         */
+/*   Updated: 2025/08/23 11:33:54 by pekatsar      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3D.h"
 
+/*
+** Initialize vertical ray casting to the LEFT (west direction).
+** Sets starting point at left edge of current tile.
+*/
 static void	init_v_ray_left(t_data *d, t_ray_params *p)
 {
-	p->vx = floor(d->pl->x / TILE_SIZE) * TILE_SIZE - 0.0001;
+	p->vx = floor(d->pl->x / TILE_SIZE) * TILE_SIZE - (TILE_SIZE * 0.001);
 	p->vy = (d->pl->x - p->vx) * p->v_tan + d->pl->y;
 	p->xo = -TILE_SIZE;
 	p->yo = -p->xo * p->v_tan;
 }
 
+/*
+** Initialize vertical ray casting to the RIGHT (east direction).
+** Sets starting point at right edge of current tile.
+*/
 static void	init_v_ray_right(t_data *d, t_ray_params *p)
 {
 	p->vx = floor(d->pl->x / TILE_SIZE) * TILE_SIZE + TILE_SIZE;
@@ -28,6 +36,10 @@ static void	init_v_ray_right(t_data *d, t_ray_params *p)
 	p->yo = -p->xo * p->v_tan;
 }
 
+/*
+** Cast vertical ray step by step until hitting a wall.
+** Checks each vertical grid line intersection.
+*/
 static void	v_check_helper(t_data *d, t_ray_params *p)
 {
 	int	map_x;
@@ -48,6 +60,9 @@ static void	v_check_helper(t_data *d, t_ray_params *p)
 	}
 }
 
+/*
+** Determines direction and initiates ray casting.
+*/
 void	vertical_check(t_ray *ray, t_data *d, t_ray_params *p)
 {
 	p->v_tan = -tan(ray->angle);

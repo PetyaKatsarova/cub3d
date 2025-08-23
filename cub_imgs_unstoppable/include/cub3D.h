@@ -24,7 +24,7 @@
 # define DEG_RAD			0.0174533 // one degree in radians
 
 # define MINIMAP_WALL 		0x800080
-# define PL_COLOR    		0x0d0832ff
+# define PL_COLOR    		0x8c932a // 0x0d0832ff
 //# define BACKGROUND_COLOR 	0xD3D3D3
 # define PURPLE_RAY			0x800080
 # define BLACK				0x000000

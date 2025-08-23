@@ -6,7 +6,7 @@
 /*   By: pekatsar <pekatsar@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/08/15 19:50:49 by pekatsar      #+#    #+#                 */
-/*   Updated: 2025/08/15 19:50:53 by pekatsar      ########   odam.nl         */
+/*   Updated: 2025/08/23 11:30:01 by pekatsar      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	init_h_ray_up(t_data *d, t_ray_params *ray_params)
 {
-	ray_params->hy = floor(d->pl->y / TILE_SIZE) * TILE_SIZE - 0.0001;
+	ray_params->hy = floor(d->pl->y / TILE_SIZE) * TILE_SIZE - (TILE_SIZE * 0.001);
 	ray_params->hx = (d->pl->y - ray_params->hy)
 		* ray_params->h_tan + d->pl->x;
 	ray_params->yo = -TILE_SIZE;

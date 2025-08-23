@@ -6,7 +6,7 @@
 /*   By: pekatsar <pekatsar@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/08/15 20:01:49 by pekatsar      #+#    #+#                 */
-/*   Updated: 2025/08/22 14:28:35 by pekatsar      ########   odam.nl         */
+/*   Updated: 2025/08/22 17:35:48 by pekatsar      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,9 @@ int	main(int argc, char **argv)
     mlx_hook(data.win, 2, 1L<<0, key_press, &data); // 
     mlx_hook(data.win, 3, 1L<<1, key_release, &data); 
     mlx_hook(data.win, 17, 0, close_window, &data);
-    mlx_hook(data.win, 6, 1L<<6, mouse_handler, &data);
-    mlx_hook(data.win, 9, 1L<<21, focus_in, &data);
-    mlx_hook(data.win, 10, 1L<<21, focus_out, &data);
+    //mlx_hook(data.win, 6, 1L<<6, mouse_handler, &data);
+    //mlx_hook(data.win, 9, 1L<<21, focus_in, &data);
+    //mlx_hook(data.win, 10, 1L<<21, focus_out, &data);
     mlx_loop(data.mlx);
     return (0);
 }
