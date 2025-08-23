@@ -6,7 +6,7 @@
 /*   By: pekatsar <pekatsar@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/08/15 20:01:49 by pekatsar      #+#    #+#                 */
-/*   Updated: 2025/08/22 17:35:48 by pekatsar      ########   odam.nl         */
+/*   Updated: 2025/08/23 14:50:20 by pekatsar      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,16 @@ static int	close_window(void *param)
 	exit(0);
 }
 
+/*
+2: keyPress, 3: keyRelease, 17: DestroyNotify(x btn, window close)
+The third argument is the event mask (which bits to listen for).
+Example:
+1L<<0 = KeyPress
+1L<<1 = KeyRelease
+1L<<6 = MotionNotify (mouse move)
+1L<<21 = FocusIn/FocusOut
+0 = No mask needed (for DestroyNotify, event 17)
+*/
 int	main(int argc, char **argv)
 {
 	t_data			data;

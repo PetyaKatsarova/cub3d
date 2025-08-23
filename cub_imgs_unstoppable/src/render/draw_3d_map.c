@@ -6,7 +6,7 @@
 /*   By: pekatsar <pekatsar@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/07/30 18:34:37 by pekatsar      #+#    #+#                 */
-/*   Updated: 2025/08/23 12:10:10 by pekatsar      ########   odam.nl         */
+/*   Updated: 2025/08/23 17:45:38 by pekatsar      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@ void	calculate_distances(t_data *d, t_ray_params *params,
 			+ (params->hy - d->pl->y) * (params->hy - d->pl->y));
 	*vdist = sqrt((params->vx - d->pl->x) * (params->vx - d->pl->x)
 			+ (params->vy - d->pl->y) * (params->vy - d->pl->y));
-	if (*hdist <= 1.0 || *hdist > 10000)
-		*hdist = 10000;
-	if (*vdist <= 1.0 || *vdist > 10000)
-		*vdist = 10000;
+	//if (*hdist <= 1.0 || *hdist > 10000) // dont see for now diff without
+	//	*hdist = 10000;
+	//if (*vdist <= 1.0 || *vdist > 10000)
+	//	*vdist = 10000;
 }
 
 /* corrected is fix for fish eye effect */

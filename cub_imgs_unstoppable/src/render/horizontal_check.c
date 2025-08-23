@@ -6,7 +6,7 @@
 /*   By: pekatsar <pekatsar@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/08/15 19:50:49 by pekatsar      #+#    #+#                 */
-/*   Updated: 2025/08/23 12:54:29 by pekatsar      ########   odam.nl         */
+/*   Updated: 2025/08/23 17:54:05 by pekatsar      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	init_h_ray_up(t_data *d, t_ray_params *ray_params)
 {
 	ray_params->hy = floor(d->pl->y / TILE_SIZE) * TILE_SIZE
-		- (TILE_SIZE * 0.001);
+		- (TILE_SIZE * EPS);
 	ray_params->hx = (d->pl->y - ray_params->hy)
 		* ray_params->h_tan + d->pl->x;
 	ray_params->yo = -TILE_SIZE;
@@ -24,7 +24,7 @@ void	init_h_ray_up(t_data *d, t_ray_params *ray_params)
 
 void	init_h_ray_down(t_data *d, t_ray_params *params)
 {
-	params->hy = floor(d->pl->y / TILE_SIZE) * TILE_SIZE + TILE_SIZE;
+	params->hy = floor(d->pl->y / TILE_SIZE) * TILE_SIZE + TILE_SIZE + EPS;
 	params->hx = (d->pl->y - params->hy) * params->h_tan + d->pl->x;
 	params->yo = TILE_SIZE;
 	params->xo = -params->yo * params->h_tan;
@@ -38,20 +38,17 @@ static void	h_check_helper(t_data *d, t_ray_params *ray_params)
 	map_x = 0;
 	map_y = 0;
 	ray_params->dof = 0;
-	while (ray_params->dof < d->map_rows)
+	while (ray_params->dof < (d->map_cols + d->map_rows) * 4)
 	{
 		map_x = (int)(ray_params->hx / TILE_SIZE);
 		map_y = (int)(ray_params->hy / TILE_SIZE);
-		if (map_x >= 0 && map_x < d->map_cols
-			&& map_y >= 0 && map_y < d->map_rows
-			&& d->map[map_y][map_x] == '1')
-			break ;
-		else
-		{
-			ray_params->hx += ray_params->xo;
-			ray_params->hy += ray_params->yo;
-			ray_params->dof++;
-		}
+        if (map_x < 0 || map_x >= d->map_cols || map_y < 0 || map_y >= d->map_rows)
+            break;
+        if (d->map[map_y][map_x] == '1')
+            break;
+		ray_params->hx += ray_params->xo;
+		ray_params->hy += ray_params->yo;
+		ray_params->dof++;
 	}
 }
 
