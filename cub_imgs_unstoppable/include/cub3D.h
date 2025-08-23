@@ -118,26 +118,27 @@ typedef struct s_minimap_params {
 } t_minimap_params;
 
 typedef struct s_data {
-	void			*mlx;
-	void			*win;
-	void			*img;
-	char			*addr;
-	int				bpp; // bits per pixel
-	int				line_length;
-	int				endian;
-	int				map_cols;
-	int				map_rows;
-	int				floor;
-	int			    ceiling;
-	char			**map;
-	t_pl 			*pl;
-	t_game_configs *game_configs;
-	t_btns			btns;
-	t_texture 		north_tex;
-    t_texture 		south_tex;
-    t_texture 		east_tex;
-	t_texture   	west_tex;
-	bool			focus;
+	void				*mlx;
+	void				*win;
+	void				*img;
+	char				*addr;
+	int					bpp; // bits per pixel
+	int					line_length;
+	int					endian;
+	int					map_cols;
+	int					map_rows;
+	int					floor;
+	int			    	ceiling;
+	char				**map;
+	t_pl 				*pl;
+	t_minimap_params	*params;
+	t_game_configs 		*game_configs;
+	t_btns				btns;
+	t_texture 			north_tex;
+    t_texture 			south_tex;
+    t_texture 			east_tex;
+	t_texture   		west_tex;
+	bool				focus;
 }	t_data;
 
   typedef struct s_helper
@@ -173,7 +174,7 @@ uint32_t    get_texture_pixel(t_texture *tex, int x, int y);
 void        draw_textured_wall(t_data *d, int screen_x, int wall_height, t_texture *tex);
 int 		clean_mlx(t_data *d);
 // src/render/draw_minimap2.c && 3
-void		draw_single_ray(t_data *d, float ray_angle, t_minimap_params *params, int player_x, int player_y);
+void		draw_single_ray(t_data *d, float ray_angle, int player_x, int player_y);
 void		draw_player_dot(t_data *d, int player_x, int player_y, t_minimap_params *params);
 void		draw_player_direction(t_data *d, int player_x, int player_y);
 // src/render draw_3dmap and 2.c

@@ -6,7 +6,7 @@
 /*   By: pekatsar <pekatsar@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/08/15 19:34:10 by pekatsar      #+#    #+#                 */
-/*   Updated: 2025/08/23 11:04:16 by pekatsar      ########   odam.nl         */
+/*   Updated: 2025/08/23 12:53:50 by pekatsar      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,12 +69,6 @@ static void	draw_3d_map(t_data *d, t_ray *ray)
 		horizontal_check(ray, d, &params);
 		vertical_check(ray, d, &params);
 		calculate_distances(d, &params, &hdist, &vdist);
-		printf("hdist: %f, vdist: %f\n", hdist, vdist);
-		// Debug: Print player position and which tile they're in
-		printf("Player: (%.1f, %.1f) Tile: (%d, %d)\n", 
-       	d->pl->x, d->pl->y, 
-       (int)(d->pl->x/TILE_SIZE), (int)(d->pl->y/TILE_SIZE));
-	   
 		setup_wall(&wall, &params, hdist, vdist);
 		wall.ray_angle = ray->angle;
 		draw_3d_wall_slice(d, x, &wall);
