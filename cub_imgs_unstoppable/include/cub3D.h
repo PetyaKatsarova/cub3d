@@ -16,10 +16,10 @@
 # define TILE_SIZE  		64 // px width and heightdraw_minimap_backg
 # define MINIMAP_SIZE		350
 # define PL_SIZE 			7
-# define STEP_SIZE 			5
+# define STEP_SIZE 			3 //5
 # define VECTOR_LEN			20 // px
-# define MOVE_FACTOR			1 //0.4
-# define ROTATION_FACTOR	0.05
+# define MOVE_FACTOR		0.6 //0.4
+# define ROTATION_FACTOR	0.03 // 0.05
 # define RAYS_NUM			1600
 # define DEG_RAD			0.0174533 // one degree in radians
 
@@ -29,7 +29,7 @@
 # define PURPLE_RAY			0x800080
 # define BLACK				0x000000
 # define WALL_BUFFER		1
-# define EPS				0.0001 //
+# define EPS				0.00001 //
 
 # define KEY_LEFT   		65361
 # define KEY_RIGHT  		65363
@@ -46,13 +46,13 @@ typedef struct  s_btns
 } t_btns;
 
 typedef struct s_wall_info { // for visible wall
-	float distance;    // How far away is the wall from pl (in pixels)
-	float ray_angle;   // What direction are we looking at (in radians - like degrees but different
+	double distance;    // How far away is the wall from pl (in pixels)
+	double ray_angle;   // What direction are we looking at (in radians)
 	int hit_vertical;  // Is this a vertical wall (1=yes, 0=horizontal wall)
-	float hit_x;       // X coordinate where ray hit the wall
-	float hit_y;       // Y coordinate where ray hit the wall
-	float line_h;      // How tall should we draw this wall on screen?
-	float wall_offset; // Which part of the texture to use? (0-64 pixels)
+	double hit_x;       // X coordinate where ray hit the wall
+	double hit_y;       // Y coordinate where ray hit the wall
+	double line_h;      // How tall should we draw this wall on screen?
+	double wall_offset; // Which part of the texture to use? (0-64 pixels)
 	int wall_top;      // Top pixel of wall on screen
 	int wall_bottom;   // Bottom pixel of wall on screen
 	uint32_t color;    // What color/texture pixel to draw
@@ -70,7 +70,6 @@ typedef struct s_pl {
 typedef struct s_ray { // vision ray from pl eye
 	double 	angle; // ray angle
 	double 	distance; // distance to wall
-	int		hit_vertical; // 1 if hit vertical wall
 	double	radian;
 	double	x;
 	double	y;

@@ -6,7 +6,7 @@
 /*   By: pekatsar <pekatsar@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/08/02 18:03:51 by pekatsar      #+#    #+#                 */
-/*   Updated: 2025/08/15 19:59:25 by pekatsar      ########   odam.nl         */
+/*   Updated: 2025/08/29 14:05:15 by pekatsar      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,15 @@ void	init_textures(t_data *d, t_game_configs *game_configs)
 		printf("Warning: Failed to load west texture\n");
 }
 
+/*
+	tex->addr is the start of the texture’s pixel data in memory.
+	Each row of the image is tex->line_length bytes long.
+	To find the pixel at (x, y):
+	Move down y rows: y * tex->line_length bytes.
+	Move right x columns: x * (tex->bpp / 8) bytes.
+	tex->bpp is bits per pixel, so divide by 8 to get bytes per pixel.
+	Add these together to get the memory address of the pixel.
+*/
 uint32_t	get_texture_pixel(t_texture *tex, int x, int y)
 {
 	char	*pixel;

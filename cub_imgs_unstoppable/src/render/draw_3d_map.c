@@ -6,7 +6,7 @@
 /*   By: pekatsar <pekatsar@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/07/30 18:34:37 by pekatsar      #+#    #+#                 */
-/*   Updated: 2025/08/23 17:45:38 by pekatsar      ########   odam.nl         */
+/*   Updated: 2025/08/29 14:02:07 by pekatsar      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,12 @@ void	calculate_distances(t_data *d, t_ray_params *params,
 			+ (params->hy - d->pl->y) * (params->hy - d->pl->y));
 	*vdist = sqrt((params->vx - d->pl->x) * (params->vx - d->pl->x)
 			+ (params->vy - d->pl->y) * (params->vy - d->pl->y));
-	//if (*hdist <= 1.0 || *hdist > 10000) // dont see for now diff without
-	//	*hdist = 10000;
-	//if (*vdist <= 1.0 || *vdist > 10000)
-	//	*vdist = 10000;
 }
 
 /* corrected is fix for fish eye effect */
 static void	setup_wall_info(t_wall_info *wall, t_data *d)
 {
-	float	corrected;
+	double	corrected;
 
 	corrected = wall->distance * cos(wall->ray_angle - d->pl->angle);
 	wall->line_h = (TILE_SIZE * WIN_HEIGHT / 2) / corrected;
@@ -61,12 +57,12 @@ static t_texture	*set_texture(t_wall_info *wall, t_data *d)
 
 /*
 ** The map is split into 64x64 px tiles:
-** example: when ray hits a wall at px 150, fmod(150, 64) == 22
+** for example when ray hits a wall at px 150, fmod(150, 64) == 22
 ** so the ray hit is 22 px into the tile.
 */
 static float	set_wall_offset(t_wall_info *wall)
 {
-	float	offset;
+	double	offset;
 
 	if (wall->hit_vertical)
 	{
@@ -84,6 +80,11 @@ static float	set_wall_offset(t_wall_info *wall)
 	}
 }
 
+/*
+	Draws one vertical slice of a wall on the screen, like a thin column.
+	top is 0, bottom is win_height: for graphics
+	tex_x: which col of the wall texture to use
+*/
 void	draw_3d_wall_slice(t_data *d, int x, t_wall_info *wall)
 {
 	t_texture	*wall_texture;

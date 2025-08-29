@@ -6,7 +6,7 @@
 /*   By: pekatsar <pekatsar@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/08/15 19:34:10 by pekatsar      #+#    #+#                 */
-/*   Updated: 2025/08/23 12:53:50 by pekatsar      ########   odam.nl         */
+/*   Updated: 2025/08/29 13:14:57 by pekatsar      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,10 @@ void	set_px(t_data *d, int x, int y, uint32_t color)
 	}
 }
 
-static void	setup_rayangle(t_data *d, t_ray *ray)
+/*
+	Start drawing rays from 30 degrees left of where I'm looking.
+*/
+static void	setup_ray_angle(t_data *d, t_ray *ray)
 {
 	ray->angle = d->pl->angle - (30.0 * DEG_RAD);
 	if (ray->angle < 0)
@@ -61,7 +64,7 @@ static void	draw_3d_map(t_data *d, t_ray *ray)
 	t_wall_info		wall;
 	int				x;
 
-	setup_rayangle(d, ray);
+	setup_ray_angle(d, ray);
 	x = 0;
 	while (x < WIN_WIDTH)
 	{
@@ -90,7 +93,7 @@ int	render_frame(t_data *d)
 	draw_3d_map(d, &ray);
 	draw_minimap(d);
 	mlx_put_image_to_window(d->mlx, d->win, d->img, 0, 0);
-	if (d->focus == true)
-		mlx_mouse_move(d->mlx, d->win, WIN_WIDTH / 2, WIN_HEIGHT / 2);
+	//if (d->focus == true)
+	//	mlx_mouse_move(d->mlx, d->win, WIN_WIDTH / 2, WIN_HEIGHT / 2);
 	return (0);
 }

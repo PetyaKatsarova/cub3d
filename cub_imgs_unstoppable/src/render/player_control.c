@@ -6,7 +6,7 @@
 /*   By: petya <petya@student.42.fr>                  +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/07/23 15:22:20 by pekatsar      #+#    #+#                 */
-/*   Updated: 2025/08/22 14:19:50 by pekatsar      ########   odam.nl         */
+/*   Updated: 2025/08/29 12:32:27 by pekatsar      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,23 +38,23 @@ static int	calc_move(t_data *d, float *move_x, float *move_y)
 {
 	if (d->btns.w)
 	{
-		*move_x = d->pl->delta_x * MOVE_FACTOR;
-		*move_y = d->pl->delta_y * MOVE_FACTOR;
+		*move_x += d->pl->delta_x * MOVE_FACTOR;
+		*move_y += d->pl->delta_y * MOVE_FACTOR;
 	}
 	if (d->btns.s)
 	{
-		*move_x = -d->pl->delta_x * MOVE_FACTOR;
-		*move_y = -d->pl->delta_y * MOVE_FACTOR;
+		*move_x -= d->pl->delta_x * MOVE_FACTOR;
+		*move_y -= d->pl->delta_y * MOVE_FACTOR;
 	}
 	if (d->btns.a)
 	{
-		*move_x = d->pl->delta_y * MOVE_FACTOR;
-		*move_y = -d->pl->delta_x * MOVE_FACTOR;
+		*move_x += d->pl->delta_y * MOVE_FACTOR;
+		*move_y -= d->pl->delta_x * MOVE_FACTOR;
 	}
 	if (d->btns.d)
 	{
-		*move_x = -d->pl->delta_y * MOVE_FACTOR;
-		*move_y = d->pl->delta_x * MOVE_FACTOR;
+		*move_x -= d->pl->delta_y * MOVE_FACTOR;
+		*move_y += d->pl->delta_x * MOVE_FACTOR;
 	}
 	return (0);
 }
