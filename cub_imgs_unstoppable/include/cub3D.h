@@ -26,11 +26,10 @@
 
 # define MINIMAP_WALL 		0x800080
 # define PL_COLOR    		0x8c932a // 0x0d0832ff
-//# define BACKGROUND_COLOR 	0xD3D3D3
 # define PURPLE_RAY			0x800080
 # define BLACK				0x000000
 # define WALL_BUFFER		1
-# define EPS				0.00001 //
+# define EPS				0.000001 //
 
 # define KEY_LEFT   		65361
 # define KEY_RIGHT  		65363

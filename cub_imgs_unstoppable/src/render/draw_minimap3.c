@@ -6,7 +6,7 @@
 /*   By: pekatsar <pekatsar@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/08/15 19:49:13 by pekatsar      #+#    #+#                 */
-/*   Updated: 2025/08/23 13:23:47 by pekatsar      ########   odam.nl         */
+/*   Updated: 2025/08/29 16:17:42 by pekatsar      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,39 +75,6 @@ void	draw_single_ray(t_data *d, float ray_angle, int player_x, int player_y)
 		draw_line(d, &line, &helper);
 	}
 }
-
-//void	draw_single_ray(t_data *d, float ray_angle, int player_x, int player_y)
-//{
-//	t_ray			ray;
-//	t_ray_params	ray_params;
-//	float			hit_x;
-//	float			hit_y;
-//	int				ray_end_x;
-//	int				ray_end_y;
-//	t_line_info		line;
-//	t_helper		helper;
-
-//	ray.angle = ray_angle;
-//	init_ray_params(&ray_params);
-//	horizontal_check(&ray, d, &ray_params);
-//	vertical_check(&ray, d, &ray_params);
-//	set_hit_xy(ray_params, d, &hit_x, &hit_y);
-//	//draw_ray_helper(d, player_x, player_y, &helper);
-//	ray_end_x = d->params->offset_x + (hit_x * d->params->scale);
-//	ray_end_y = d->params->offset_y + (hit_y * d->params->scale);
-//	if (ray_end_x >= d->params->offset_x
-//		&& ray_end_x < d->params->offset_x + MINIMAP_SIZE
-//		&& ray_end_y >= d->params->offset_y
-//		&& ray_end_y < d->params->offset_y + MINIMAP_SIZE)
-//	{
-//		line.x0 = player_x;
-//		line.y0 = player_y;
-//		line.x1 = ray_end_x;
-//		line.y1 = ray_end_y;
-//		line.color = PL_COLOR;
-//		draw_line(d, &line, &helper);
-//	}
-//}
 
 static void	draw_minimap_rays(t_data *d, t_minimap_params *params,
 				int player_x, int player_y)
