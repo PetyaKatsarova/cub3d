@@ -6,13 +6,13 @@
 /*   By: petya <petya@student.42.fr>                  +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/08/01 14:51:30 by pekatsar      #+#    #+#                 */
-/*   Updated: 2025/08/23 12:12:04 by pekatsar      ########   odam.nl         */
+/*   Updated: 2025/08/29 16:55:29 by pekatsar      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3D.h"
 
-/*
+/* Bresenham’s algorithm
 ** Connects two points with a straight line made of pxs.
 ** start at (0,0) and end at (4,2).
 ** Compute total move:
@@ -30,7 +30,7 @@
 ** step_size4: move to (4,2.0) → plot at (4,2)
 */
 void	draw_line(t_data *data, t_line_info *line_info,
-			t_helper *data_placeholder)
+			t_line_math *data_placeholder)
 {
 	int	step_size;
 	int	i;
@@ -92,11 +92,6 @@ static void	draw_wall_block(t_data *d, t_minimap_params *params, int offset_x,
 	}
 }
 
-/*
-** debug : inside inner loop:
-** printf("Drawing wall at map (%d,%d) -> px (%d,%d) to (%d,%d)\n",
-** map_x, map_y, params.start_x, params.start_y, params.end_x, params.end_y);
-*/
 void	draw_minimap_walls(t_data *d, int offset_x, int offset_y, float scale)
 {
 	int					map_x;

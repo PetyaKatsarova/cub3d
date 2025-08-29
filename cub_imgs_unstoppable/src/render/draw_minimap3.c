@@ -6,12 +6,15 @@
 /*   By: pekatsar <pekatsar@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/08/15 19:49:13 by pekatsar      #+#    #+#                 */
-/*   Updated: 2025/08/29 16:17:42 by pekatsar      ########   odam.nl         */
+/*   Updated: 2025/08/29 17:26:17 by pekatsar      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3D.h"
 
+/*
+Chooses which wall the ray hit first (horizontal or vertical) and sets the hit coordinates.
+*/
 static void	set_hit_xy(t_ray_params ray_params, t_data *d,
 				float *hit_x, float *hit_y)
 {
@@ -36,8 +39,12 @@ static void	set_hit_xy(t_ray_params ray_params, t_data *d,
 		*hit_x = ray_params.vx;
 		*hit_y = ray_params.vy;
 	}
+	//printf("hx: %f hy: %f vx: %f vy: %f\n", ray_params.hx, ray_params.hy, ray_params.vx, ray_params.vy);
 }
 
+/*
+Casts a ray from the player, finds where it hits a wall, and converts that hit position to minimap coordinates.
+*/
 static void	compute_ray_end(t_data *d, float ray_angle, int *out_x, int *out_y)
 {
 	t_ray			ray;
@@ -59,7 +66,7 @@ void	draw_single_ray(t_data *d, float ray_angle, int player_x, int player_y)
 	int				ray_end_x;
 	int				ray_end_y;
 	t_line_info		line;
-	t_helper		helper;
+	t_line_math		helper;
 
 	compute_ray_end(d, ray_angle, &ray_end_x, &ray_end_y);
 	if (ray_end_x >= d->params->offset_x

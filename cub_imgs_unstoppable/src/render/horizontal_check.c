@@ -6,7 +6,7 @@
 /*   By: pekatsar <pekatsar@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/08/15 19:50:49 by pekatsar      #+#    #+#                 */
-/*   Updated: 2025/08/29 16:09:00 by pekatsar      ########   odam.nl         */
+/*   Updated: 2025/08/29 17:42:50 by pekatsar      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,17 @@ void	init_h_ray_up(t_data *d, t_ray_params *ray_params)
 	ray_params->y_offset = -TILE_SIZE;
 	ray_params->x_offset = -ray_params->y_offset * ray_params->h_tan;
 }
-
+/*
+d->pl->y / TILE_SIZE: Get the tile index (row) where the player is.
+floor(...): Get the integer part (the start of the tile).
+* TILE_SIZE: Convert back to pixel position (top edge of the tile).
++ TILE_SIZE: Move to the bottom edge of the tile (for rays facing down).
+- EPS: Move just inside the tile to avoid floating-point bugs.
+*/
 void	init_h_ray_down(t_data *d, t_ray_params *params)
 {
 	params->hy = floor(d->pl->y / TILE_SIZE) * TILE_SIZE
-		+ TILE_SIZE + EPS;
+		+ TILE_SIZE - EPS;
 	params->hx = (d->pl->y - params->hy)
 		* params->h_tan + d->pl->x;
 	params->y_offset = TILE_SIZE;

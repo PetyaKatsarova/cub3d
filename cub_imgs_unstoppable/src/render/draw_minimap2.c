@@ -39,7 +39,7 @@ void	draw_player_dot(t_data *d, int player_x,
 void	draw_player_direction(t_data *d, int player_x, int player_y)
 {
 	t_line_info	line;
-	t_helper	helper;
+	t_line_math	helper;
 
 	line.x0 = player_x;
 	line.y0 = player_y;
