@@ -6,7 +6,7 @@
 /*   By: petya <petya@student.42.fr>                  +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/07/23 15:22:20 by pekatsar      #+#    #+#                 */
-/*   Updated: 2025/08/29 12:32:27 by pekatsar      ########   odam.nl         */
+/*   Updated: 2025/08/29 14:46:38 by pekatsar      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,8 @@ static int	calc_arrow_btns(t_data *d)
 		if (d->pl->angle > 2 * M_PI)
 			d->pl->angle -= 2 * M_PI;
 	}
-	d->pl->delta_x = cos(d->pl->angle) * 5;
-	d->pl->delta_y = sin(d->pl->angle) * 5;
+	d->pl->delta_x = cos(d->pl->angle) * MOVE_SPEED;
+	d->pl->delta_y = sin(d->pl->angle) * MOVE_SPEED;
 	return (0);
 }
 

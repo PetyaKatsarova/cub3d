@@ -6,7 +6,7 @@
 /*   By: pekatsar <pekatsar@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/08/15 19:34:10 by pekatsar      #+#    #+#                 */
-/*   Updated: 2025/08/29 13:14:57 by pekatsar      ########   odam.nl         */
+/*   Updated: 2025/08/29 15:45:32 by pekatsar      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,14 @@ static void	setup_wall(t_wall_info *wall, t_ray_params *params,
 {
 	if (hdist < vdist)
 	{
-		wall->distance = (float)hdist;
+		wall->distance = hdist;
 		wall->hit_x = params->hx;
 		wall->hit_y = params->hy;
 		wall->hit_vertical = 0;
 	}
 	else
 	{
-		wall->distance = (float)vdist;
+		wall->distance = vdist;
 		wall->hit_x = params->vx;
 		wall->hit_y = params->vy;
 		wall->hit_vertical = 1;
@@ -93,7 +93,7 @@ int	render_frame(t_data *d)
 	draw_3d_map(d, &ray);
 	draw_minimap(d);
 	mlx_put_image_to_window(d->mlx, d->win, d->img, 0, 0);
-	//if (d->focus == true)
-	//	mlx_mouse_move(d->mlx, d->win, WIN_WIDTH / 2, WIN_HEIGHT / 2);
+	if (d->focus == true)
+		mlx_mouse_move(d->mlx, d->win, WIN_WIDTH / 2, WIN_HEIGHT / 2);
 	return (0);
 }

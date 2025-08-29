@@ -6,7 +6,7 @@
 /*   By: pekatsar <pekatsar@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/07/25 16:26:59 by pekatsar      #+#    #+#                 */
-/*   Updated: 2025/08/15 19:58:04 by pekatsar      ########   odam.nl         */
+/*   Updated: 2025/08/29 15:47:31 by pekatsar      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ void	init_ray_params(t_ray_params *params)
 	params->h_tan = 0.0;
 	params->v_tan = 0.0;
 	params->dof = 0;
-	params->xo = 0.0;
-	params->yo = 0.0;
+	params->x_offset = 0.0;
+	params->y_offset = 0.0;
 	params->hx = 0.0;
 	params->hy = 0.0;
 	params->vx = 0.0;

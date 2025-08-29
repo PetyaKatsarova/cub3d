@@ -77,9 +77,6 @@ $(LIBMLX)/libmlx.a:
 	@$(CC) $(CFLAGS) -I/usr/include -Imlx_linux -O3 -c $< -o $@ $(HEADERS)
 	@echo "$(GREEN)Compiled$(RESET) $<"
 
-$(OBJDIR):
-	@mkdir -p $(OBJDIR)
-
 # Make sure MLX is built before linking, also depend on Makefile
 $(NAME): $(LIBMLX)/libmlx.a $(OBJ) Makefile
 	@$(CC) $(CFLAGS) $(OBJ) $(LIBS) -o $(NAME)

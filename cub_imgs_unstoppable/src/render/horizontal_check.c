@@ -6,28 +6,37 @@
 /*   By: pekatsar <pekatsar@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/08/15 19:50:49 by pekatsar      #+#    #+#                 */
-/*   Updated: 2025/08/23 17:54:05 by pekatsar      ########   odam.nl         */
+/*   Updated: 2025/08/29 15:49:09 by pekatsar      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3D.h"
 
+/*
+	Divide by TILE_SIZE to find which tile you’re in.
+	Floor it to get the top edge of that tile.
+	Multiply by TILE_SIZE to get the pixel position.
+	Subtract a tiny bit (TILE_SIZE * EPS) to ensure you’re just above
+	the line, not exactly on it (avoids bugs).
+*/
 void	init_h_ray_up(t_data *d, t_ray_params *ray_params)
 {
 	ray_params->hy = floor(d->pl->y / TILE_SIZE) * TILE_SIZE
 		- (TILE_SIZE * EPS);
 	ray_params->hx = (d->pl->y - ray_params->hy)
 		* ray_params->h_tan + d->pl->x;
-	ray_params->yo = -TILE_SIZE;
-	ray_params->xo = -ray_params->yo * ray_params->h_tan;
+	ray_params->y_offset = -TILE_SIZE;
+	ray_params->x_offset = -ray_params->y_offset * ray_params->h_tan;
 }
 
 void	init_h_ray_down(t_data *d, t_ray_params *params)
 {
-	params->hy = floor(d->pl->y / TILE_SIZE) * TILE_SIZE + TILE_SIZE + EPS;
-	params->hx = (d->pl->y - params->hy) * params->h_tan + d->pl->x;
-	params->yo = TILE_SIZE;
-	params->xo = -params->yo * params->h_tan;
+	params->hy = floor(d->pl->y / TILE_SIZE) * TILE_SIZE
+		+ TILE_SIZE + EPS;
+	params->hx = (d->pl->y - params->hy)
+		* params->h_tan + d->pl->x;
+	params->y_offset = TILE_SIZE;
+	params->x_offset = -params->y_offset * params->h_tan;
 }
 
 static void	h_check_helper(t_data *d, t_ray_params *ray_params)
@@ -42,12 +51,13 @@ static void	h_check_helper(t_data *d, t_ray_params *ray_params)
 	{
 		map_x = (int)(ray_params->hx / TILE_SIZE);
 		map_y = (int)(ray_params->hy / TILE_SIZE);
-        if (map_x < 0 || map_x >= d->map_cols || map_y < 0 || map_y >= d->map_rows)
-            break;
-        if (d->map[map_y][map_x] == '1')
-            break;
-		ray_params->hx += ray_params->xo;
-		ray_params->hy += ray_params->yo;
+		if (map_x < 0 || map_x >= d->map_cols
+			|| map_y < 0 || map_y >= d->map_rows)
+			break ;
+		if (d->map[map_y][map_x] == '1')
+			break ;
+		ray_params->hx += ray_params->x_offset;
+		ray_params->hy += ray_params->y_offset;
 		ray_params->dof++;
 	}
 }

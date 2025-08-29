@@ -18,7 +18,8 @@
 # define PL_SIZE 			7
 # define STEP_SIZE 			3 //5
 # define VECTOR_LEN			20 // px
-# define MOVE_FACTOR		0.6 //0.4
+# define MOVE_FACTOR		0.2 //0.4
+# define MOVE_SPEED			5
 # define ROTATION_FACTOR	0.03 // 0.05
 # define RAYS_NUM			1600
 # define DEG_RAD			0.0174533 // one degree in radians
@@ -76,11 +77,11 @@ typedef struct s_ray { // vision ray from pl eye
 } t_ray;
 
 typedef struct s_ray_params { // math helper for calc rays
-	float h_tan;  // Math value for horizontal calculations (-1/tan)
-	float v_tan;  // Math value for vertical calculations (-tan)
+	float h_tan;  // Math value for horizontal calculations (-1/tan): ratio
+	float v_tan;  // Math value for vertical calculations (-tan): ratio
 	int dof;      // "Depth of field" - how many steps ray took
-	float xo;     // How much X changes each step
-	float yo;     // How much Y changes each step
+	float x_offset  ;     // How much X changes each step
+	float y_offset;     // How much Y changes each step
 	float hx;     // X where ray hit horizontal grid line
 	float hy;     // Y where ray hit horizontal grid line
 	float vx;     // X where ray hit vertical grid line
