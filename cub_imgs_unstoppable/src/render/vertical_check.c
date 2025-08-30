@@ -6,7 +6,7 @@
 /*   By: pekatsar <pekatsar@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/08/15 20:01:15 by pekatsar      #+#    #+#                 */
-/*   Updated: 2025/08/29 17:19:21 by pekatsar      ########   odam.nl         */
+/*   Updated: 2025/08/30 15:17:45 by pekatsar      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 */
 static void	init_v_ray_left(t_data *d, t_ray_params *p)
 {
-	p->vx = floor(d->pl->x / TILE_SIZE) * TILE_SIZE - (TILE_SIZE * EPS);
+	p->vx = floor(d->pl->x / TILE_SIZE) * TILE_SIZE - EPS;
 	p->vy = (d->pl->x - p->vx) * p->v_tan + d->pl->y;
 	p->x_offset = -TILE_SIZE;
 	p->y_offset = -p->x_offset * p->v_tan;
@@ -34,7 +34,7 @@ static void	init_v_ray_left(t_data *d, t_ray_params *p)
 */
 static void	init_v_ray_right(t_data *d, t_ray_params *p)
 {
-	p->vx = floor(d->pl->x / TILE_SIZE) * TILE_SIZE + TILE_SIZE - EPS;
+	p->vx = floor(d->pl->x / TILE_SIZE) * TILE_SIZE + TILE_SIZE + EPS;
 	p->vy = (d->pl->x - p->vx) * p->v_tan + d->pl->y;
 	p->x_offset = TILE_SIZE;
 	p->y_offset = -p->x_offset * p->v_tan;

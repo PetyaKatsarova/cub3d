@@ -6,7 +6,7 @@
 /*   By: pekatsar <pekatsar@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/08/15 19:50:49 by pekatsar      #+#    #+#                 */
-/*   Updated: 2025/08/30 11:30:21 by pekatsar      ########   odam.nl         */
+/*   Updated: 2025/08/30 15:18:13 by pekatsar      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 void	init_h_ray_up(t_data *d, t_ray_params *ray_params)
 {
 	ray_params->hy = floor(d->pl->y / TILE_SIZE) * TILE_SIZE
-		- (TILE_SIZE * EPS);
+		- EPS;
 	ray_params->hx = (d->pl->y - ray_params->hy)
 		* ray_params->h_tan + d->pl->x;
 	ray_params->y_offset = -TILE_SIZE;
@@ -39,7 +39,7 @@ floor(...): Get the integer part (the start of the tile).
 void	init_h_ray_down(t_data *d, t_ray_params *params)
 {
 	params->hy = floor(d->pl->y / TILE_SIZE) * TILE_SIZE
-		+ TILE_SIZE - EPS;
+		+ TILE_SIZE + EPS;
 	params->hx = (d->pl->y - params->hy)
 		* params->h_tan + d->pl->x;
 	params->y_offset = TILE_SIZE;

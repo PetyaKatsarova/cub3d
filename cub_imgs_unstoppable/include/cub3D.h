@@ -13,10 +13,10 @@
 
 # define WIN_WIDTH      	1600
 # define WIN_HEIGHT     	1000
-# define TILE_SIZE  		64 // px width and heightdraw_minimap_backg
+# define TILE_SIZE  		64 // px width and height
 # define MINIMAP_SIZE		350
 # define PL_SIZE 			7
-# define STEP_SIZE 			3 //5
+# define STEP_SIZE 			5 // 3
 # define VECTOR_LEN			20 // px
 # define MOVE_FACTOR		0.2 //0.4
 # define MOVE_SPEED			5
@@ -25,11 +25,11 @@
 # define DEG_RAD			0.0174533 // one degree in radians
 
 # define MINIMAP_WALL 		0x800080
-# define PL_COLOR    		0x8c932a // 0x0d0832ff
+# define PL_COLOR    		0x8c932a
 # define PURPLE_RAY			0x800080
 # define BLACK				0x000000
 # define WALL_BUFFER		1
-# define EPS				0.000001 //
+# define EPS				0.001 //
 
 # define KEY_LEFT   		65361
 # define KEY_RIGHT  		65363
