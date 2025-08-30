@@ -6,14 +6,15 @@
 /*   By: pekatsar <pekatsar@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/08/15 19:49:13 by pekatsar      #+#    #+#                 */
-/*   Updated: 2025/08/29 17:26:17 by pekatsar      ########   odam.nl         */
+/*   Updated: 2025/08/30 11:31:23 by pekatsar      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3D.h"
 
 /*
-Chooses which wall the ray hit first (horizontal or vertical) and sets the hit coordinates.
+	Chooses which wall the ray hit first (horizontal or vertical) and
+ 	sets the hit coordinates.
 */
 static void	set_hit_xy(t_ray_params ray_params, t_data *d,
 				float *hit_x, float *hit_y)
@@ -39,11 +40,11 @@ static void	set_hit_xy(t_ray_params ray_params, t_data *d,
 		*hit_x = ray_params.vx;
 		*hit_y = ray_params.vy;
 	}
-	//printf("hx: %f hy: %f vx: %f vy: %f\n", ray_params.hx, ray_params.hy, ray_params.vx, ray_params.vy);
 }
 
 /*
-Casts a ray from the player, finds where it hits a wall, and converts that hit position to minimap coordinates.
+	Casts a ray from the player, finds where it hits a wall, and converts
+	that hit position to minimap coordinates.
 */
 static void	compute_ray_end(t_data *d, float ray_angle, int *out_x, int *out_y)
 {
@@ -110,6 +111,8 @@ void	draw_minimap(t_data *d)
 	params.offset_x = WIN_WIDTH - MINIMAP_SIZE;
 	params.offset_y = 0;
 	params.scale = (float)MINIMAP_SIZE / (d->map_cols * TILE_SIZE);
+	if (d->map_rows > d->map_cols)
+		params.scale = (float)MINIMAP_SIZE / (d->map_rows * TILE_SIZE);
 	draw_minimap_walls(d, params.offset_x, params.offset_y, params.scale);
 	player_x = params.offset_x + (d->pl->x * params.scale);
 	player_y = params.offset_y + (d->pl->y * params.scale);
