@@ -1,9 +1,20 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         ::::::::             #
+#    Makefile                                           :+:    :+:             #
+#                                                      +:+                     #
+#    By: pekatsar <pekatsar@student.codam.nl>         +#+                      #
+#                                                    +#+                       #
+#    Created: 2025/08/30 11:49:07 by pekatsar      #+#    #+#                  #
+#    Updated: 2025/08/30 11:58:54 by pekatsar      ########   odam.nl          #
+#                                                                              #
+# **************************************************************************** #
+
 NAME     := cub3D
 CC       := cc
 CFLAGS   := -Wall -Wextra -Werror -O3
-
 LIBMLX   := lib/minilibx_linux
-HEADERS  := -I./include -I$(LIBMLX)/include
+HEADERS  := -I ./include -I$(LIBMLX)/include
 LIBS     := -L$(LIBMLX) -lmlx -lX11 -lXext -lm
 
 SRC      := src/main.c \
@@ -52,11 +63,8 @@ SRC      := src/main.c \
 			src/get_input/test/print_game_configs.c \
 			src/get_input/test/print_game_configs_utils.c
 
-OBJDIR   := obj
 OBJ      := $(SRC:%.c=%.o)
 
-
-# Colors
 GREEN    := \033[0;32m
 RESET    := \033[0m
 
@@ -65,11 +73,10 @@ HEADER_FILES := include/cub3D.h \
 				includes/get_input.h \
 				includes/get_next_line.h
 
-all: $(NAME)
+all: libmlx $(NAME)
 
-# Build MLX library first
-$(LIBMLX)/libmlx.a:
-	@echo "Building MLX library..."
+libmlx:
+	@if [ ! -d "$(LIBMLX)" ]; then echo "Error: minilibx not found at $(LIBMLX)"; exit 1; fi
 	@make -C $(LIBMLX)
 
 # Compile with dependency on header files and Makefile
@@ -83,7 +90,6 @@ $(NAME): $(LIBMLX)/libmlx.a $(OBJ) Makefile
 	@echo "$(GREEN)Build successful!$(RESET)"
 
 clean:
-
 		rm -rf $(OBJ) && echo "$(GREEN)Object files cleaned$(RESET)"; \
 
 	@make -C $(LIBMLX) clean > /dev/null 2>&1 || true
