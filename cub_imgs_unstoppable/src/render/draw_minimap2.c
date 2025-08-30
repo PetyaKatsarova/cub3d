@@ -50,7 +50,8 @@ void	draw_player_direction(t_data *d, int player_x, int player_y)
 }
 
 /*
-** Creates a MINMAP_SIZE×MINMAP_SIZE max or d->map_rows and cols pixel rect.BACKGROUND_COL
+** Creates a MINMAP_SIZE×MINMAP_SIZE max or d->map_rows and cols pixel
+	rect.BACKGROUND_COL
 ** Positioned at top-right corner: offset_x, offset_y.
 ** Fills every pixel with BACKGROUND_COLOR (gray).
 */

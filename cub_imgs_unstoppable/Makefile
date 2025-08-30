@@ -6,7 +6,7 @@
 #    By: pekatsar <pekatsar@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2025/08/30 11:49:07 by pekatsar      #+#    #+#                  #
-#    Updated: 2025/08/30 11:58:54 by pekatsar      ########   odam.nl          #
+#    Updated: 2025/08/30 16:29:45 by pekatsar      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,7 +61,7 @@ SRC      := src/main.c \
 			src/get_input/utils/copy_map.c \
 			src/get_input/test/print_parsing.c \
 			src/get_input/test/print_game_configs.c \
-			src/get_input/test/print_game_configs_utils.c
+			src/get_input/test/print_game_configs_utils.c \
 
 OBJ      := $(SRC:%.c=%.o)
 
@@ -77,20 +77,18 @@ all: libmlx $(NAME)
 
 libmlx:
 	@if [ ! -d "$(LIBMLX)" ]; then echo "Error: minilibx not found at $(LIBMLX)"; exit 1; fi
-	@make -C $(LIBMLX)
+	@make -s -C $(LIBMLX) > /dev/null 2>&1
 
-# Compile with dependency on header files and Makefile
 %.o: %.c $(HEADER_FILES) Makefile
 	@$(CC) $(CFLAGS) -I/usr/include -Imlx_linux -O3 -c $< -o $@ $(HEADERS)
 	@echo "$(GREEN)Compiled$(RESET) $<"
 
-# Make sure MLX is built before linking, also depend on Makefile
 $(NAME): $(LIBMLX)/libmlx.a $(OBJ) Makefile
 	@$(CC) $(CFLAGS) $(OBJ) $(LIBS) -o $(NAME)
 	@echo "$(GREEN)Build successful!$(RESET)"
 
 clean:
-		rm -rf $(OBJ) && echo "$(GREEN)Object files cleaned$(RESET)"; \
+	rm -rf $(OBJ) && echo "$(GREEN)Object files cleaned$(RESET)"; \
 
 	@make -C $(LIBMLX) clean > /dev/null 2>&1 || true
 	@echo "$(GREEN)MLX library cleaned$(RESET)"
@@ -105,7 +103,6 @@ fclean: clean
 
 re: fclean all
 
-# Check if everything is up to date
 check:
 	@if [ -f "$(NAME)" ]; then \
 		echo "$(GREEN)$(NAME) exists and is up to date$(RESET)"; \

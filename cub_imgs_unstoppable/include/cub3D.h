@@ -27,7 +27,7 @@
 # define MINIMAP_WALL 		0x800080
 # define PL_COLOR    		0x8c932a
 # define PURPLE_RAY			0x800080
-#define BACKGROUND_COLOR 0xD9D7AB
+# define BACKGROUND_COLOR 	0xD9D7AB
 # define WALL_BUFFER		1
 # define EPS				0.0001
 
