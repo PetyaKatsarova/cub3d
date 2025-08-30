@@ -29,7 +29,7 @@
 # define PURPLE_RAY			0x800080
 # define BLACK				0x000000
 # define WALL_BUFFER		1
-# define EPS				0.001 //
+# define EPS				0.0001 //
 
 # define KEY_LEFT   		65361
 # define KEY_RIGHT  		65363
