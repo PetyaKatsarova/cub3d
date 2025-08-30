@@ -27,9 +27,9 @@
 # define MINIMAP_WALL 		0x800080
 # define PL_COLOR    		0x8c932a
 # define PURPLE_RAY			0x800080
-# define BLACK				0x000000
+#define BACKGROUND_COLOR 0xD9D7AB
 # define WALL_BUFFER		1
-# define EPS				0.0001 //
+# define EPS				0.0001
 
 # define KEY_LEFT   		65361
 # define KEY_RIGHT  		65363
@@ -163,6 +163,8 @@ void 		horizontal_check(t_ray *ray, t_data *d, t_ray_params *ray_params);
 void 		vertical_check(t_ray *ray, t_data *d, t_ray_params *ray_params);
 void		draw_line(t_data *data, t_line_info *line_info, t_line_math *data_placeholder);
 double 		normalize_angle(double angle);
+void		draw_minimap_background(t_data *d, int offset_x, int offset_y,
+			t_minimap_params *params);
 void		draw_minimap_walls(t_data *d, int offset_x, int offset_y, float scale);
 void 		draw_minimap(t_data *d);
 int			render_frame(t_data *data);
