@@ -6,7 +6,7 @@
 /*   By: pekatsar <pekatsar@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/08/15 19:50:49 by pekatsar      #+#    #+#                 */
-/*   Updated: 2025/08/30 16:10:45 by pekatsar      ########   odam.nl         */
+/*   Updated: 2025/09/05 15:36:08 by pekatsar      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 void	init_h_ray_up(t_data *d, t_ray_params *ray_params)
 {
 	ray_params->hy = floor(d->pl->y / TILE_SIZE) * TILE_SIZE
-		- EPS;
+		- (TILE_SIZE / 2 * EPS);
 	ray_params->hx = (d->pl->y - ray_params->hy)
 		* ray_params->h_tan + d->pl->x;
 	ray_params->y_offset = -TILE_SIZE;
@@ -40,6 +40,8 @@ void	init_h_ray_down(t_data *d, t_ray_params *params)
 {
 	params->hy = floor(d->pl->y / TILE_SIZE) * TILE_SIZE
 		+ TILE_SIZE + EPS;
+	params->hy = floor(d->pl->y / TILE_SIZE) * TILE_SIZE
+		+ TILE_SIZE + EPS;
 	params->hx = (d->pl->y - params->hy)
 		* params->h_tan + d->pl->x;
 	params->y_offset = TILE_SIZE;
@@ -53,7 +55,6 @@ static void	h_check_helper(t_data *d, t_ray_params *ray_params)
 
 	map_x = 0;
 	map_y = 0;
-	ray_params->dof = 0;
 	while (ray_params->dof < (d->map_cols + d->map_rows) * 4)
 	{
 		map_x = (int)(ray_params->hx / TILE_SIZE);
@@ -72,7 +73,6 @@ static void	h_check_helper(t_data *d, t_ray_params *ray_params)
 void	horizontal_check(t_ray *ray, t_data *d, t_ray_params *ray_params)
 {
 	ray_params->h_tan = -1.0 / tan(ray->angle);
-	ray_params->dof = 0;
 	if (ray->angle > M_PI)
 		init_h_ray_up(d, ray_params);
 	else if (ray->angle < M_PI)
