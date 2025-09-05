@@ -21,6 +21,7 @@
 # define MOVE_FACTOR		0.2 //0.4
 # define MOVE_SPEED			5
 # define ROTATION_FACTOR	0.03 // 0.05
+# define ROTATION_FACTOR_MOUSE 0.0003
 # define RAYS_NUM			1600
 # define DEG_RAD			0.0174533 // one degree in radians
 
