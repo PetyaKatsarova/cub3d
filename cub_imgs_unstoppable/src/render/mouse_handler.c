@@ -36,7 +36,7 @@ int	mouse_handler(int curr_x, int curr_y, t_data *d)
 		return (0);
 	}
 	mlx_mouse_hide(d->mlx, d->win);
-	delta_x = curr_x - 800;
+	delta_x = curr_x - WIN_WIDTH / 2;
 	d->pl->angle += (double)delta_x * 0.0003;
 	d->pl->delta_x = cos(d->pl->angle) * MOVE_SPEED;
 	d->pl->delta_y = sin(d->pl->angle) * MOVE_SPEED;
