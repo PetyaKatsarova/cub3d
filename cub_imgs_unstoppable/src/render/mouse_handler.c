@@ -26,7 +26,6 @@ int	focus_out(t_data *d)
 
 int	mouse_handler(int curr_x, int curr_y, t_data *d)
 {
-	static int	last_x = 0;
 	int			delta_x;
 
 	(void)curr_y;
@@ -40,6 +39,5 @@ int	mouse_handler(int curr_x, int curr_y, t_data *d)
 	d->pl->angle += (double)delta_x * ROTATION_FACTOR_MOUSE;
 	d->pl->delta_x = cos(d->pl->angle) * MOVE_SPEED;
 	d->pl->delta_y = sin(d->pl->angle) * MOVE_SPEED;
-	last_x = curr_x;
 	return (0);
 }
