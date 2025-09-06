@@ -3,7 +3,7 @@
 /*                                                         ::::::::           */
 /*   check_map_enclosed.c                                :+:    :+:           */
 /*                                                      +:+                   */
-/*   By: jstuhrin <marvin@42.fr>                       +#+                    */
+/*   By: jstuhrin <jstuhrin@student.codam.nl>          +#+                    */
 /*                                                    +#+                     */
 /*   Created: 2025/08/20 12:44:33 by jstuhrin       #+#    #+#                */
 /*   Updated: 2025/08/20 12:44:35 by jstuhrin       ########   odam.nl        */

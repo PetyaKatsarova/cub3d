@@ -3,7 +3,7 @@
 /*                                                         ::::::::           */
 /*   free_game_configs.c                                 :+:    :+:           */
 /*                                                      +:+                   */
-/*   By: jstuhrin <marvin@42.fr>                       +#+                    */
+/*   By: jstuhrin <jstuhrin@student.codam.nl>          +#+                    */
 /*                                                    +#+                     */
 /*   Created: 2025/08/20 12:49:08 by jstuhrin       #+#    #+#                */
 /*   Updated: 2025/08/20 12:49:10 by jstuhrin       ########   odam.nl        */

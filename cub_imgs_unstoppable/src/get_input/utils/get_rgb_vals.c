@@ -3,7 +3,7 @@
 /*                                                         ::::::::           */
 /*   make_game_configs_utils.c                           :+:    :+:           */
 /*                                                      +:+                   */
-/*   By: jstuhrin <marvin@42.fr>                       +#+                    */
+/*   By: jstuhrin <jstuhrin@student.codam.nl>          +#+                    */
 /*                                                    +#+                     */
 /*   Created: 2025/08/20 13:02:25 by jstuhrin       #+#    #+#                */
 /*   Updated: 2025/08/20 13:02:27 by jstuhrin       ########   odam.nl        */

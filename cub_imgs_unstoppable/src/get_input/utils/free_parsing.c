@@ -3,7 +3,7 @@
 /*                                                         ::::::::           */
 /*   free_parsing.c                                      :+:    :+:           */
 /*                                                      +:+                   */
-/*   By: jstuhrin <marvin@42.fr>                       +#+                    */
+/*   By: jstuhrin <jstuhrin@student.codam.nl>          +#+                    */
 /*                                                    +#+                     */
 /*   Created: 2025/08/20 12:47:39 by jstuhrin       #+#    #+#                */
 /*   Updated: 2025/08/20 12:47:41 by jstuhrin       ########   odam.nl        */

@@ -3,7 +3,7 @@
 /*                                                         ::::::::           */
 /*   count_players.c                                     :+:    :+:           */
 /*                                                      +:+                   */
-/*   By: jstuhrin <marvin@42.fr>                       +#+                    */
+/*   By: jstuhrin <jstuhrin@student.codam.nl>          +#+                    */
 /*                                                    +#+                     */
 /*   Created: 2025/08/20 12:44:43 by jstuhrin       #+#    #+#                */
 /*   Updated: 2025/08/20 12:44:45 by jstuhrin       ########   odam.nl        */

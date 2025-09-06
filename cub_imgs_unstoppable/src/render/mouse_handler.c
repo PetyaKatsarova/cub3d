@@ -3,10 +3,10 @@
 /*                                                        ::::::::            */
 /*   mouse_handler.c                                    :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: jstuhrin <marvin@42.fr>                      +#+                     */
+/*   By: jstuhrin <jstuhrin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/08/20 15:44:11 by jstuhrin      #+#    #+#                 */
-/*   Updated: 2025/08/22 14:43:19 by pekatsar      ########   odam.nl         */
+/*   Updated: 2025/09/06 14:43:19 by jstuhrin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	focus_out(t_data *d)
 
 int	mouse_handler(int curr_x, int curr_y, t_data *d)
 {
-	int			delta_x;
+	int	delta_x;
 
 	(void)curr_y;
 	if (d->focus == false)

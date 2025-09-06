@@ -3,7 +3,7 @@
 /*                                                         ::::::::           */
 /*   copy_map.c                                          :+:    :+:           */
 /*                                                      +:+                   */
-/*   By: jstuhrin <marvin@42.fr>                       +#+                    */
+/*   By: jstuhrin <jstuhrin@student.codam.nl>          +#+                    */
 /*                                                    +#+                     */
 /*   Created: 2025/08/20 13:06:01 by jstuhrin       #+#    #+#                */
 /*   Updated: 2025/08/20 13:06:03 by jstuhrin       ########   odam.nl        */

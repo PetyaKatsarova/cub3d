@@ -3,7 +3,7 @@
 /*                                                         ::::::::           */
 /*   ft_strlen.c                                         :+:    :+:           */
 /*                                                      +:+                   */
-/*   By: jstuhrin <marvin@42.fr>                       +#+                    */
+/*   By: jstuhrin <jstuhrin@student.codam.nl>          +#+                    */
 /*                                                    +#+                     */
 /*   Created: 2025/08/20 12:49:40 by jstuhrin       #+#    #+#                */
 /*   Updated: 2025/08/20 12:49:43 by jstuhrin       ########   odam.nl        */

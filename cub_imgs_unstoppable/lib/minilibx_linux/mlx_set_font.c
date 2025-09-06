@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_set_font.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amalliar <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: amalliar <jstuhrin@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/30 13:30:47 by amalliar          #+#    #+#             */
 /*   Updated: 2020/09/30 17:08:36 by amalliar         ###   ########.fr       */

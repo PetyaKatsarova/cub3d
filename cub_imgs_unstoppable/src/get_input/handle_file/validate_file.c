@@ -3,7 +3,7 @@
 /*                                                         ::::::::           */
 /*   validate_file.c                                     :+:    :+:           */
 /*                                                      +:+                   */
-/*   By: jstuhrin <marvin@42.fr>                       +#+                    */
+/*   By: jstuhrin <jstuhrin@student.codam.nl>          +#+                    */
 /*                                                    +#+                     */
 /*   Created: 2025/08/20 12:43:17 by jstuhrin       #+#    #+#                */
 /*   Updated: 2025/08/20 12:43:19 by jstuhrin       ########   odam.nl        */

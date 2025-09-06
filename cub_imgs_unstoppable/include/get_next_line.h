@@ -3,7 +3,7 @@
 /*                                                         ::::::::           */
 /*   get_next_line.h                                     :+:    :+:           */
 /*                                                      +:+                   */
-/*   By: jstuhrin <marvin@42.fr>                       +#+                    */
+/*   By: jstuhrin <jstuhrin@student.codam.nl>          +#+                    */
 /*                                                    +#+                     */
 /*   Created: 2024/11/05 15:56:58 by jstuhrin       #+#    #+#                */
 /*   Updated: 2024/11/05 15:57:00 by jstuhrin       ########   odam.nl        */

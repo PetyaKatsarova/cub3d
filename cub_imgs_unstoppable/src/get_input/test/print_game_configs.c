@@ -3,7 +3,7 @@
 /*                                                         ::::::::           */
 /*   print_game_configs.c                                :+:    :+:           */
 /*                                                      +:+                   */
-/*   By: jstuhrin <marvin@42.fr>                       +#+                    */
+/*   By: jstuhrin <jstuhrin@student.codam.nl>          +#+                    */
 /*                                                    +#+                     */
 /*   Created: 2025/08/20 12:46:49 by jstuhrin       #+#    #+#                */
 /*   Updated: 2025/08/20 12:46:50 by jstuhrin       ########   odam.nl        */

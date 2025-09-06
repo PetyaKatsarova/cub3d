@@ -3,7 +3,7 @@
 /*                                                         ::::::::           */
 /*   print_parsing.c                                     :+:    :+:           */
 /*                                                      +:+                   */
-/*   By: jstuhrin <marvin@42.fr>                       +#+                    */
+/*   By: jstuhrin <jstuhrin@student.codam.nl>          +#+                    */
 /*                                                    +#+                     */
 /*   Created: 2025/08/20 12:47:03 by jstuhrin       #+#    #+#                */
 /*   Updated: 2025/08/20 12:47:05 by jstuhrin       ########   odam.nl        */

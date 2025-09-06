@@ -3,7 +3,7 @@
 /*                                                         ::::::::           */
 /*   map_enclosed.c                                      :+:    :+:           */
 /*                                                      +:+                   */
-/*   By: jstuhrin <marvin@42.fr>                       +#+                    */
+/*   By: jstuhrin <jstuhrin@student.codam.nl>          +#+                    */
 /*                                                    +#+                     */
 /*   Created: 2025/08/20 12:45:06 by jstuhrin       #+#    #+#                */
 /*   Updated: 2025/08/20 12:45:08 by jstuhrin       ########   odam.nl        */

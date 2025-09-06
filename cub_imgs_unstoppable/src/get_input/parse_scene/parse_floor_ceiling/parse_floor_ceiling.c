@@ -3,7 +3,7 @@
 /*                                                         ::::::::           */
 /*   parse_floor_ceiling.c                               :+:    :+:           */
 /*                                                      +:+                   */
-/*   By: jstuhrin <marvin@42.fr>                       +#+                    */
+/*   By: jstuhrin <jstuhrin@student.codam.nl>          +#+                    */
 /*                                                    +#+                     */
 /*   Created: 2025/08/20 12:43:55 by jstuhrin       #+#    #+#                */
 /*   Updated: 2025/08/20 12:43:58 by jstuhrin       ########   odam.nl        */

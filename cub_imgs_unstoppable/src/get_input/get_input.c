@@ -3,7 +3,7 @@
 /*                                                         ::::::::           */
 /*   get_input.c                                         :+:    :+:           */
 /*                                                      +:+                   */
-/*   By: jstuhrin <marvin@42.fr>                       +#+                    */
+/*   By: jstuhrin <jstuhrin@student.codam.nl>          +#+                    */
 /*                                                    +#+                     */
 /*   Created: 2025/08/20 12:41:31 by jstuhrin       #+#    #+#                */
 /*   Updated: 2025/08/20 12:41:48 by jstuhrin       ########   odam.nl        */

@@ -3,7 +3,7 @@
 /*                                                         ::::::::           */
 /*   parse_map.c                                         :+:    :+:           */
 /*                                                      +:+                   */
-/*   By: jstuhrin <marvin@42.fr>                       +#+                    */
+/*   By: jstuhrin <jstuhrin@student.codam.nl>          +#+                    */
 /*                                                    +#+                     */
 /*   Created: 2025/08/20 12:45:32 by jstuhrin       #+#    #+#                */
 /*   Updated: 2025/08/20 12:45:35 by jstuhrin       ########   odam.nl        */
