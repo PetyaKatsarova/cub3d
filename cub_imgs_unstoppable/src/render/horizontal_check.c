@@ -6,7 +6,7 @@
 /*   By: petya <petya@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/15 19:50:49 by pekatsar          #+#    #+#             */
-/*   Updated: 2025/09/10 21:01:57 by petya            ###   ########.fr       */
+/*   Updated: 2025/09/10 21:11:27 by petya            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,16 +96,12 @@ static void	h_check_helper(t_data *d, t_ray_params *ray_params)
         
         double x_in_tile = fmod(ray_params->hx, TILE_SIZE);
         double y_in_tile = fmod(ray_params->hy, TILE_SIZE);
-        
-        // Check left/right (your existing code)
         if (x_in_tile < 0.005 && map_x > 0)
             if (d->map[map_y][map_x - 1] == '1')
                 break;
         if (x_in_tile > TILE_SIZE - 0.005 && map_x < d->map_cols - 1)
             if (d->map[map_y][map_x + 1] == '1')
                 break;
-        
-        // ADD: Check up/down for diagonal connections
         if (y_in_tile < 0.005 && map_y > 0)
             if (d->map[map_y - 1][map_x] == '1')
                 break;
