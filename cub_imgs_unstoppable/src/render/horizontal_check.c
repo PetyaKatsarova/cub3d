@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   horizontal_check.c                                 :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: pekatsar <pekatsar@student.codam.nl>         +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2025/08/15 19:50:49 by pekatsar      #+#    #+#                 */
-/*   Updated: 2025/09/05 15:36:08 by pekatsar      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   horizontal_check.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: petya <petya@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/08/15 19:50:49 by pekatsar          #+#    #+#             */
+/*   Updated: 2025/09/10 21:01:57 by petya            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,26 +48,75 @@ void	init_h_ray_down(t_data *d, t_ray_params *params)
 	params->x_offset = -params->y_offset * params->h_tan;
 }
 
+// static void	h_check_helper(t_data *d, t_ray_params *ray_params)
+// {
+// 	int	map_x;
+// 	int	map_y;
+
+// 	map_x = 0;
+// 	map_y = 0;
+// 	while (ray_params->dof < (d->map_cols + d->map_rows) * 4)
+// 	{
+// 		map_x = (int)(ray_params->hx / TILE_SIZE);
+// 		map_y = (int)(ray_params->hy / TILE_SIZE);
+// 		if (map_x < 0 || map_x >= d->map_cols
+// 			|| map_y < 0 || map_y >= d->map_rows)
+// 			break ;
+// 		if (d->map[map_y][map_x] == '1')
+// 			break ;
+// 		double x_in_tile = fmod(ray_params->hx, TILE_SIZE);
+//         if (x_in_tile < 0.005 && map_x > 0)
+//             if (d->map[map_y][map_x - 1] == '1')
+//                 break;
+//         if (x_in_tile > TILE_SIZE - 0.005 && map_x < d->map_cols - 1)
+//             if (d->map[map_y][map_x + 1] == '1')
+//                 break;
+// 		ray_params->hx += ray_params->x_offset;
+// 		ray_params->hy += ray_params->y_offset;
+// 		ray_params->dof++;
+// 	}
+// }
+
 static void	h_check_helper(t_data *d, t_ray_params *ray_params)
 {
-	int	map_x;
-	int	map_y;
+    int	map_x;
+    int	map_y;
 
-	map_x = 0;
-	map_y = 0;
-	while (ray_params->dof < (d->map_cols + d->map_rows) * 4)
-	{
-		map_x = (int)(ray_params->hx / TILE_SIZE);
-		map_y = (int)(ray_params->hy / TILE_SIZE);
-		if (map_x < 0 || map_x >= d->map_cols
-			|| map_y < 0 || map_y >= d->map_rows)
-			break ;
-		if (d->map[map_y][map_x] == '1')
-			break ;
-		ray_params->hx += ray_params->x_offset;
-		ray_params->hy += ray_params->y_offset;
-		ray_params->dof++;
-	}
+    map_x = 0;
+    map_y = 0;
+    while (ray_params->dof < (d->map_cols + d->map_rows) * 4)
+    {
+        map_x = (int)(ray_params->hx / TILE_SIZE);
+        map_y = (int)(ray_params->hy / TILE_SIZE);
+        if (map_x < 0 || map_x >= d->map_cols
+            || map_y < 0 || map_y >= d->map_rows)
+            break ;
+        if (d->map[map_y][map_x] == '1')
+            break ;
+        
+        double x_in_tile = fmod(ray_params->hx, TILE_SIZE);
+        double y_in_tile = fmod(ray_params->hy, TILE_SIZE);
+        
+        // Check left/right (your existing code)
+        if (x_in_tile < 0.005 && map_x > 0)
+            if (d->map[map_y][map_x - 1] == '1')
+                break;
+        if (x_in_tile > TILE_SIZE - 0.005 && map_x < d->map_cols - 1)
+            if (d->map[map_y][map_x + 1] == '1')
+                break;
+        
+        // ADD: Check up/down for diagonal connections
+        if (y_in_tile < 0.005 && map_y > 0)
+            if (d->map[map_y - 1][map_x] == '1')
+                break;
+        if (y_in_tile > TILE_SIZE - 0.005 && map_y < d->map_rows - 1)
+            if (d->map[map_y + 1][map_x] == '1')
+                break;
+        
+        ray_params->hx += ray_params->x_offset;
+        ray_params->hy += ray_params->y_offset;
+        ray_params->dof++;
+    }
 }
 
 void	horizontal_check(t_ray *ray, t_data *d, t_ray_params *ray_params)
