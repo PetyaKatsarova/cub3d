@@ -6,7 +6,7 @@
 /*   By: pekatsar <pekatsar@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/09/11 18:01:45 by pekatsar      #+#    #+#                 */
-/*   Updated: 2025/09/11 18:37:59 by pekatsar      ########   odam.nl         */
+/*   Updated: 2025/09/11 18:40:36 by pekatsar      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ typedef struct s_wall_info
 {
 	double		distance; /* wall from pl (in px) */
 	double		ray_angle; /* direction looking at (in radians) */
-	int			hit_vertical; /* Is this a vertical wall/
+	int			hit_vertical; /* Is this a vertical wall */
 	double		hit_x; /* X coordinate where ray hit the wall */
 	double		hit_y; /* Y coordinate where ray hit the wall */
 	double		line_h; /* How tall should we draw this */
