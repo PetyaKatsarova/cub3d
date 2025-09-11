@@ -6,13 +6,15 @@
 /*   By: petya <petya@student.42.fr>                  +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/08/01 14:51:30 by pekatsar      #+#    #+#                 */
-/*   Updated: 2025/08/29 16:55:29 by pekatsar      ########   odam.nl         */
+/*   Updated: 2025/09/11 18:39:10 by pekatsar      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3D.h"
 
-/* Bresenham’s algorithm
+/* 
+
+Bresenham’s algorithm
 ** Connects two points with a straight line made of pxs.
 ** start at (0,0) and end at (4,2).
 ** Compute total move:
@@ -28,6 +30,11 @@
 ** step_size2: move to (2,1.0) → plot at (2,1)
 ** step_size3: move to (3,1.5) → plot at (3,1)
 ** step_size4: move to (4,2.0) → plot at (4,2)
+fast way to draw a straight line between two points on a grid
+calculates which pixels to color so the line looks as straight as possible,
+using only integer math (no floating point).
+distance_x, distance_y: total difference in x and y between start and end points.
+x_incr, y_incr: how much to move in x and y for each step on the line.
 */
 void	draw_line(t_data *data, t_line_info *line_info,
 			t_line_math *data_placeholder)
