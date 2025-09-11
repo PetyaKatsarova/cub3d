@@ -6,33 +6,64 @@
 /*   By: pekatsar <pekatsar@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/08/02 18:03:51 by pekatsar      #+#    #+#                 */
-/*   Updated: 2025/08/29 14:05:15 by pekatsar      ########   odam.nl         */
+/*   Updated: 2025/09/11 17:54:31 by pekatsar      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3D.h"
 
+void	clean_texture(t_data *d, t_texture *tex)
+{
+	(void)d;
+	(void)tex;
+	if (tex->img)
+	{
+		mlx_destroy_image(d->mlx, tex->img);
+		tex->img = NULL;
+		tex->addr = NULL;
+	}
+	write(2, "Error: Failed to load texture\n", 30);
+}
+
 int	load_texture(t_data *d, t_texture *tex, char *path)
 {
-	tex->img = mlx_xpm_file_to_image(d->mlx, path,
-			&tex->width, &tex->height);
+	(void)path;
+	(void)d;
+	(void)path;
+	tex->img = mlx_xpm_file_to_image(d->mlx,
+			path, &tex->width, &tex->height);
 	if (!tex->img)
 		return (1);
-	tex->addr = mlx_get_data_addr(tex->img, &tex->bpp,
-			&tex->line_length, &tex->endian);
+	tex->addr = mlx_get_data_addr(tex->img,
+			&tex->bpp, &tex->line_length, &tex->endian);
+	if (!tex->addr)
+		return (1);
 	return (0);
 }
 
-void	init_textures(t_data *d, t_game_configs *game_configs)
+int	init_textures(t_data *d, t_game_configs *game_configs)
 {
 	if (load_texture(d, &d->north_tex, game_configs->no))
-		printf("Warning: Failed to load north texture\n");
+		return (clean_texture(d, &d->north_tex), 1);
 	if (load_texture(d, &d->south_tex, game_configs->so))
-		printf("Warning: Failed to load south texture\n");
+	{
+		clean_texture(d, &d->north_tex);
+		return (clean_texture(d, &d->south_tex), 1);
+	}
 	if (load_texture(d, &d->east_tex, game_configs->ea))
-		printf("Warning: Failed to load east texture\n");
+	{
+		clean_texture(d, &d->north_tex);
+		clean_texture(d, &d->south_tex);
+		return (clean_texture(d, &d->east_tex), 1);
+	}
 	if (load_texture(d, &d->west_tex, game_configs->we))
-		printf("Warning: Failed to load west texture\n");
+	{
+		clean_texture(d, &d->north_tex);
+		clean_texture(d, &d->south_tex);
+		clean_texture(d, &d->east_tex);
+		return (clean_texture(d, &d->west_tex), 1);
+	}
+	return (0);
 }
 
 /*
