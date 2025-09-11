@@ -45,11 +45,10 @@ static void	print_map_data(t_game_configs *game_configs)
 		game_configs->player_start_orientation);
 }
 
-void	print_game_configs(t_parsing *parsing, t_game_configs *game_configs)
+void	print_game_configs(t_game_configs *game_configs)
 {
 	printf("\n*****     PRINTING GAME CONFIGS START     *****\n\n");
 	print_textures(game_configs);
-	print_fc(parsing, game_configs);
 	print_argb(game_configs);
 	print_map(game_configs);
 	print_map_data(game_configs);

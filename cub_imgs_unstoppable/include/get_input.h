@@ -74,8 +74,6 @@ typedef struct s_game_configs
 	char	*ea;
 	char	*so;
 	char	*we;
-	char	floor[11];
-	char	ceiling[11];
 	int		floor_argb;
 	int		ceiling_argb;
 	char	**map;
@@ -112,8 +110,7 @@ void			measure_map(t_parsing *parsing, int i);
 bool			is_space(char c);
 int				traverse_space(t_parsing *parsing, int i, int j);
 void			print_parsing(t_parsing *parsing);
-void			print_game_configs(t_parsing *parsing,
-					t_game_configs *game_configs);
+void			print_game_configs(t_game_configs *game_configs);
 void			get_rgb_vals(t_parsing *parsing, t_game_configs *game_configs);
 void			copy_map(t_parsing *parsing, t_game_configs *game_configs);
 void			print_argb(t_game_configs *game_configs);
