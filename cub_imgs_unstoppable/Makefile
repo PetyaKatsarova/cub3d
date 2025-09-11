@@ -13,6 +13,7 @@
 NAME     := cub3D
 CC       := cc
 CFLAGS   := -Wall -Wextra -Werror -O3
+DEPFLAGS := -MMD -MP
 LIBMLX   := lib/minilibx_linux
 HEADERS  := -I ./include -I$(LIBMLX)/include
 LIBS     := -L$(LIBMLX) -lmlx -lX11 -lXext -lm
@@ -65,13 +66,11 @@ SRC      := src/main.c \
 
 OBJ      := $(SRC:%.c=%.o)
 
+DEPS	 := $(OBJ:%.o=%.d)
+
 GREEN    := \033[0;32m
 RESET    := \033[0m
 
-# Header files for dependency tracking
-HEADER_FILES := include/cub3D.h \
-				includes/get_input.h \
-				includes/get_next_line.h
 
 all: libmlx $(NAME)
 
@@ -79,16 +78,18 @@ libmlx:
 	@if [ ! -d "$(LIBMLX)" ]; then echo "Error: minilibx not found at $(LIBMLX)"; exit 1; fi
 	@make -s -C $(LIBMLX) > /dev/null 2>&1
 
-%.o: %.c $(HEADER_FILES) Makefile
-	@$(CC) $(CFLAGS) -I/usr/include -Imlx_linux -O3 -c $< -o $@ $(HEADERS)
+%.o: %.c Makefile
+	@$(CC) $(CFLAGS) $(DEPFLAGS) -I/usr/include -Imlx_linux -c $< -o $@ $(HEADERS)
 	@echo "$(GREEN)Compiled$(RESET) $<"
 
 $(NAME): $(LIBMLX)/libmlx.a $(OBJ) Makefile
-	@$(CC) $(CFLAGS) $(OBJ) $(LIBS) -o $(NAME)
+	@$(CC) $(OBJ) $(LIBS) -o $(NAME)
 	@echo "$(GREEN)Build successful!$(RESET)"
 
+-include $(DEPS)
+
 clean:
-	rm -rf $(OBJ) && echo "$(GREEN)Object files cleaned$(RESET)"; \
+	rm -rf $(OBJ) $(DEPS) && echo "$(GREEN)Object and dependency files cleaned$(RESET)"; \
 
 	@make -C $(LIBMLX) clean > /dev/null 2>&1 || true
 	@echo "$(GREEN)MLX library cleaned$(RESET)"
@@ -102,12 +103,5 @@ fclean: clean
 	@echo "$(GREEN)Full clean completed$(RESET)"
 
 re: fclean all
-
-check:
-	@if [ -f "$(NAME)" ]; then \
-		echo "$(GREEN)$(NAME) exists and is up to date$(RESET)"; \
-	else \
-		echo "$(NAME) needs to be built"; \
-	fi
 
 .PHONY: all clean fclean re check

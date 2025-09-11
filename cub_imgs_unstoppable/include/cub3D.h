@@ -3,7 +3,6 @@
 
 # include "../lib/minilibx_linux/mlx.h"
 # include "get_input.h"
-# include "get_next_line.h"
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdint.h> // for uint32_t
