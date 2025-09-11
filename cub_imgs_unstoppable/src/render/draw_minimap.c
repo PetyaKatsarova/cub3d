@@ -6,7 +6,7 @@
 /*   By: petya <petya@student.42.fr>                  +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/08/01 14:51:30 by pekatsar      #+#    #+#                 */
-/*   Updated: 2025/09/11 18:39:10 by pekatsar      ########   odam.nl         */
+/*   Updated: 2025/09/11 18:46:51 by pekatsar      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /* 
 
 Bresenham’s algorithm
-** Connects two points with a straight line made of pxs.
+** Connects two points with a straight line made of pxs on a grid
 ** start at (0,0) and end at (4,2).
 ** Compute total move:
 ** dx = 4 − 0 = 4 px
@@ -30,28 +30,27 @@ Bresenham’s algorithm
 ** step_size2: move to (2,1.0) → plot at (2,1)
 ** step_size3: move to (3,1.5) → plot at (3,1)
 ** step_size4: move to (4,2.0) → plot at (4,2)
-fast way to draw a straight line between two points on a grid
 calculates which pixels to color so the line looks as straight as possible,
 using only integer math (no floating point).
 distance_x, distance_y: total difference in x and y between start and end points.
 x_incr, y_incr: how much to move in x and y for each step on the line.
 */
 void	draw_line(t_data *data, t_line_info *line_info,
-			t_line_math *data_placeholder)
+			t_line_math *line_math)
 {
 	int	step_size;
 	int	i;
 
-	data_placeholder->distance_x = line_info->x1 - line_info->x0;
-	data_placeholder->distance_y = line_info->y1 - line_info->y0;
-	step_size = fabs(data_placeholder->distance_y);
-	if (fabs(data_placeholder->distance_x)
-		> fabs(data_placeholder->distance_y))
-		step_size = fabs(data_placeholder->distance_x);
-	data_placeholder->x_increment
-		= data_placeholder->distance_x / step_size;
-	data_placeholder->y_increment
-		= data_placeholder->distance_y / step_size;
+	line_math->distance_x = line_info->x1 - line_info->x0;
+	line_math->distance_y = line_info->y1 - line_info->y0;
+	step_size = fabs(line_math->distance_y);
+	if (fabs(line_math->distance_x)
+		> fabs(line_math->distance_y))
+		step_size = fabs(line_math->distance_x);
+	line_math->x_increment
+		= line_math->distance_x / step_size;
+	line_math->y_increment
+		= line_math->distance_y / step_size;
 	i = 0;
 	while (i < step_size)
 	{
@@ -59,8 +58,8 @@ void	draw_line(t_data *data, t_line_info *line_info,
 			&& line_info->y0 >= 0 && line_info->y0 < WIN_HEIGHT)
 			set_px(data, (int)line_info->x0, (int)line_info->y0,
 				line_info->color);
-		line_info->x0 += data_placeholder->x_increment;
-		line_info->y0 += data_placeholder->y_increment;
+		line_info->x0 += line_math->x_increment;
+		line_info->y0 += line_math->y_increment;
 		i++;
 	}
 }

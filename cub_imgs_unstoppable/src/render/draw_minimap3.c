@@ -6,15 +6,15 @@
 /*   By: pekatsar <pekatsar@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/08/15 19:49:13 by pekatsar      #+#    #+#                 */
-/*   Updated: 2025/08/30 15:33:37 by pekatsar      ########   odam.nl         */
+/*   Updated: 2025/09/11 18:57:17 by pekatsar      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3D.h"
 
 /*
-	Chooses which wall the ray hit first (horizontal or vertical) and
- 	sets the hit coordinates.
+	Pythagorean th: a² + b² = hypothenose²
+	hypothenose = sqrt(a² + b²)
 */
 static void	set_hit_xy(t_ray_params ray_params, t_data *d,
 				float *hit_x, float *hit_y)

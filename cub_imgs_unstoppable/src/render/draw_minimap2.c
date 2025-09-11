@@ -12,7 +12,7 @@
 
 #include "../../include/cub3D.h"
 
-/* make pl_x, pl_y center of the player 5px diameter dot */
+/* player 5px diameter dot */
 void	draw_player_dot(t_data *d, int player_x,
 			int player_y, t_minimap_params *params)
 {
@@ -49,12 +49,6 @@ void	draw_player_direction(t_data *d, int player_x, int player_y)
 	draw_line(d, &line, &helper);
 }
 
-/*
-** Creates a MINMAP_SIZE×MINMAP_SIZE max or d->map_rows and cols pixel
-	rect.BACKGROUND_COL
-** Positioned at top-right corner: offset_x, offset_y.
-** Fills every pixel with BACKGROUND_COLOR (gray).
-*/
 void	draw_minimap_background(t_data *d, int offset_x, int offset_y,
 			t_minimap_params *params)
 {

@@ -6,7 +6,7 @@
 /*   By: pekatsar <pekatsar@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/09/11 18:01:45 by pekatsar      #+#    #+#                 */
-/*   Updated: 2025/09/11 18:40:36 by pekatsar      ########   odam.nl         */
+/*   Updated: 2025/09/11 18:46:51 by pekatsar      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,7 +173,7 @@ void		set_px(t_data *d, int x, int y, uint32_t color);
 void		horizontal_check(t_ray *ray, t_data *d, t_ray_params *ray_params);
 void		vertical_check(t_ray *ray, t_data *d, t_ray_params *ray_params);
 void		draw_line(t_data *data, t_line_info *line_info,
-				t_line_math *data_placeholder);
+				t_line_math *line_math);
 double		normalize_angle(double angle);
 void		draw_minimap_background(t_data *d, int offset_x, int offset_y,
 				t_minimap_params *params);
