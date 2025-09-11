@@ -67,7 +67,6 @@ typedef struct s_parsing
 	int		test_columns;
 }	t_parsing;
 
-// if in main: get_input/assets/texture/my.xpm
 typedef struct s_game_configs
 {
 	char	*no;
@@ -115,4 +114,5 @@ void			get_rgb_vals(t_parsing *parsing, t_game_configs *game_configs);
 void			copy_map(t_parsing *parsing, t_game_configs *game_configs);
 void			print_argb(t_game_configs *game_configs);
 void			print_fc(t_parsing *parsing, t_game_configs *game_configs);
+
 #endif
