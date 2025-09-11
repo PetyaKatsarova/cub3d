@@ -23,8 +23,16 @@ int	init_btns(t_btns *btns)
 	return (0);
 }
 
+static void	null_init(t_data *d)
+{
+	d->mlx = NULL;
+	d->win = NULL;
+	d->img = NULL;
+}
+
 static	int	init_mlx_data(t_data	*d)
 {
+	null_init(d);
 	d->mlx = mlx_init();
 	if (!d->mlx)
 		return (1);
@@ -44,13 +52,9 @@ static	int	init_mlx_data(t_data	*d)
 int	init_data(t_data *d, t_pl *pl, t_game_configs *game_configs)
 {
 	if (init_mlx_data(d) == 1)
-		return (1);
+		return (clean_mlx(d), 1);
 	d->map = game_configs->map;
-	if (!d->map)
-		return (write(2, "Map initialization failed\n", 26), 1);
 	d->game_configs = game_configs;
-	if (!d->game_configs)
-		return (write(2, "parse initialization failed\n", 28), 1);
 	d->pl = pl;
 	d->map_cols = game_configs->map_cols;
 	d->map_rows = game_configs->map_rows;
