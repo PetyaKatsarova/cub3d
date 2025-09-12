@@ -1,18 +1,18 @@
 # **************************************************************************** #
 #                                                                              #
-#                                                         ::::::::             #
-#    Makefile                                           :+:    :+:             #
-#                                                      +:+                     #
-#    By: pekatsar <pekatsar@student.codam.nl>         +#+                      #
-#                                                    +#+                       #
-#    Created: 2025/08/30 11:49:07 by pekatsar      #+#    #+#                  #
-#    Updated: 2025/08/30 16:29:45 by pekatsar      ########   odam.nl          #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: petya <petya@student.42.fr>                +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2025/08/30 11:49:07 by pekatsar          #+#    #+#              #
+#    Updated: 2025/09/12 08:04:26 by petya            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME     := cub3D
 CC       := cc
-CFLAGS   := -Wall -Wextra -Werror -O3
+CFLAGS   := -O3
 DEPFLAGS := -MMD -MP
 LIBMLX   := lib/minilibx_linux
 HEADERS  := -I ./include -I$(LIBMLX)/include

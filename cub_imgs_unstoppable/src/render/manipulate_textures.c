@@ -1,35 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   manipulate_textures.c                              :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: pekatsar <pekatsar@student.codam.nl>         +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2025/08/02 18:03:51 by pekatsar      #+#    #+#                 */
-/*   Updated: 2025/09/11 17:54:31 by pekatsar      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   manipulate_textures.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: petya <petya@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/08/02 18:03:51 by pekatsar          #+#    #+#             */
+/*   Updated: 2025/09/12 08:46:55 by petya            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3D.h"
 
-void	clean_texture(t_data *d, t_texture *tex)
+static void	clean_texture(t_data *d, t_texture *tex)
 {
-	(void)d;
-	(void)tex;
 	if (tex->img)
 	{
 		mlx_destroy_image(d->mlx, tex->img);
 		tex->img = NULL;
 		tex->addr = NULL;
+		write(2, "Error: Failed to load texture\n", 30);
 	}
-	write(2, "Error: Failed to load texture\n", 30);
 }
 
 int	load_texture(t_data *d, t_texture *tex, char *path)
 {
-	(void)path;
-	(void)d;
-	(void)path;
 	tex->img = mlx_xpm_file_to_image(d->mlx,
 			path, &tex->width, &tex->height);
 	if (!tex->img)
@@ -85,23 +80,53 @@ uint32_t	get_texture_pixel(t_texture *tex, int x, int y)
 	return (*(uint32_t *)pixel);
 }
 
-void	draw_textured_wall(t_data *d, int screen_x,
-			int wall_height, t_texture *tex)
-{
-	int			wall_start;
-	int			y;
-	int			tex_y;
-	int			tex_x;
-	uint32_t	color;
+// void	draw_textured_wall(t_data *d, int screen_x,
+// 			int wall_height, t_texture *tex)
+// {
+// 	int			wall_start;
+// 	int			y;
+// 	int			tex_y;
+// 	int			tex_x;
+// 	uint32_t	color;
 
-	wall_start = (WIN_HEIGHT - wall_height) / 2;
-	tex_x = screen_x % tex->width;
-	y = wall_start;
-	while (y < wall_start + wall_height)
-	{
-		tex_y = ((y - wall_start) * tex->height) / wall_height;
-		color = get_texture_pixel(tex, tex_x, tex_y);
-		set_px(d, screen_x, y, color);
-		y++;
-	}
+// 	wall_start = (WIN_HEIGHT - wall_height) / 2;
+// 	tex_x = screen_x % tex->width;
+// 	y = wall_start;
+// 	while (y < wall_start + wall_height)
+// 	{
+// 		tex_y = ((y - wall_start) * tex->height) / wall_height;
+// 		color = get_texture_pixel(tex, tex_x, tex_y);
+// 		set_px(d, screen_x, y, color);
+// 		y++;
+// 	}
+// }
+
+void	draw_textured_wall(t_data *d, int screen_x,
+            int wall_height, t_texture *tex, t_wall_info *wall)
+{
+    int			wall_start;
+    int			y;
+    int			tex_y;
+    int			tex_x;
+    uint32_t	color;
+    double		wall_hit_offset;
+
+    wall_start = (WIN_HEIGHT - wall_height) / 2;
+    
+    // Calculate texture X based on wall hit position, not screen position
+    if (wall->hit_vertical)
+        wall_hit_offset = fmod(wall->hit_y, TILE_SIZE);
+    else
+        wall_hit_offset = fmod(wall->hit_x, TILE_SIZE);
+    
+    tex_x = (int)(wall_hit_offset * tex->width / TILE_SIZE);
+    
+    y = wall_start;
+    while (y < wall_start + wall_height && y < WIN_HEIGHT)
+    {
+        tex_y = ((y - wall_start) * tex->height) / wall_height;
+        color = get_texture_pixel(tex, tex_x, tex_y);
+        set_px(d, screen_x, y, color);
+        y++;
+    }
 }

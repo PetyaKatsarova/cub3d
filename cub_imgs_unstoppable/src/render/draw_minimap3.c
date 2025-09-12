@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   draw_minimap3.c                                    :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: pekatsar <pekatsar@student.codam.nl>         +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2025/08/15 19:49:13 by pekatsar      #+#    #+#                 */
-/*   Updated: 2025/09/11 18:57:17 by pekatsar      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   draw_minimap3.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: petya <petya@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/08/15 19:49:13 by pekatsar          #+#    #+#             */
+/*   Updated: 2025/09/12 08:22:40 by petya            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 /*
 	Pythagorean th: a² + b² = hypothenose²
 	hypothenose = sqrt(a² + b²)
+	ray_params.hx: where the ray hits a h. grid line
+	(wall intersection point)
 */
 static void	set_hit_xy(t_ray_params ray_params, t_data *d,
 				float *hit_x, float *hit_y)

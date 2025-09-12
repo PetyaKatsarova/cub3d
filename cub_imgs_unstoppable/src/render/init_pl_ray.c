@@ -1,17 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   init_pl_ray.c                                      :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: pekatsar <pekatsar@student.codam.nl>         +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2025/07/25 16:26:59 by pekatsar      #+#    #+#                 */
-/*   Updated: 2025/08/29 15:47:31 by pekatsar      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   init_pl_ray.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: petya <petya@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/25 16:26:59 by pekatsar          #+#    #+#             */
+/*   Updated: 2025/09/12 08:30:11 by petya            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3D.h"
 
+/*
+	pl->x += pl->delta_x; move 5 units in current facing direction
+	delta: how much the player moves in the x and y directions
+*/
 int	init_pl(t_pl *pl, t_game_configs *game_configs)
 {
 	char	dir;

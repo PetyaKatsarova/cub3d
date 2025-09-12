@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   init_data.c                                        :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: petya <petya@student.42.fr>                  +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2025/07/23 15:21:24 by pekatsar      #+#    #+#                 */
-/*   Updated: 2025/09/11 17:51:05 by pekatsar      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   init_data.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: petya <petya@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/23 15:21:24 by pekatsar          #+#    #+#             */
+/*   Updated: 2025/09/12 08:39:07 by petya            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,17 +74,25 @@ int	init_data(t_data *d, t_pl *pl, t_game_configs *game_configs)
 
 int	clean_mlx(t_data *d)
 {
-	if (!d)
-		return (1);
-	if (d->img && d->mlx)
-		mlx_destroy_image(d->mlx, d->img);
-	if (d->win && d->mlx)
-		mlx_destroy_window(d->mlx, d->win);
-	if (d->mlx)
-	{
-		mlx_destroy_display(d->mlx);
-		free(d->mlx);
-		d->mlx = NULL;
-	}
-	return (0);
+    if (!d)
+        return (1);
+    if (d->north_tex.img && d->mlx)
+        mlx_destroy_image(d->mlx, d->north_tex.img);
+    if (d->south_tex.img && d->mlx)
+        mlx_destroy_image(d->mlx, d->south_tex.img);
+    if (d->east_tex.img && d->mlx)
+        mlx_destroy_image(d->mlx, d->east_tex.img);
+    if (d->west_tex.img && d->mlx)
+        mlx_destroy_image(d->mlx, d->west_tex.img);
+    if (d->img && d->mlx)
+        mlx_destroy_image(d->mlx, d->img);
+    if (d->win && d->mlx)
+        mlx_destroy_window(d->mlx, d->win);
+    if (d->mlx)
+    {
+        mlx_destroy_display(d->mlx);
+        free(d->mlx);
+        d->mlx = NULL;
+    }
+    return (0);
 }

@@ -1,17 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   draw_3d_map2.c                                     :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: pekatsar <pekatsar@student.codam.nl>         +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2025/08/15 19:34:10 by pekatsar      #+#    #+#                 */
-/*   Updated: 2025/08/29 15:45:32 by pekatsar      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   draw_3d_map2.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: petya <petya@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/08/15 19:34:10 by pekatsar          #+#    #+#             */
+/*   Updated: 2025/09/12 08:14:59 by petya            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3D.h"
 
+
+/*
+	line_length: the number of bytes per row in the image buffer
+	(including any padding for memory alignment)
+*/
 void	set_px(t_data *d, int x, int y, uint32_t color)
 {
 	uint32_t	*pixels;
@@ -56,6 +61,13 @@ static void	setup_wall(t_wall_info *wall, t_ray_params *params,
 	}
 }
 
+/*
+ray->angle += (60.0 * DEG_RAD) / WIN_WIDTH; increments the ray
+ angle by a small step to cast the next ray for the next pixel
+ column, where the total 60-degree field of view is divided
+ equally across all screen width pixels to create a smooth
+ 3D perspective.
+*/
 static void	draw_3d_map(t_data *d, t_ray *ray)
 {
 	t_ray_params	params;

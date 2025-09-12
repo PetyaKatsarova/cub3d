@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   cub3D.h                                            :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: pekatsar <pekatsar@student.codam.nl>         +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2025/09/11 18:01:45 by pekatsar      #+#    #+#                 */
-/*   Updated: 2025/09/11 18:46:51 by pekatsar      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   cub3D.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: petya <petya@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/11 18:01:45 by pekatsar          #+#    #+#             */
+/*   Updated: 2025/09/12 08:47:52 by petya            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -190,8 +190,10 @@ void		pl_control(t_data *d);
 int			load_texture(t_data *d, t_texture *tex, char *path);
 int			init_textures(t_data *d, t_game_configs *game_configs);
 uint32_t	get_texture_pixel(t_texture *tex, int x, int y);
-void		draw_textured_wall(t_data *d, int screen_x, int wall_height,
-				t_texture *tex);
+// void		draw_textured_wall(t_data *d, int screen_x, int wall_height,
+// 				t_texture *tex);
+void			draw_textured_wall(t_data *d, int screen_x, int wall_height,
+                    t_texture *tex, t_wall_info *wall);
 int			clean_mlx(t_data *d);
 void		draw_single_ray(t_data *d, float ray_angle, int player_x,
 				int player_y);
