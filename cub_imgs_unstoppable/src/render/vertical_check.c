@@ -6,7 +6,7 @@
 /*   By: pekatsar <pekatsar@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/08/15 20:01:15 by pekatsar      #+#    #+#                 */
-/*   Updated: 2025/08/30 16:07:02 by pekatsar      ########   odam.nl         */
+/*   Updated: 2025/09/12 10:20:32 by pekatsar      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 	the computer can’t decide which wall to take → tiny holes.
 	Adding EPS pushes the hit slightly inside the right tile
 	to always pick the correct wall and avoid gaps.
+	floor(d->pl->x / TILE_SIZE) * TILE_SIZE  gives the starting position
+	of the current tile
 */
 static void	init_v_ray_left(t_data *d, t_ray_params *p)
 {
